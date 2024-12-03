@@ -42,14 +42,14 @@ sanity_check_CLUSTER <- function() {
 	# Import the package
 	library(cluster)
 
-	# Import the sanity check dataset generator
-	source("Sanity_check.R")
+	# Import the sanity check dataset
+	sc_dataset <- read.csv("sc_dataset.csv")
 
 	# Apply k-means on the dataset, with 2 centroids
-	sc_clustering <- kmeans(sc_dataset(), centers = 2)
+	sc_clustering <- kmeans(sc_dataset, centers = 2)
 
 	# Compute the Silhouette widths
-	sil_widths <- silhouette(sc_clustering$cluster, dist(sc_dataset()))
+	sil_widths <- silhouette(sc_clustering$cluster, dist(sc_dataset))
 
 	return(sil_widths[, 3])
 }

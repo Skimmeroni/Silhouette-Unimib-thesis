@@ -6,7 +6,7 @@
 #}
 
 for (i in c("cluster", "drclust", "tidyclust", "rguhi", "TDA", "optpart",
-            "Kira", "didec", "MASS")) {
+            "Kira", "didec")) {
 	if (system.file(package = i) == "") {
 		stop(c("Missing package: ", i))
 		q()
