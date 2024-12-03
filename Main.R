@@ -16,12 +16,16 @@ for (i in c("cluster", "drclust", "tidyclust", "rguhi", "TDA", "optpart",
 source("Package_CLUSTER.R")
 cat("Current package: cluster \n")
 
-sc_scores <- sanity_check_CLUSTER()
+sc_scores <- sanity_check_good_CLUSTER()
+sc_scores_bad <- sanity_check_bad_CLUSTER()
 bm_scores <- binary_matrix_CLUSTER(8, 4)
 
 pdf("cluster.pdf")
-par(mfrow = c(1, 2))
-plot(sc_scores, main = "Package: cluster (sanity check)",
+par(mfrow = c(1, 3))
+plot(sc_scores, main = "Package: cluster (good sanity check)",
+	 xlab = "i-th value", ylab = "Silhouette score for the i-th value",
+	 xlim = c(0, 200), ylim = c(-1, 1), type = 'h')
+plot(sc_scores_bad, main = "Package: cluster (bad sanity check)",
 	 xlab = "i-th value", ylab = "Silhouette score for the i-th value",
 	 xlim = c(0, 200), ylim = c(-1, 1), type = 'h')
 plot(bm_scores, main = "Package: cluster (binary matrix)",

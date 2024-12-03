@@ -38,18 +38,36 @@ binary_matrix_CLUSTER <- function(matrix_rows, matrix_columns) {
 	return(degrading_scores)
 }
 
-sanity_check_CLUSTER <- function() {
+sanity_check_good_CLUSTER <- function() {
 	# Import the package
 	library(cluster)
 
 	# Import the sanity check dataset
-	sc_dataset <- read.csv("sc_dataset.csv")
+	sc_dataset_good <- read.csv("sc_dataset_good.csv")
 
 	# Apply k-means on the dataset, with 2 centroids
-	sc_clustering <- kmeans(sc_dataset, centers = 2)
+	sc_clustering_good <- kmeans(sc_dataset_good, centers = 2)
 
 	# Compute the Silhouette widths
-	sil_widths <- silhouette(sc_clustering$cluster, dist(sc_dataset))
+	sil_widths_good <- silhouette(sc_clustering_good$cluster,
+	                              dist(sc_dataset_good))
 
-	return(sil_widths[, 3])
+	return(sil_widths_good[, 3])
+}
+
+sanity_check_bad_CLUSTER <- function() {
+	# Import the package
+	library(cluster)
+
+	# Import the sanity check dataset
+	sc_dataset_bad <- read.csv("sc_dataset_bad.csv")
+
+	# Apply k-means on the dataset, with 2 centroids
+	sc_clustering_bad <- kmeans(sc_dataset_bad, centers = 2)
+
+	# Compute the Silhouette widths
+	sil_widths_bad <- silhouette(sc_clustering_bad$cluster,
+                                 dist(sc_dataset_bad))
+
+	return(sil_widths_bad[, 3])
 }
