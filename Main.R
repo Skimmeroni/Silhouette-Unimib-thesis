@@ -16,24 +16,13 @@ for (i in packages) {
 }
 
 source("bin/Package_CLUSTER.R")
+source("bin/Plotting_facility.R")
 cat("Current package: cluster \n")
 
 sc_scores_good <- sanity_check_good_CLUSTER()
 sc_scores_bad <- sanity_check_bad_CLUSTER()
 bm_scores <- binary_matrix_CLUSTER(8, 4)
-
-pdf("cluster.pdf")
-par(mfrow = c(1, 3))
-plot(sc_scores_good, main = "Package: cluster (good sanity check)",
-	 xlab = "i-th value", ylab = "Silhouette score for the i-th value",
-	 xlim = c(0, 200), ylim = c(-1, 1), type = 'h')
-plot(sc_scores_bad, main = "Package: cluster (bad sanity check)",
-	 xlab = "i-th value", ylab = "Silhouette score for the i-th value",
-	 xlim = c(0, 200), ylim = c(-1, 1), type = 'h')
-plot(bm_scores, main = "Package: cluster (binary matrix)",
-	 xlab = "iteration", type = 'b', pch = 21, cex = 1.5, bg = "black",
-	 ylab = "Average Silhouette score for the i-th iteration")
-dev.off()
+plot_results("cluster")
 
 # source("Package_DRCLUST.R")
 # source("Package_TIDYCLUST.R")
