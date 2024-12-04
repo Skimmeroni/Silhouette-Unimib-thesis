@@ -17,10 +17,10 @@ sc_dataset_good <- as.data.frame(dataset)
 colnames(sc_dataset_good) <- c("X", "Y")
 
 # Write to output file
-write.csv(sc_dataset_good, "sc_dataset_good.csv", row.names = FALSE)
+write.csv(sc_dataset_good, "../data/sc_dataset_good.csv", row.names = FALSE)
 
 # Dump the plot of the dataset
-pdf("sc_dataset_good.pdf")
+pdf("../doc/sc_dataset_good.pdf")
 plot(sc_dataset_good, main = "Sanity check dataset", xlab = "X", type = 'p',
      pch = 21, cex = 1.5, ylab = "Y")
 
@@ -36,9 +36,9 @@ sc_dataset_bad <- as.data.frame(normal_C)
 colnames(sc_dataset_bad) <- c("X", "Y")
 
 # Write to output file
-write.csv(sc_dataset_bad, "sc_dataset_bad.csv", row.names = FALSE)
+write.csv(sc_dataset_bad, "../data/sc_dataset_bad.csv", row.names = FALSE)
 
 # Dump the plot of the dataset
-pdf("sc_dataset_bad.pdf")
+pdf("../doc/sc_dataset_bad.pdf")
 plot(sc_dataset_bad, main = "Sanity check bad dataset", xlab = "X", type = 'p',
      pch = 21, cex = 1.5, ylab = "Y")

@@ -3,7 +3,7 @@ binary_matrix_CLUSTER <- function(matrix_rows, matrix_columns) {
 	library(cluster)
 
 	# Import the binary matrix generator
-	source("Binary_matrix.R")
+	source("bin/Binary_matrix.R")
 
 	# Generate a matrix of 0s and 1s
 	bmatrix <- binary_matrix(matrix_rows, matrix_columns)
@@ -43,7 +43,7 @@ sanity_check_good_CLUSTER <- function() {
 	library(cluster)
 
 	# Import the sanity check dataset
-	sc_dataset_good <- read.csv("sc_dataset_good.csv")
+	sc_dataset_good <- read.csv("data/sc_dataset_good.csv")
 
 	# Apply k-means on the dataset, with 2 centroids
 	sc_clustering_good <- kmeans(sc_dataset_good, centers = 2)
@@ -60,7 +60,7 @@ sanity_check_bad_CLUSTER <- function() {
 	library(cluster)
 
 	# Import the sanity check dataset
-	sc_dataset_bad <- read.csv("sc_dataset_bad.csv")
+	sc_dataset_bad <- read.csv("data/sc_dataset_bad.csv")
 
 	# Apply k-means on the dataset, with 2 centroids
 	sc_clustering_bad <- kmeans(sc_dataset_bad, centers = 2)

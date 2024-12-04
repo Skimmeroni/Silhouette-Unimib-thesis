@@ -13,7 +13,7 @@ for (i in c("cluster", "drclust", "tidyclust", "rguhi", "TDA", "optpart",
 	}
 }
 
-source("Package_CLUSTER.R")
+source("bin/Package_CLUSTER.R")
 cat("Current package: cluster \n")
 
 sc_scores <- sanity_check_good_CLUSTER()
