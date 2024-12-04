@@ -2,14 +2,10 @@ binary_matrix <- function(matrix_rows, matrix_columns, package_name) {
 	file <- paste("bin/Package_", toupper(package_name), ".R", sep = "")
 	source(file)
 
-	# Construct a vector of 0s and a vector of 1s and bind them together
-	A <- rep(0, (matrix_rows * matrix_columns) / 2)
-	B <- rep(1, (matrix_rows * matrix_columns) / 2)
-	binary_vector <- c(A, B)
-
-	# Coerce the vector into a matrix
-	bmatrix <- matrix(binary_vector, nrow = matrix_rows,
-                      ncol = matrix_columns, byrow = TRUE)
+	# Construct a matrix of 0s and 1s
+	A <- matrix(0, nrow = (matrix_rows / 2), ncol = matrix_columns)
+	B <- matrix(1, nrow = (matrix_rows / 2), ncol = matrix_columns)
+	bmatrix <- rbind(A, B)
 
 	# Generate a random sequence of rows that will be replaced
 	sub_order <- sample(1:nrow(bmatrix), nrow(bmatrix), replace = FALSE)
