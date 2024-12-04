@@ -1,33 +1,22 @@
-#cat("Save to file? [Y/N] ")
-#response <- readLines(file("stdin"), 1)
-#
-#if (response == "N") {
-#	x11()
-#}
+packages <- c("cluster", "drclust", "tidyclust", "rguhi",
+              "TDA", "optpart", "Kira", "didec")
 
-packages <- c("cluster", "drclust", "tidyclust", "rguhi", "TDA", "optpart",
-              "Kira", "didec")
-
-for (i in packages) {
-	if (system.file(package = i) == "") {
-		stop(c("Missing package: ", i))
-		q()
+for (this_package in packages) {
+	if (system.file(package = this_package) == "") {
+		stop(c("Missing package: ", this_package))
 	}
 }
 
-source("bin/Package_CLUSTER.R")
+cat("All packages are installed. Proceeding... \n")
 source("bin/Plotting_facility.R")
-cat("Current package: cluster \n")
+source("bin/Binary_matrix.R")
+source("bin/Sanity_check.R")
 
-sc_scores_good <- sanity_check_good_CLUSTER()
-sc_scores_bad <- sanity_check_bad_CLUSTER()
-bm_scores <- binary_matrix_CLUSTER(8, 4)
-plot_results("cluster")
+for (this_package in packages) {
+	cat("Current package:", this_package, "\n")
 
-# source("Package_DRCLUST.R")
-# source("Package_TIDYCLUST.R")
-# source("Package_RGUHI.R")
-# source("Package_TDA.R")
-# source("Package_OPTPART.R")
-# source("Package_KIRA.R")
-# source("Package_DIDEC.R")
+	sc_scores_good <- sanity_check_good(this_package)
+	sc_scores_bad <- sanity_check_bad(this_package)
+	bm_scores <- binary_matrix(8, 4, this_package)
+	plot_results(sc_scores_good, sc_scores_bad, bm_scores, this_package)
+}

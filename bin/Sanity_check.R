@@ -1,44 +1,29 @@
-# Import the MASS library
-library(MASS)
+sanity_check_good <- function(package_name) {
+	file <- paste("bin/Package_", toupper(package_name), ".R", sep = "")
+	source(file)
 
-# GOOD DATASET
+	# Import the sanity check dataset
+	sc_dataset_good <- read.csv("data/sc_dataset_good.csv")
 
-# Generate two datapoints with a bivariate normal distribution
-normal_A <- mvrnorm(n = 100, Sigma = matrix(c(0.5, 0.25, 0.25, 0.5),
-                    nrow = 2, ncol = 2), mu = c(-5, 5))
-normal_B <- mvrnorm(n = 100, Sigma = matrix(c(0.5, 0.25, 0.25, 0.5),
-                    nrow = 2, ncol = 2), mu = c(5, -5))
+	# Apply k-means on the dataset, with 2 centroids
+	sc_clustering_good <- kmeans(sc_dataset_good, centers = 2)
 
-# Merge the two together in one dataset
-dataset <- rbind(normal_A, normal_B)
+	sil_widths_good <- compute_si_Silhouette(sc_clustering_good,
+                                             sc_dataset_good)
+	return(sil_widths_good)
+}
 
-# Coerce into a dataframe
-sc_dataset_good <- as.data.frame(dataset)
-colnames(sc_dataset_good) <- c("X", "Y")
+sanity_check_bad <- function(package_name) {
+	file <- paste("bin/Package_", toupper(package_name), ".R", sep = "")
+	source(file)
 
-# Write to output file
-write.csv(sc_dataset_good, "../data/sc_dataset_good.csv", row.names = FALSE)
+	# Import the sanity check dataset
+	sc_dataset_bad <- read.csv("data/sc_dataset_bad.csv")
 
-# Dump the plot of the dataset
-pdf("../doc/sc_dataset_good.pdf")
-plot(sc_dataset_good, main = "Sanity check dataset", xlab = "X", type = 'p',
-     pch = 21, cex = 1.5, ylab = "Y")
+	# Apply k-means on the dataset, with 2 centroids
+	sc_clustering_bad <- kmeans(sc_dataset_bad, centers = 2)
 
-# BAD DATASET
-
-# Generate a datapoint with a bivariate normal distribution
-
-normal_C <- mvrnorm(n = 200, Sigma = matrix(c(10, 5, 5, 10),
-                    nrow = 2, ncol = 2), mu = c(0, 0))
-
-# Coerce into a dataframe
-sc_dataset_bad <- as.data.frame(normal_C)
-colnames(sc_dataset_bad) <- c("X", "Y")
-
-# Write to output file
-write.csv(sc_dataset_bad, "../data/sc_dataset_bad.csv", row.names = FALSE)
-
-# Dump the plot of the dataset
-pdf("../doc/sc_dataset_bad.pdf")
-plot(sc_dataset_bad, main = "Sanity check bad dataset", xlab = "X", type = 'p',
-     pch = 21, cex = 1.5, ylab = "Y")
+	sil_widths_bad <- compute_si_Silhouette(sc_clustering_bad,
+                                             sc_dataset_bad)
+	return(sil_widths_bad)
+}
