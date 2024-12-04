@@ -6,7 +6,10 @@ sanity_check <- function(package_name, dataset_path) {
 	sc_dataset <- read.csv(dataset_path)
 
 	# Apply k-means on the dataset, with 2 centroids
-	sc_clustering <- kmeans(sc_dataset, centers = 2)
+	sc_kmeans_result <- kmeans(sc_dataset, centers = 2)
+
+	# Extract the clustering result
+	sc_clustering <- sc_kmeans_result$cluster
 
 	sil_widths <- compute_si_Silhouette(sc_clustering, sc_dataset)
 	return(sil_widths)

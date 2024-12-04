@@ -15,7 +15,10 @@ binary_matrix <- function(matrix_rows, matrix_columns, package_name) {
 
 	for (i in sub_order) {
 		# Apply k-means with 2 clusters
-		clustering <- kmeans(bmatrix, centers = 2)
+		kmeans_result <- kmeans(bmatrix, centers = 2)
+
+		# Extract the clustering result
+		clustering <- kmeans_result$cluster
 
 		# Compute the average Silhouette score
 		sil_score <- compute_avg_Silhouette(clustering, bmatrix)
