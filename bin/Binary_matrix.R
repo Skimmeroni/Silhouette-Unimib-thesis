@@ -14,14 +14,8 @@ binary_matrix <- function(matrix_rows, matrix_columns, package_name) {
 	degrading_scores <- c()
 
 	for (i in sub_order) {
-		# Apply k-means with 2 clusters
-		kmeans_result <- kmeans(bmatrix, centers = 2)
-
-		# Extract the clustering result
-		clustering <- kmeans_result$cluster
-
 		# Compute the average Silhouette score
-		sil_score <- compute_avg_Silhouette(clustering, bmatrix)
+		sil_score <- compute_avg_Silhouette(bmatrix)
 
 		# Add the new value
 		degrading_scores <- append(degrading_scores, sil_score)

@@ -1,5 +1,5 @@
-packages <- c("cluster", "drclust", "tidyclust", "rguhi",
-              "TDA", "optpart", "Kira", "didec")
+packages <- c("cluster", "drclust", "tidyclust", "Kira")
+# Pending: rguhi, TDA
 
 for (this_package in packages) {
 	if (system.file(package = this_package) == "") {
