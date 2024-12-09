@@ -1,34 +1,15 @@
-compute_si_Silhouette <- function(sanity_check_dataset) {
-	# Import the package
-	library(cluster)
-
-	# Apply k-means on the dataset, with 2 centroids
-	sc_kmeans_result <- kmeans(sanity_check_dataset, centers = 2)
-
-	# Extract the clustering result
-	sc_clustering <- sc_kmeans_result$cluster
-
-	# Compute the Silhouette widths
-	sil_result <- silhouette(sc_clustering, dist(sanity_check_dataset))
-
-	# Extract the widths
-	sil_widths <- sil_result[, 3]
-
-	return(sil_widths)
-}
-
-compute_avg_Silhouette <- function(binary_matrix) {
+compute_avg_Silhouette <- function(matrix) {
 	# Import the package
 	library(cluster)
 
 	# Apply k-means with 2 clusters
-	kmeans_result <- kmeans(binary_matrix, centers = 2)
+	kmeans_result <- kmeans(matrix, centers = 2)
 
 	# Extract the clustering result
 	clustering <- kmeans_result$cluster
 
 	# Compute the Silhouette widths
-	sil_result <- silhouette(clustering, dist(binary_matrix))
+	sil_result <- silhouette(clustering, dist(matrix))
 
 	# Extract the widths
 	sil_widths <- sil_result[, 3]

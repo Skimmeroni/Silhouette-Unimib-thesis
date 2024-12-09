@@ -15,8 +15,8 @@ source("bin/Sanity_check.R")
 for (this_package in packages) {
 	cat("Current package:", this_package, "\n")
 
-	sc_scores_good <- sanity_check(this_package, "data/sc_dataset_good.csv")
-	sc_scores_bad <- sanity_check(this_package, "data/sc_dataset_bad.csv")
+	sc_score_good <- sanity_check(this_package, "data/sc_dataset_good.csv")
+	sc_score_bad <- sanity_check(this_package, "data/sc_dataset_bad.csv")
 	bm_scores <- binary_matrix(8, 4, this_package)
-	plot_results(sc_scores_good, sc_scores_bad, bm_scores, this_package)
+	plot_results(sc_score_good, sc_score_bad, bm_scores, this_package)
 }
