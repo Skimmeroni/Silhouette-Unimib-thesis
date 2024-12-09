@@ -7,6 +7,9 @@ binary_matrix <- function(matrix_rows, matrix_columns, package_name) {
 	B <- matrix(1, nrow = (matrix_rows / 2), ncol = matrix_columns)
 	bmatrix <- rbind(A, B)
 
+	# Set the seed to reduce variability
+	set.seed(11)
+
 	# Generate a random sequence of rows that will be replaced
 	sub_order <- sample(1:nrow(bmatrix), nrow(bmatrix), replace = FALSE)
 
