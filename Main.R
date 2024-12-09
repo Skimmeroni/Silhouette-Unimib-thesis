@@ -1,5 +1,4 @@
-packages <- c("cluster", "drclust", "tidyclust")
-# Pending: rguhi, TDA, Kira
+packages <- c("cluster", "drclust", "tidyclust", "Kira")
 
 for (this_package in packages) {
 	if (system.file(package = this_package) == "") {
@@ -17,6 +16,6 @@ for (this_package in packages) {
 
 	sc_score_good <- sanity_check(this_package, "data/sc_dataset_good.csv")
 	sc_score_bad <- sanity_check(this_package, "data/sc_dataset_bad.csv")
-	bm_scores <- binary_matrix(8, 4, this_package)
+	bm_scores <- binary_matrix(20, 10, this_package)
 	plot_results(sc_score_good, sc_score_bad, bm_scores, this_package)
 }
