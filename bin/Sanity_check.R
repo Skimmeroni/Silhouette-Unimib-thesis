@@ -10,5 +10,9 @@ sanity_check <- function(package_name, dataset_path) {
 
 	# Compute the Silhouette widths
 	avg_sil_score <- compute_avg_Silhouette(sc_matrix)
+
+	# Round to two digits
+	avg_sil_score <- round(avg_sil_score, digits = 2)
+
 	return(avg_sil_score)
 }
