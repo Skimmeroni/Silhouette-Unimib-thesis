@@ -18,3 +18,24 @@ compute_avg_Silhouette <- function(matrix) {
 
 	return(sil_avg)
 }
+
+create_plottable_df <- function(dataset_path) {
+	# Import the package
+	library(drclust)
+
+	dataframe <- read.csv(dataset_path)
+
+	matrix <- as.matrix(dataframe)
+
+	# Apply k-means on the dataset, with 2 centroids
+	clustering_result <- dpcakm(matrix, 2, 1)
+
+	# Extract clusters
+	clusters <- clustering_result$U + 1
+	clusters <- clusters[, 1]
+
+	plottable_dataframe <- data.frame(var1 = matrix, var2 = clusters)
+	colnames(plottable_dataframe) = c("X", "Y", "Cluster")
+
+	return(plottable_dataframe)
+}

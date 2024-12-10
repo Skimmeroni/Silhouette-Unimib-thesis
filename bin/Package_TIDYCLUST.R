@@ -16,3 +16,23 @@ compute_avg_Silhouette <- function(matrix) {
 
 	return(sil_avg)
 }
+
+create_plottable_df <- function(dataset_path) {
+	# Import the package
+	library(tidyclust)
+
+	dataframe <- read.csv(dataset_path)
+
+	matrix <- as.matrix(dataframe)
+
+	# Apply k-means on the dataset, with 2 centroids
+	kmeans_spec <- k_means(num_clusters = 2, engine = "stats")
+	clustering_result <- fit(kmeans_spec, ~., dataframe)
+
+	clusters <- as.vector((clustering_result$fit)$cluster)
+
+	plottable_dataframe <- data.frame(var1 = matrix, var2 = clusters)
+	colnames(plottable_dataframe) = c("X", "Y", "Cluster")
+
+	return(plottable_dataframe)
+}

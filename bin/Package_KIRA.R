@@ -14,3 +14,18 @@ compute_avg_Silhouette <- function(matrix) {
 
 	return(sil_avg)
 }
+
+create_plottable_df <- function(dataset_path) {
+	# Import the package
+	library(Kira)
+
+	dataframe <- read.csv(dataset_path)
+
+	# Apply k-means with 2 clusters
+	kmeans_result <- kmeans(dataframe, num.groups = 2)
+
+	plottable_dataframe <- kmeans_result$group
+	colnames(plottable_dataframe) = c("X", "Y", "Cluster")
+
+	return(plottable_dataframe)
+}
