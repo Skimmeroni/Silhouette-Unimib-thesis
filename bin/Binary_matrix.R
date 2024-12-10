@@ -31,5 +31,8 @@ binary_matrix <- function(matrix_rows, matrix_columns, package_name) {
 		bmatrix[i, ] <- rep(new_value, ncol(bmatrix))
 	}
 
-	return(degrading_scores)
+	bm_dataframe <- data.frame(var1 = 1:nrow(bmatrix), var2 = degrading_scores)
+	colnames(bm_dataframe) = c("X", "Y")
+
+	return(bm_dataframe)
 }

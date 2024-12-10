@@ -1,5 +1,6 @@
-# Import the MASS library
+# Import the MASS and ggplot2 library
 library(MASS)
+library(ggplot2)
 
 # GOOD DATASET
 
@@ -20,9 +21,11 @@ colnames(sc_dataset_good) <- c("X", "Y")
 write.csv(sc_dataset_good, "../data/sc_dataset_good.csv", row.names = FALSE)
 
 # Dump the plot of the dataset
-pdf("../doc/sc_dataset_good.pdf")
-plot(sc_dataset_good, main = "Sanity check dataset", xlab = "X", type = 'p',
-     pch = 21, cex = 1.5, ylab = "Y")
+ggplot(data = sc_dataset_good, mapping = aes(x = X, y = Y)) +
+geom_point() +
+labs(title = "Sanity check good dataset", x = "X", y = "Y")
+
+ggsave(filename = "sc_dataset_good.pdf", path = "../doc")
 
 # BAD DATASET
 
@@ -39,6 +42,8 @@ colnames(sc_dataset_bad) <- c("X", "Y")
 write.csv(sc_dataset_bad, "../data/sc_dataset_bad.csv", row.names = FALSE)
 
 # Dump the plot of the dataset
-pdf("../doc/sc_dataset_bad.pdf")
-plot(sc_dataset_bad, main = "Sanity check bad dataset", xlab = "X", type = 'p',
-     pch = 21, cex = 1.5, ylab = "Y")
+ggplot(data = sc_dataset_bad, mapping = aes(x = X, y = Y)) +
+geom_point() +
+labs(title = "Sanity check bad dataset", x = "X", y = "Y")
+
+ggsave(filename = "sc_dataset_bad.pdf", path = "../doc")

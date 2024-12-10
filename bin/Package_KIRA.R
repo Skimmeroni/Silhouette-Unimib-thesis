@@ -9,9 +9,6 @@ compute_avg_Silhouette <- function(matrix) {
 	# Extract the average Silhouette score
 	sil_avg <- clustering_result$eve.si
 
-	# WHY WON'T YOU WORK
-	file.remove("Rplots.pdf")
-
 	return(sil_avg)
 }
 
@@ -26,6 +23,7 @@ create_plottable_df <- function(dataset_path) {
 
 	plottable_dataframe <- kmeans_result$group
 	colnames(plottable_dataframe) = c("X", "Y", "Cluster")
-
+	plottable_dataframe <- transform(plottable_dataframe,
+	                                 Cluster = as.character(Cluster))
 	return(plottable_dataframe)
 }

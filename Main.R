@@ -23,3 +23,8 @@ for (this_package in packages) {
 	f_time <- round(f_time, digits = 2)
 	plot_results(sc_score_good, sc_score_bad, bm_scores, this_package, f_time)
 }
+
+# ????????
+for (i in list.files(pattern = "Rplots*")) {
+	file.remove(i)
+}
