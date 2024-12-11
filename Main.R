@@ -1,4 +1,4 @@
-packages <- c("cluster", "drclust", "tidyclust", "Kira")
+packages <- c("cluster", "drclust", "tidyclust", "Kira", "reticulate")
 
 for (this_package in packages) {
 	if (system.file(package = this_package) == "") {
