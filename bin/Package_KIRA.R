@@ -22,7 +22,7 @@ create_plottable_df <- function(dataset_path) {
 	kmeans_result <- kmeans(dataframe, num.groups = 2)
 
 	plottable_dataframe <- kmeans_result$group
-	colnames(plottable_dataframe) = c("X", "Y", "Cluster")
+	colnames(plottable_dataframe) <- c("X", "Y", "Cluster")
 	plottable_dataframe <- transform(plottable_dataframe,
 	                                 Cluster = as.character(Cluster))
 	return(plottable_dataframe)

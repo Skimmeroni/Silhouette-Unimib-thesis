@@ -12,7 +12,7 @@ compute_avg_Silhouette <- function(matrix) {
 	# Compute the average Silhouette score
 	sil_avg <- silhouette_avg(kmeans_fit, dists = dist(matrix))
 
-	sil_avg <- sil_avg[, 3]$.estimate
+	sil_avg <- sil_avg$.estimate
 
 	return(sil_avg)
 }
@@ -32,7 +32,7 @@ create_plottable_df <- function(dataset_path) {
 	clusters <- as.vector((clustering_result$fit)$cluster)
 
 	plottable_dataframe <- data.frame(var1 = matrix, var2 = clusters)
-	colnames(plottable_dataframe) = c("X", "Y", "Cluster")
+	colnames(plottable_dataframe) <- c("X", "Y", "Cluster")
 	plottable_dataframe <- transform(plottable_dataframe,
 	                                 Cluster = as.character(Cluster))
 

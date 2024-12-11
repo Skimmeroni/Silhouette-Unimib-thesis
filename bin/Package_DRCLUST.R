@@ -8,13 +8,8 @@ compute_avg_Silhouette <- function(matrix) {
 	# Compute the Silhouette
 	sil_result <- silhouette(matrix, clustering)
 
-	sil_result <- sil_result$cl.silhouette
-
-	# Extract the widths
-	sil_widths <- sil_result[, 3]
-
-	# Compute the average Silhouette score
-	sil_avg <- mean(sil_widths)
+	# Extract the average Silhouette score
+	sil_avg <- summary(sil_result$cl.silhouette)$avg.width
 
 	return(sil_avg)
 }
@@ -35,7 +30,7 @@ create_plottable_df <- function(dataset_path) {
 	clusters <- clusters[, 1]
 
 	plottable_dataframe <- data.frame(var1 = matrix, var2 = clusters)
-	colnames(plottable_dataframe) = c("X", "Y", "Cluster")
+	colnames(plottable_dataframe) <- c("X", "Y", "Cluster")
 	plottable_dataframe <- transform(plottable_dataframe,
 	                                 Cluster = as.character(Cluster))
 	return(plottable_dataframe)
