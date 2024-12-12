@@ -1,5 +1,5 @@
 sanity_check <- function(package_name, dataset_path) {
-	file <- paste("bin/Package_", toupper(package_name), ".R", sep = "")
+	file <- paste0("bin/Package_", toupper(package_name), ".R")
 	source(file)
 
 	# Import the sanity check dataset

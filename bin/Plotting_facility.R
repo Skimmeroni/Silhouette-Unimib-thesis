@@ -1,7 +1,6 @@
 plot_results <- function(sc_score_good, sc_score_bad, bms, package_name, time) {
-	filename <- paste("results/results_", toupper(package_name), ".pdf",
-	                  sep = "")
-	file <- paste("bin/Package_", toupper(package_name), ".R", sep = "")
+	filename <- paste0("results/results_", toupper(package_name), ".pdf")
+	file <- paste0("bin/Package_", toupper(package_name), ".R")
 	source(file)
 
 	library(ggplot2)
@@ -14,22 +13,22 @@ plot_results <- function(sc_score_good, sc_score_bad, bms, package_name, time) {
 	             mapping = aes(x = X, y = Y, color = Cluster)) +
 	      scale_color_manual(values = c("blue", "green")) +
 	      geom_point() +
-	      labs(title = paste("Sanity check (good) for package: ",
-	           package_name, sep = ""),
-	           subtitle = paste("Average Silhouette score: ",
+	      labs(title = paste0("Sanity check (good) for package: ",
+	           package_name),
+	           subtitle = paste0("Average Silhouette score: ",
 	                            sc_score_good, "\nCompleted in: ", time, "
-	                            seconds", sep = ""),
+	                            seconds"),
 	           x = "X",
 	           y = "Y"))
 	print(ggplot(data = sc_dataset_bad,
 	             mapping = aes(x = X, y = Y, color = Cluster)) +
 	      scale_color_manual(values = c("blue", "green")) +
 	      geom_point() +
-	      labs(title = paste("Sanity check (bad) for package: ",
-	           package_name, sep = ""),
-	           subtitle = paste("Average Silhouette score: ",
+	      labs(title = paste0("Sanity check (bad) for package: ",
+	           package_name),
+	           subtitle = paste0("Average Silhouette score: ",
 	                            sc_score_bad, "\nCompleted in: ", time, "
-	                            seconds", sep = ""),
+	                            seconds"),
 	           x = "X",
 	           y = "Y"))
 	print(ggplot(data = bms, mapping = aes(x = X, y = Y)) +
@@ -37,9 +36,8 @@ plot_results <- function(sc_score_good, sc_score_bad, bms, package_name, time) {
 	      scale_color_manual(values = c("blue", "green")) +
 	      geom_point() +
 	      geom_smooth(formula = y ~ x, method = "lm") +
-	      labs(title = paste("Binary matrix for package: ", package_name,
-	                         sep = ""),
-	           subtitle = paste("Completed in: ", time, " seconds", sep = ""),
+	      labs(title = paste0("Binary matrix for package: ", package_name),
+	           subtitle = paste0("Completed in: ", time, " seconds"),
 	           y = "Average Silhouette score for the i-th iteration",
 	           x = "Iteration"))
 	dev.off()

@@ -1,5 +1,5 @@
 binary_matrix <- function(matrix_rows, matrix_columns, package_name) {
-	file <- paste("bin/Package_", toupper(package_name), ".R", sep = "")
+	file <- paste0("bin/Package_", toupper(package_name), ".R")
 	source(file)
 
 	# Construct a matrix of 0s and 1s
