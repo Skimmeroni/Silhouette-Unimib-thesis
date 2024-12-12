@@ -21,6 +21,7 @@ for (this_package in packages) {
 
 	f_time <- Sys.time() - s_time
 	f_time <- round(f_time, digits = 2)
+
 	plot_results(sc_score_good, sc_score_bad, bm_scores, this_package, f_time)
 }
 

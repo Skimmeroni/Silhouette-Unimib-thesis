@@ -33,5 +33,6 @@ create_plottable_df <- function(dataset_path) {
 	colnames(plottable_dataframe) <- c("X", "Y", "Cluster")
 	plottable_dataframe <- transform(plottable_dataframe,
 	                                 Cluster = as.character(Cluster))
+
 	return(plottable_dataframe)
 }
