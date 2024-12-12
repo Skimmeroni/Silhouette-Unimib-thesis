@@ -36,7 +36,7 @@ plot_results <- function(sc_score_good, sc_score_bad, bms, package_name, time) {
 	      ylim(-1, 1) +
 	      scale_color_manual(values = c("blue", "green")) +
 	      geom_point() +
-	      geom_smooth(method = "lm") +
+	      geom_smooth(formula = y ~ x, method = "lm") +
 	      labs(title = paste("Binary matrix for package: ", package_name,
 	                         sep = ""),
 	           subtitle = paste("Completed in: ", time, " seconds", sep = ""),
