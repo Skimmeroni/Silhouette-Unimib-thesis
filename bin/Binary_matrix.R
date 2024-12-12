@@ -3,9 +3,8 @@ binary_matrix <- function(matrix_rows, matrix_columns, package_name) {
 	source(file)
 
 	# Construct a matrix of 0s and 1s
-	A <- matrix(0, nrow = (matrix_rows / 2), ncol = matrix_columns)
-	B <- matrix(1, nrow = (matrix_rows / 2), ncol = matrix_columns)
-	bmatrix <- rbind(A, B)
+	bmatrix <- matrix(rep(c(0, 1), each = matrix_rows / 2),
+	                  nrow = matrix_rows, ncol = matrix_columns)
 
 	# Set the seed to reduce variability
 	set.seed(11)
