@@ -22,6 +22,7 @@ for (method in clustering_methods) {
 		opt_num <- which.max(H_frame$sil_avg)
 		opt_set <- H_frame[opt_num, ]
 		opt_set <- subset(opt_set, select = -sil_avg)
+		opt_set <- as.vector(opt_set)
 
 		dataframe <- create_clustering_dataframe(dataset, opt_set)
 		extra_plot <- customized_plot(H_frame, d)

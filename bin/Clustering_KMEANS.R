@@ -23,7 +23,7 @@ tune_hyperparameters <- function(dataset) {
 }
 
 create_clustering_dataframe <- function(dataset, optimal_set) {
-	optimal_k <- optimal_set[1, ]
+	optimal_k <- optimal_set$k
 	matrix <- as.matrix(dataset)
 
 	kmeans_result <- kmeans(matrix, centers = optimal_k)

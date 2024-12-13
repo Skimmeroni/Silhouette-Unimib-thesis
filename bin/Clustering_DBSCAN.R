@@ -34,8 +34,8 @@ tune_hyperparameters <- function(dataset) {
 }
 
 create_clustering_dataframe <- function(dataset, optimal_set) {
-	opt_minPoints <- optimal_set[1, 1]
-	opt_epsilon <- optimal_set[1, 2]
+	opt_minPoints <- optimal_set$minPoints
+	opt_epsilon <- optimal_set$epsilon
 
 	dbscan_result <- dbscan(dataset, eps = opt_epsilon, minPts = opt_minPoints)
 
