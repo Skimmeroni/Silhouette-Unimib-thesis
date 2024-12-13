@@ -5,7 +5,7 @@ datasets <- list.files(path = "data", pattern = "^[a-r|t-z|0-9]")
 #clustering_methods <- c("KMEANS", "HIERARCHICAL-CLUSTERING", "DBSCAN",
 #                        "BIRCH", "MEAN-SHIFT", "HDBSCAN")
 
-clustering_methods <- c("KMEANS")
+clustering_methods <- c("KMEANS", "DBSCAN")
 
 for (method in clustering_methods) {
 	file <- paste0("bin/Clustering_", method, ".R")
