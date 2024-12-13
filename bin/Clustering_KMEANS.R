@@ -1,4 +1,4 @@
-retrieve_opt_clusters_number <- function(dataset) {
+tune_hyperparameters <- function(dataset) {
 	library(cluster)
 
 	matrix <- as.matrix(dataset)
@@ -18,10 +18,12 @@ retrieve_opt_clusters_number <- function(dataset) {
 		sil_avgs_vector <- append(sil_avgs_vector, sil_avg)
 	}
 
-	return(sil_avgs_vector)
+	H_dataframe <- data.frame(k = 2:10, sil_avg = sil_avgs_vector)
+	return(H_dataframe)
 }
 
-create_clustering_dataframe <- function(dataset, optimal_k) {
+create_clustering_dataframe <- function(dataset, optimal_set) {
+	optimal_k <- optimal_set[1, ]
 	matrix <- as.matrix(dataset)
 
 	kmeans_result <- kmeans(matrix, centers = optimal_k)
@@ -31,4 +33,18 @@ create_clustering_dataframe <- function(dataset, optimal_k) {
 	clustering_df <- transform(clustering_df, Cluster = as.character(Cluster))
 
 	return(clustering_df)
+}
+
+customized_plot <- function(H_frame, dataset) {
+	P <- ggplot(data = H_frame, mapping = aes(x = k, y = sil_avg)) +
+		      ylim(-1, 1) +
+		      scale_x_continuous(limits = c(2, 10)) +
+		      geom_line() +
+		      geom_point() +
+		      labs(title = "K-Means elbow plot",
+		           subtitle = paste0("Dataset: ", dataset),
+		           x = "Number of clusters",
+		           y = "Average Silhouette width")
+
+	return(P)
 }

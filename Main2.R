@@ -17,23 +17,15 @@ for (method in clustering_methods) {
 	for (d in datasets) {
 		dataset <- read.csv(paste0("data/", d))
 		dataset <- na.omit(dataset)
-		K_vector <- retrieve_opt_clusters_number(dataset)
 
-		opt_K <- which.max(K_vector) + 1
-		dataframe <- create_clustering_dataframe(dataset, opt_K)
+		H_frame <- tune_hyperparameters(dataset)
+		opt_num <- which.max(H_frame$sil_avg)
+		opt_set <- H_frame[opt_num, ]
+		opt_set <- subset(opt_set, select = -sil_avg)
 
-		sil_dataframe <- data.frame(var1 = 2:10, var2 = K_vector)
-		colnames(sil_dataframe) = c("X", "Y")
-
-		print(ggplot(data = sil_dataframe, mapping = aes(x = X, y = Y)) +
-		      ylim(-1, 1) +
-		      scale_x_continuous(limits = c(2, 10)) +
-		      geom_line() +
-		      geom_point() +
-		      labs(title = paste0("Elbow plot: ", method),
-		           subtitle = paste0("Dataset: ", d),
-		           x = "Number of clusters",
-		           y = "Average Silhouette width"))
+		dataframe <- create_clustering_dataframe(dataset, opt_set)
+		extra_plot <- customized_plot(H_frame, d)
+		print(extra_plot)
 
 		print(ggplot(data = dataframe, mapping = aes(Cluster)) +
 		      geom_bar(aes(fill = Cluster)) +
