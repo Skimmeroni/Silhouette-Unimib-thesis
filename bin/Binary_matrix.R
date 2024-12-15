@@ -10,14 +10,14 @@ avg_sil_scores_for_bm <- function(matrix_rows, matrix_columns, package_name) {
 	sub_order <- sample(1:nrow(bmatrix), nrow(bmatrix), replace = FALSE)
 
 	# Construct a (empty) vector to store the average Silhouette scores
-	degrading_scores <- c()
+	vector_of_scores <- c()
 
 	for (i in sub_order) {
 		# Compute the average Silhouette score
-		sil_score <- compute_avg_Silhouette(bmatrix)
+		sil_score <- compute_avg_Silhouette(as.data.frame(bmatrix))
 
 		# Add the new value
-		degrading_scores <- append(degrading_scores, sil_score)
+		vector_of_scores <- append(vector_of_scores, sil_score)
 
 		# Pick a random number between 0 and 1, rounded to two digits
 		# for the sake of simplicity
@@ -27,8 +27,8 @@ avg_sil_scores_for_bm <- function(matrix_rows, matrix_columns, package_name) {
 		bmatrix[i, ] <- rep(new_value, ncol(bmatrix))
 	}
 
-	bm_dataframe <- data.frame(var1 = 1:nrow(bmatrix), var2 = degrading_scores)
-	colnames(bm_dataframe) = c("X", "Y")
+	# Construct a dataframe with Silhouette scores as y values
+	bm_dataframe <- data.frame(X = 1:nrow(bmatrix), Y = vector_of_scores)
 
 	return(bm_dataframe)
 }
