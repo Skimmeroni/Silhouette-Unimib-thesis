@@ -42,3 +42,15 @@ plot_results <- function(sc_score_good, sc_score_bad, bms, package_name, time) {
 	           x = "Iteration"))
 	dev.off()
 }
+
+clustering_generic_plot <- function(dataframe, dataset, method) {
+	P <- ggplot(data = dataframe, mapping = aes(Cluster)) +
+		 geom_bar(aes(fill = Cluster)) +
+		 theme(legend.position = "top") +
+		 labs(title = paste0("Clustering: ", method),
+		      subtitle = paste0("Dataset: ", dataset),
+		      y = "Cluster size",
+		      x = "Cluster number")
+
+	return(P)
+}
