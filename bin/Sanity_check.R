@@ -1,12 +1,6 @@
-sanity_check <- function(package_name, dataset_path) {
-	file <- paste0("bin/Package_", toupper(package_name), ".R")
-	source(file)
-
-	# Import the sanity check dataset
-	sc_dataset <- read.csv(dataset_path)
-
+avg_sil_score_for_sc <- function(package_name, dataframe) {
 	# Coerce the dataframe into a matrix
-	sc_matrix <- as.matrix(sc_dataset)
+	sc_matrix <- as.matrix(dataframe)
 
 	# Compute the Silhouette widths
 	avg_sil_score <- compute_avg_Silhouette(sc_matrix)

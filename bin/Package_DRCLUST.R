@@ -14,11 +14,9 @@ compute_avg_Silhouette <- function(matrix) {
 	return(sil_avg)
 }
 
-create_plottable_df <- function(dataset_path) {
+create_plottable_df <- function(dataframe) {
 	# Import the package
 	library(drclust)
-
-	dataframe <- read.csv(dataset_path)
 
 	matrix <- as.matrix(dataframe)
 

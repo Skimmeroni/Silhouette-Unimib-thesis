@@ -1,46 +1,29 @@
-plot_results <- function(sc_score_good, sc_score_bad, bms, package_name, time) {
-	filename <- paste0("results/results_", toupper(package_name), ".pdf")
-	file <- paste0("bin/Package_", toupper(package_name), ".R")
-	source(file)
+sanity_check_plot <- function(dataset, dataframe, package_name, score, time) {
+	P <- ggplot(data = dataframe, mapping = aes(x = X, y = Y,
+	                                            color = Cluster)) +
+	     scale_color_manual(values = c("blue", "green")) +
+	     geom_point() +
+	     labs(title = paste0("Sanity check for package: ", package_name),
+	          subtitle = paste0("Using dataset: ", dataset,
+	                            "\nAverage Silhouette score: ", score,
+	                            "\nCompleted in: ", time, " seconds"),
+	          x = "X", y = "Y")
 
-	library(ggplot2)
+	return(P)
+}
 
-	sc_dataset_good <- create_plottable_df("data/sc_dataset_good.csv")
-	sc_dataset_bad <- create_plottable_df("data/sc_dataset_bad.csv")
+binary_matrix_plot <- function(score_vector, package_name, time) {
+	P <- ggplot(data = score_vector, mapping = aes(x = X, y = Y)) +
+	     ylim(-1, 1) +
+	     scale_color_manual(values = c("blue", "green")) +
+	     geom_point() +
+	     geom_smooth(formula = y ~ x, method = "lm") +
+	     labs(title = paste0("Binary matrix for package: ", package_name),
+	          subtitle = paste0("Completed in: ", time, " seconds"),
+	          y = "Average Silhouette score for the i-th iteration",
+	          x = "Iteration")
 
-	pdf(filename)
-	print(ggplot(data = sc_dataset_good,
-	             mapping = aes(x = X, y = Y, color = Cluster)) +
-	      scale_color_manual(values = c("blue", "green")) +
-	      geom_point() +
-	      labs(title = paste0("Sanity check (good) for package: ",
-	           package_name),
-	           subtitle = paste0("Average Silhouette score: ",
-	                            sc_score_good, "\nCompleted in: ", time, "
-	                            seconds"),
-	           x = "X",
-	           y = "Y"))
-	print(ggplot(data = sc_dataset_bad,
-	             mapping = aes(x = X, y = Y, color = Cluster)) +
-	      scale_color_manual(values = c("blue", "green")) +
-	      geom_point() +
-	      labs(title = paste0("Sanity check (bad) for package: ",
-	           package_name),
-	           subtitle = paste0("Average Silhouette score: ",
-	                            sc_score_bad, "\nCompleted in: ", time, "
-	                            seconds"),
-	           x = "X",
-	           y = "Y"))
-	print(ggplot(data = bms, mapping = aes(x = X, y = Y)) +
-	      ylim(-1, 1) +
-	      scale_color_manual(values = c("blue", "green")) +
-	      geom_point() +
-	      geom_smooth(formula = y ~ x, method = "lm") +
-	      labs(title = paste0("Binary matrix for package: ", package_name),
-	           subtitle = paste0("Completed in: ", time, " seconds"),
-	           y = "Average Silhouette score for the i-th iteration",
-	           x = "Iteration"))
-	dev.off()
+	return(P)
 }
 
 clustering_generic_plot <- function(dataframe, dataset, method) {

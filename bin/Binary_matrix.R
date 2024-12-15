@@ -1,7 +1,4 @@
-binary_matrix <- function(matrix_rows, matrix_columns, package_name) {
-	file <- paste0("bin/Package_", toupper(package_name), ".R")
-	source(file)
-
+avg_sil_scores_for_bm <- function(matrix_rows, matrix_columns, package_name) {
 	# Construct a matrix of 0s and 1s
 	bmatrix <- matrix(rep(c(0, 1), each = matrix_rows / 2),
 	                  nrow = matrix_rows, ncol = matrix_columns)

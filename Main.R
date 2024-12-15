@@ -1,28 +1,52 @@
-packages <- c("cluster", "drclust", "tidyclust", "Kira", "reticulate")
+all_packages <- c("cluster", "drclust", "tidyclust", "Kira", "reticulate")
 
-for (this_package in packages) {
-	if (system.file(package = this_package) == "") {
-		stop(c("Missing package: ", this_package))
+for (package in all_packages) {
+	if (system.file(package = package) == "") {
+		stop(c("Missing package: ", package))
 	}
 }
 
 cat("All packages are installed. Proceeding... \n")
+
+library(ggplot2)
 source("bin/Plotting_facility.R")
 source("bin/Binary_matrix.R")
 source("bin/Sanity_check.R")
 
-for (this_package in packages) {
-	cat("Current package:", this_package, "\n")
+for (package in all_packages) {
+	cat("Current package:", package, "\n")
+	file <- paste0("bin/Package_", toupper(package), ".R")
+	source(file)
+
 	s_time <- Sys.time()
+	sc_filename_good <- "sc_dataset_good.csv"
+	sc_dataset_good <- read.csv(paste0("data/", sc_filename_good))
+	sc_score_good <- avg_sil_score_for_sc(package, sc_dataset_good)
+	sc_dataframe_good <- create_plottable_df(sc_dataset_good)
+	f_time <- round(Sys.time() - s_time, digits = 2)
+	sc_plot_good <- sanity_check_plot(sc_filename_good, sc_dataframe_good,
+	                                  package, sc_score_good, f_time)
 
-	sc_score_good <- sanity_check(this_package, "data/sc_dataset_good.csv")
-	sc_score_bad <- sanity_check(this_package, "data/sc_dataset_bad.csv")
-	bm_scores <- binary_matrix(20, 10, this_package)
+	s_time <- Sys.time()
+	sc_filename_bad <- "sc_dataset_bad.csv"
+	sc_dataset_bad <- read.csv(paste0("data/", sc_filename_bad))
+	sc_score_bad <- avg_sil_score_for_sc(package, sc_dataset_bad)
+	sc_dataframe_bad <- create_plottable_df(sc_dataset_bad)
+	f_time <- round(Sys.time() - s_time, digits = 2)
+	sc_plot_bad <- sanity_check_plot(sc_filename_bad, sc_dataframe_bad,
+	                                  package, sc_score_bad, f_time)
 
-	f_time <- Sys.time() - s_time
-	f_time <- round(f_time, digits = 2)
+	s_time <- Sys.time()
+	bm_scores <- avg_sil_scores_for_bm(20, 10, package)
+	f_time <- round(Sys.time() - s_time, digits = 2)
+	bm_plot <- binary_matrix_plot(bm_scores, package, f_time)
 
-	plot_results(sc_score_good, sc_score_bad, bm_scores, this_package, f_time)
+	result <- paste0("results/results_", toupper(package), ".pdf")
+	pdf(result)
+	print(sc_plot_good)
+	print(sc_plot_bad)
+	print(bm_plot)
+	dev.off()
 }
 
 # ????????
