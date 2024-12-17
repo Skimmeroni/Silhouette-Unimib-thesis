@@ -24,8 +24,10 @@ tune_hyperparameters <- function(dataset) {
 				# Extract the average Silhouette score
 				sil_avg <- summary(sil_result)$avg.width
 
-				H_dataframe[nrow(H_dataframe) + 1, ] <- c(minPoints, epsilon,
-				                                                  sil_avg)
+				H_dataframe[nrow(H_dataframe) + 1, ] <- c(minPoints,
+				                                          round(epsilon,
+				                                                digits = 2),
+				                                          sil_avg)
 			}
 		}
 	}

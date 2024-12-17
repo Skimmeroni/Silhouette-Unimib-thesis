@@ -26,12 +26,13 @@ binary_matrix_plot <- function(score_vector, package_name, time) {
 	return(P)
 }
 
-clustering_generic_plot <- function(dataframe, dataset, method) {
+clustering_generic_plot <- function(dataframe, string, dataset, method) {
 	P <- ggplot(data = dataframe, mapping = aes(Cluster)) +
 		 geom_bar(aes(fill = Cluster)) +
 		 theme(legend.position = "top") +
 		 labs(title = paste0("Clustering: ", method),
-		      subtitle = paste0("Dataset: ", dataset),
+		      subtitle = paste0("Dataset: ", dataset,
+		                        "\nParameters used: ", string),
 		      y = "Cluster size",
 		      x = "Cluster number")
 

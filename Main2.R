@@ -40,7 +40,10 @@ for (method in clustering_methods) {
 		print(custom_plot)
 
 		# Generic plot with cluster size (same for all algorithms)
+		optimal_tostring <- paste(names(optimal_set), optimal_set,
+		                          sep = " = ", collapse = ", ")
 		generic_plot <- clustering_generic_plot(optimal_dataframe,
+		                                        optimal_tostring,
 		                                        filename,
 		                                        method)
 		print(generic_plot)
