@@ -35,9 +35,9 @@ for (method in clustering_methods) {
 		# Apply clustering with such hyperparameter combination
 		optimal_dataframe <- create_clustering_dataframe(dataset, optimal_set)
 
-		# Plot specific to the clustering algorithm (elbow plot, ecc...)
-		custom_plot <- customized_plot(hyp_combinations, filename)
-		print(custom_plot)
+		# Plot regarding hyperparameters
+		hyp_plot <- hyperparameter_plot(hyp_combinations, filename)
+		print(hyp_plot)
 
 		# Generic plot with cluster size (same for all algorithms)
 		optimal_tostring <- paste(names(optimal_set), optimal_set,
@@ -47,6 +47,14 @@ for (method in clustering_methods) {
 		                                        filename,
 		                                        method)
 		print(generic_plot)
+
+		# Alternative plot, not using Silhouette (different for each algorithm)
+		# May or may not exist
+		custom_plot <- customized_plot(dataset, filename)
+		if (!is.null(custom_plot)) {
+			print(custom_plot)
+		}
+
 	}
 
 	dev.off()

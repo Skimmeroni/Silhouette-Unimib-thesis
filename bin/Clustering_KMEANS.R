@@ -35,7 +35,7 @@ create_clustering_dataframe <- function(dataset, optimal_set) {
 	return(clustering_df)
 }
 
-customized_plot <- function(H_frame, dataset) {
+hyperparameter_plot <- function(H_frame, dataset) {
 	P <- ggplot(data = H_frame, mapping = aes(x = k, y = sil_avg)) +
 		      ylim(-1, 1) +
 		      scale_x_continuous(limits = c(2, 10)) +
@@ -47,4 +47,9 @@ customized_plot <- function(H_frame, dataset) {
 		           y = "Average Silhouette width")
 
 	return(P)
+}
+
+customized_plot <- function(dataframe, dataset) {
+	# No-op
+	return(NULL)
 }

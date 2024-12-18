@@ -48,7 +48,7 @@ create_clustering_dataframe <- function(dataset, optimal_set) {
 	return(clustering_df)
 }
 
-customized_plot <- function(H_frame, dataset) {
+hyperparameter_plot <- function(H_frame, dataset) {
 	H_frame <- transform(H_frame, minPoints = as.character(minPoints))
 
 	P <- ggplot(data = H_frame,
@@ -61,6 +61,30 @@ customized_plot <- function(H_frame, dataset) {
 		      subtitle = paste0("Dataset: ", dataset),
 		      x = "Epsilon",
 		      y = "Average Silhouette width")
+
+	return(P)
+}
+
+customized_plot <- function(dataframe, dataset) {
+	parameters <- read.csv("data/s_DBSCAN.csv")
+	visual_opt_set <- as.vector(subset(parameters, filename == dataset))
+	visual_opt_set <- c(visual_opt_set[2], visual_opt_set[3])
+
+	visual_dataframe <- create_clustering_dataframe(dataframe, visual_opt_set)
+	visual_string <- paste(names(visual_opt_set), visual_opt_set,
+	                       sep = " = ", collapse = ", ")
+
+	palette <- c("#3d85c6", "#6fa8dc", "#9fc5e8", "#c27ba0", "#a64d79")
+
+	P <- ggplot(data = visual_dataframe, mapping = aes(Cluster)) +
+		 scale_fill_manual(values = palette) +
+		 geom_bar(aes(fill = Cluster)) +
+		 theme(legend.position = "top") +
+		 labs(title = paste0("DBSCAN clustering with visual inspection"),
+		      subtitle = paste0("Dataset: ", dataset,
+		                        "\nParameters used: ", visual_string),
+		      y = "Cluster size",
+		      x = "Cluster number")
 
 	return(P)
 }
