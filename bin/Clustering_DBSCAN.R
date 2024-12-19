@@ -1,6 +1,5 @@
 tune_hyperparameters <- function(dataset) {
-	library(cluster)
-	library(dbscan)
+	library(dbscan, warn.conflicts = FALSE)
 
 	matrix <- as.matrix(dataset)
 

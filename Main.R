@@ -26,6 +26,7 @@ if (what_to_do == "--silhouette") {
 	main(all_packages)
 } else if (what_to_do == "--clustering") {
 	source("bin/Clustering_main.R")
+	library(cluster)
 
 	main(clustering_methods, dataset_filenames)
 } else {

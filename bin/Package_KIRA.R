@@ -1,6 +1,6 @@
 compute_avg_Silhouette <- function(dataframe) {
 	# Import the package
-	library(Kira)
+	library(Kira, warn.conflicts = FALSE)
 
 	# Coerce into a matrix
 	matrix <- as.matrix(dataframe)
@@ -17,7 +17,7 @@ compute_avg_Silhouette <- function(dataframe) {
 
 create_plottable_df <- function(dataframe) {
 	# Import the package
-	library(Kira)
+	library(Kira, warn.conflicts = FALSE)
 
 	# Apply k-means on the dataframe with 2 centroids
 	kmeans_result <- kmeans(dataframe, num.groups = 2)
