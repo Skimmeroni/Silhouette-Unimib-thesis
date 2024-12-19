@@ -16,10 +16,7 @@ main <- function(clustering_methods, dataset_filenames) {
 			hyp_combinations <- tune_hyperparameters(dataset)
 
 			# Extract the hyperparameter combination that maximizes Silhouette
-			optimal_by_num <- which.max(hyp_combinations$sil_avg)
-			optimal_set <- hyp_combinations[optimal_by_num, ]
-			optimal_set <- subset(optimal_set, select = -sil_avg)
-			optimal_set <- as.vector(optimal_set)
+			optimal_set <- extract_opt_hyperparameters(hyp_combinations)
 
 			# Apply clustering with such hyperparameter combination
 			optimal_dataframe <- create_clustering_dataframe(dataset,
@@ -49,6 +46,14 @@ main <- function(clustering_methods, dataset_filenames) {
 
 		dev.off()
 	}
+}
+
+extract_opt_hyperparameters <- function(hyperparameters) {
+	optimal_by_num <- which.max(hyperparameters$sil_avg)
+	optimal_set <- hyperparameters[optimal_by_num, ]
+	optimal_set <- subset(optimal_set, select = -sil_avg)
+	optimal_set <- as.vector(optimal_set)
+	return(optimal_set)
 }
 
 clustering_generic_plot <- function(dataframe, string, dataset, method) {
