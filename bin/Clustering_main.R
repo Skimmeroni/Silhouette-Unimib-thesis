@@ -52,13 +52,15 @@ main <- function(clustering_methods, dataset_filenames) {
 }
 
 clustering_generic_plot <- function(dataframe, string, dataset, method) {
-	P <- ggplot(data = dataframe, mapping = aes(Cluster)) +
+	P <- ggplot(data = dataframe, aes(Cluster, y = after_stat(count) /
+		                                           sum(after_stat(count)))) +
 		 geom_bar(aes(fill = Cluster)) +
 		 theme(legend.position = "top") +
+		 ylim(0, 1) +
 		 labs(title = paste0("Clustering: ", method),
 		      subtitle = paste0("Dataset: ", dataset,
 		                        "\nParameters used: ", string),
-		      y = "Cluster size",
+		      y = "Cluster size (in percentage)",
 		      x = "Cluster number")
 
 	return(P)

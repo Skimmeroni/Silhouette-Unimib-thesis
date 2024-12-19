@@ -75,14 +75,16 @@ customized_plot <- function(dataframe, dataset) {
 
 	palette <- c("#3d85c6", "#6fa8dc", "#9fc5e8", "#c27ba0", "#a64d79")
 
-	P <- ggplot(data = visual_dataframe, mapping = aes(Cluster)) +
+	P <- ggplot(data = visual_dataframe, aes(Cluster, y = after_stat(count) /
+		                                           sum(after_stat(count)))) +
 		 scale_fill_manual(values = palette) +
 		 geom_bar(aes(fill = Cluster)) +
 		 theme(legend.position = "top") +
+		 ylim(0, 1) +
 		 labs(title = paste0("DBSCAN clustering with visual inspection"),
 		      subtitle = paste0("Dataset: ", dataset,
 		                        "\nParameters used: ", visual_string),
-		      y = "Cluster size",
+		      y = "Cluster size (in percentage)",
 		      x = "Cluster number")
 
 	return(P)
