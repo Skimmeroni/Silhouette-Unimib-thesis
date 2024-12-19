@@ -25,7 +25,7 @@ tune_hyperparameters <- function(dataset) {
 
 				H_dataframe[nrow(H_dataframe) + 1, ] <- c(minPoints,
 				                                          round(epsilon,
-				                                                digits = 2),
+				                                                digits = 5),
 				                                          sil_avg)
 			}
 		}

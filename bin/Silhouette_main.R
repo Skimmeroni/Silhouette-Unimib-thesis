@@ -12,7 +12,7 @@ main <- function(all_packages) {
 
 		# Compute average Silhouette score and clustering
 		sc_score_good <- round(compute_avg_Silhouette(sc_dataset_good),
-		                       digits = 2)
+		                       digits = 5)
 		sc_dataframe_good <- create_plottable_df(sc_dataset_good)
 		finish_time <- round(Sys.time() - start_time, digits = 2)
 
@@ -27,7 +27,7 @@ main <- function(all_packages) {
 
 		# Compute average Silhouette score and clustering
 		sc_score_bad <- round(compute_avg_Silhouette(sc_dataset_bad),
-		                      digits = 2)
+		                      digits = 5)
 		sc_dataframe_bad <- create_plottable_df(sc_dataset_bad)
 		finish_time <- round(Sys.time() - start_time, digits = 2)
 
@@ -75,7 +75,7 @@ avg_sil_scores_for_bm <- function(matrix_rows, matrix_columns, package_name) {
 
 		# Pick a random number between 0 and 1, rounded to two digits
 		# for the sake of simplicity
-		new_value <- round(runif(n = 1, min = 0, max = 1), digits = 2)
+		new_value <- round(runif(n = 1, min = 0, max = 1), digits = 5)
 
 		# Substitute the old row with the new one
 		bmatrix[i, ] <- rep(new_value, ncol(bmatrix))
