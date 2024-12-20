@@ -1,14 +1,16 @@
-main <- function(all_packages) {
-	for (package in all_packages) {
+main <- function(silhouette_packages) {
+	for (package in silhouette_packages) {
 		# Load functions needed for the current package
 		cat("Current package:", package, "\n")
 		file <- paste0("bin/Package_", toupper(package), ".R")
 		source(file)
 
+		result <- paste0("results/results_", toupper(package), ".pdf")
+		pdf(result)
+
 		# Load sanity check dataset (favorable case)
 		start_time <- Sys.time()
-		sc_filename_good <- "sc_dataset_good.csv"
-		sc_dataset_good <- read.csv(paste0("data/", sc_filename_good))
+		sc_dataset_good <- read.csv("data/sc_dataset_good.csv")
 
 		# Compute average Silhouette score and clustering
 		sc_score_good <- round(compute_avg_Silhouette(sc_dataset_good),
@@ -17,13 +19,14 @@ main <- function(all_packages) {
 		finish_time <- round(Sys.time() - start_time, digits = 2)
 
 		# Plot the result
-		sc_plot_good <- sanity_check_plot(sc_filename_good, sc_dataframe_good,
-										package, sc_score_good, finish_time)
+		sc_plot_good <- sanity_check_plot("sc_dataset_good.csv",
+		                                  sc_dataframe_good, package,
+		                                  sc_score_good, finish_time)
+		print(sc_plot_good)
 
 		# Load sanity check dataset (unfavorable case)
 		start_time <- Sys.time()
-		sc_filename_bad <- "sc_dataset_bad.csv"
-		sc_dataset_bad <- read.csv(paste0("data/", sc_filename_bad))
+		sc_dataset_bad <- read.csv("data/sc_dataset_bad.csv")
 
 		# Compute average Silhouette score and clustering
 		sc_score_bad <- round(compute_avg_Silhouette(sc_dataset_bad),
@@ -32,8 +35,10 @@ main <- function(all_packages) {
 		finish_time <- round(Sys.time() - start_time, digits = 2)
 
 		# Plot the result
-		sc_plot_bad <- sanity_check_plot(sc_filename_bad, sc_dataframe_bad,
-										package, sc_score_bad, finish_time)
+		sc_plot_bad <- sanity_check_plot("sc_dataset_bad.csv",
+		                                 sc_dataframe_bad, package,
+		                                 sc_score_bad, finish_time)
+		print(sc_plot_bad)
 
 		# Compute the Silhouette scores for binary matrix
 		start_time <- Sys.time()
@@ -42,12 +47,8 @@ main <- function(all_packages) {
 
 		# Plot the result
 		bm_plot <- binary_matrix_plot(bm_scores, package, finish_time)
-
-		result <- paste0("results/results_", toupper(package), ".pdf")
-		pdf(result)
-		print(sc_plot_good)
-		print(sc_plot_bad)
 		print(bm_plot)
+
 		dev.off()
 	}
 }

@@ -27,12 +27,10 @@ main <- function(clustering_methods, dataset_filenames) {
 			print(hyp_plot)
 
 			# Generic plot with cluster size (same for all algorithms)
-			optimal_tostring <- paste(names(optimal_set), optimal_set,
-									sep = " = ", collapse = ", ")
-			generic_plot <- clustering_generic_plot(optimal_dataframe,
-													optimal_tostring,
-													filename,
-													method)
+			generic_plot <- create_generic_plot(optimal_dataframe,
+			                                    optimal_set,
+			                                    filename,
+			                                    method)
 			print(generic_plot)
 
 			# Alternative plot, not using Silhouette (different for each
@@ -56,7 +54,10 @@ extract_opt_hyperparameters <- function(hyperparameters) {
 	return(optimal_set)
 }
 
-clustering_generic_plot <- function(dataframe, string, dataset, method) {
+create_generic_plot <- function(dataframe, optimal_hyps, dataset, method) {
+	tostring <- paste(names(optimal_hyps), optimal_hyps,
+	                  sep = " = ", collapse = ", ")
+
 	P <- ggplot(data = dataframe, aes(Cluster, y = after_stat(count) /
 		                                           sum(after_stat(count)))) +
 		 geom_bar(aes(fill = Cluster)) +
@@ -64,7 +65,7 @@ clustering_generic_plot <- function(dataframe, string, dataset, method) {
 		 ylim(0, 1) +
 		 labs(title = paste0("Clustering: ", method),
 		      subtitle = paste0("Dataset: ", dataset,
-		                        "\nParameters used: ", string),
+		                        "\nParameters used: ", tostring),
 		      y = "Cluster size (in percentage)",
 		      x = "Cluster number")
 
