@@ -51,6 +51,12 @@ main <- function(silhouette_packages) {
 
 		dev.off()
 	}
+
+	# Chosen package was 'cluster'
+	pdf("results/Final_comparison.pdf")
+	fc_plot <- final_comparison_plot_for_bm()
+	print(fc_plot)
+	dev.off()
 }
 
 avg_sil_scores_for_bm <- function(matrix_rows, matrix_columns, package_name) {
@@ -110,6 +116,26 @@ binary_matrix_plot <- function(score_vector, package_name, time) {
 	     geom_smooth(formula = y ~ x, method = "lm") +
 	     labs(title = paste0("Binary matrix for package: ", package_name),
 	          subtitle = paste0("Completed in: ", time, " seconds"),
+	          y = "Average Silhouette score for the i-th iteration",
+	          x = "Iteration")
+
+	return(P)
+}
+
+final_comparison_plot_for_bm <- function() {
+	source("bin/Package_CLUSTER.R")
+	test_scores <- avg_sil_scores_for_bm(20, 10, "CLUSTER")
+	test_scores$Implementation <- "cluster"
+	source("bin/Package_RETICULATE.R")
+	compare_scores <- avg_sil_scores_for_bm(20, 10, "RETICULATE")
+	compare_scores$Implementation <- "scikit-learn"
+	all_scores <- rbind(test_scores, compare_scores)
+
+	P <- ggplot(data = all_scores, mapping = aes(x = X, y = Y, color = Implementation)) +
+	     ylim(-1, 1) +
+	     geom_point() +
+	     scale_color_manual(values = c("blue", "green")) +
+	     labs(title = "Binary matrix comparison between 'cluster' (R) and 'scikit-learn' (Python)",
 	          y = "Average Silhouette score for the i-th iteration",
 	          x = "Iteration")
 

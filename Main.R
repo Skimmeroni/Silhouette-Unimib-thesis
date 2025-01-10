@@ -3,6 +3,7 @@ if (length(args) != 1) {
 	stop(c("Wrong number of arguments given: expected 1, got ", length(args)))
 }
 
+#all_packages <- c("cluster", "drclust", "tidyclust", "Kira", "reticulate", "fpc", "clValid", "NbClust")
 all_packages <- c("cluster", "drclust", "tidyclust", "Kira", "reticulate")
 #clustering_methods <- c("KMEANS", "HIERARCHICAL-CLUSTERING", "DBSCAN",
 #                        "BIRCH", "MEAN-SHIFT", "HDBSCAN")
