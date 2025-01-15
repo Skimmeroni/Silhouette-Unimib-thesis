@@ -54,7 +54,11 @@ main <- function(silhouette_packages) {
 
 	# Chosen package was 'cluster'
 	pdf("results/Final_comparison.pdf")
-	fc_plot <- final_comparison_plot_for_bm()
+	fc_plot <- final_comparison_plot_for_bm(20, 10)
+	print(fc_plot)
+	fc_plot <- final_comparison_plot_for_bm(200, 100)
+	print(fc_plot)
+	fc_plot <- final_comparison_plot_for_bm(2000, 1000)
 	print(fc_plot)
 	dev.off()
 }
@@ -122,12 +126,12 @@ binary_matrix_plot <- function(score_vector, package_name, time) {
 	return(P)
 }
 
-final_comparison_plot_for_bm <- function() {
+final_comparison_plot_for_bm <- function(matrix_rows, matrix_columns) {
 	source("bin/Package_CLUSTER.R")
-	test_scores <- avg_sil_scores_for_bm(20, 10, "CLUSTER")
+	test_scores <- avg_sil_scores_for_bm(matrix_rows, matrix_columns, "CLUSTER")
 	test_scores$Implementation <- "cluster"
 	source("bin/Package_RETICULATE.R")
-	compare_scores <- avg_sil_scores_for_bm(20, 10, "RETICULATE")
+	compare_scores <- avg_sil_scores_for_bm(matrix_rows, matrix_columns, "RETICULATE")
 	compare_scores$Implementation <- "scikit-learn"
 	all_scores <- rbind(test_scores, compare_scores)
 
