@@ -19,8 +19,7 @@ main <- function(clustering_methods, dataset_filenames) {
 			optimal_set <- extract_opt_hyperparameters(hyp_combinations)
 
 			# Apply clustering with such hyperparameter combination
-			optimal_dataframe <- create_clustering_dataframe(dataset,
-			                                                 optimal_set)
+			optimal_dataframe <- create_clustering_dataframe(dataset, optimal_set)
 
 			# Plot regarding hyperparameters
 			hyp_plot <- hyperparameter_plot(hyp_combinations, filename)

@@ -7,7 +7,7 @@ if (length(args) != 1) {
 all_packages <- c("cluster", "drclust", "tidyclust", "Kira", "reticulate")
 #clustering_methods <- c("KMEANS", "HIERARCHICAL-CLUSTERING", "DBSCAN",
 #                        "BIRCH", "MEAN-SHIFT", "HDBSCAN")
-clustering_methods <- c("KMEANS", "DBSCAN")
+clustering_methods <- c("KMEANS", "DBSCAN", "HDBSCAN")
 dataset_filenames <- list.files(path = "data", pattern = "^[a-r|t-z|0-9]")
 
 # Load ggplot2 here, since it will be used anyway
