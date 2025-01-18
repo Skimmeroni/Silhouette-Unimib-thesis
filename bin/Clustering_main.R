@@ -9,6 +9,9 @@ main <- function(clustering_methods, dataset_filenames) {
 		result <- paste0("results/results_c_", method, ".pdf")
 		pdf(result)
 
+		rnk_combinations <- data.frame(sil_avg = numeric(),
+		                                   parameters = character())
+
 		for (filename in dataset_filenames) {
 			# Load the dataset and test some combinations of hyperparameters
 			dataset <- read.csv(paste0("data/", filename))
@@ -39,7 +42,14 @@ main <- function(clustering_methods, dataset_filenames) {
 				print(custom_plot)
 			}
 
+			# Merge results for ranking
+			rnk_combinations <- rbind(rnk_combinations, format_for_ranking(hyp_combinations))
 		}
+
+		rnk_combinations <- rnk_combinations[order(rnk_combinations$sil_avg, decreasing = TRUE), ]
+		rnk_combinations <- head(rnk_combinations, 10)
+		rnk_plot <- create_ranking_plot(rnk_combinations, method)
+		print(rnk_plot)
 
 		dev.off()
 	}
@@ -67,6 +77,33 @@ create_generic_plot <- function(dataframe, optimal_hyps, dataset, method) {
 		                        "\nParameters used: ", tostring),
 		      y = "Cluster size (in percentage)",
 		      x = "Cluster number")
+
+	return(P)
+}
+
+format_for_ranking <- function(hyps) {
+	ranking_combinations <- data.frame(sil_avg = hyps[, ncol(hyps)], parameters = " ")
+
+	if (ncol(hyps) == 2) {
+		ranking_combinations$parameters <- paste0(colnames(hyps)[1], " = ", hyps[, 1])
+	} else {
+		ranking_combinations$parameters <- apply(hyps[, -ncol(hyps)], 1,
+	                                             function(row) {
+	                                                  paste0(names(hyps)[-ncol(hyps)],
+	                                                         " = ", row, collapse = "\n")
+	                                             })
+	}
+
+	return(ranking_combinations)
+}
+
+create_ranking_plot <- function(ranking_combinations, method) {
+	P <- ggplot(data = ranking_combinations, mapping = aes(x = sil_avg, y = parameters)) +
+		 geom_col(fill = "cyan") +
+		 xlim(-1, 1) +
+		 labs(title = paste0("Clustering: ", method),
+		      subtitle = "Hyperparameter combinations ranked by its average Silhouette score",
+		      x = "Silhouette score")
 
 	return(P)
 }
