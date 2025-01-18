@@ -56,7 +56,7 @@ main <- function(silhouette_packages) {
 	pdf("results/Final_comparison.pdf")
 	fc_plot1 <- final_comparison_plot_for_bm(20, 10)
 	print(fc_plot1)
-	fc_plot2 <- final_comparison_plot_for_bm(200, 100)
+	fc_plot2 <- final_comparison_plot_for_bm(100, 50)
 	print(fc_plot2)
 	fc_plot3 <- final_comparison_plot_for_bm(1000, 500)
 	print(fc_plot3)
@@ -140,7 +140,8 @@ final_comparison_plot_for_bm <- function(matrix_rows, matrix_columns) {
 	     geom_point() +
 	     scale_color_manual(values = c("blue", "green")) +
 	     labs(title = "Binary matrix comparison between 'cluster' (R) and 'scikit-learn' (Python)",
-	          y = "Average Silhouette score for the i-th iteration",
+	          subtitle = paste0("Matrix size: ", matrix_rows, " rows, ", matrix_columns, " columns"),
+		  y = "Average Silhouette score for the i-th iteration",
 	          x = "Iteration")
 
 	return(P)
