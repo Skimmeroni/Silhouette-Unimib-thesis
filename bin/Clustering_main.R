@@ -46,6 +46,7 @@ main <- function(clustering_methods, dataset_filenames) {
 		}
 
 		rnk_combinations <- rnk_combinations[order(rnk_combinations$sil_avg, decreasing = TRUE), ]
+		row.names(rnk_combinations) <- NULL
 		rnk_combinations <- head(rnk_combinations, 15)
 		rnk_plot <- create_ranking_plot(rnk_combinations, filename)
 		print(rnk_plot)
