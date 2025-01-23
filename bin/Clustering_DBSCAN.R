@@ -7,11 +7,11 @@ tune_hyperparameters <- function(dataset) {
 	                          epsilon = numeric(),
 	                          sil_avg = numeric())
 
-	minPoints_range <- seq(ncol(dataset) + 1, ncol(dataset) * 2)
+	minPoints_range <- seq(ncol(dataset) + 1, ncol(dataset) * 3)
 
 	for (minPoints in minPoints_range) {
 		max_distance <- max(kNNdist(dataset, k = minPoints))
-		epsilon_range <- seq(0, max_distance, by = max_distance / 10)
+		epsilon_range <- seq(0, max_distance, by = max_distance / 50)
 
 		for (epsilon in epsilon_range) {
 			dbscan_result <- dbscan(dataset, eps = epsilon, minPts = minPoints)
