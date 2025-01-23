@@ -10,6 +10,9 @@ main <- function(clustering_methods, dataset_filenames) {
 		rnk_combinations <- data.frame(sil_avg = numeric(),
 		                               parameters = character())
 
+		rnk_by_method <- data.frame(sil_avg = numeric(),
+		                            method = character())
+
 		for (method in clustering_methods) {
 			# Load the functions specific for the clustering algorithm in use
 			file <- paste0("bin/Clustering_", method, ".R")
@@ -43,6 +46,9 @@ main <- function(clustering_methods, dataset_filenames) {
 			rnk_this <- format_for_ranking(hyp_combinations)
 			rnk_this$method <- method
 			rnk_combinations <- rbind(rnk_combinations, rnk_this)
+
+			by_method_this <- data.frame(sil_avg = max(rnk_this$sil_avg), method = method)
+			rnk_by_method <- rbind(rnk_by_method, by_method_this)
 		}
 
 		rnk_combinations <- rnk_combinations[order(rnk_combinations$sil_avg, decreasing = TRUE), ]
@@ -50,6 +56,9 @@ main <- function(clustering_methods, dataset_filenames) {
 		rnk_combinations <- head(rnk_combinations, 15)
 		rnk_plot <- create_ranking_plot(rnk_combinations, filename)
 		print(rnk_plot)
+
+		by_method_plot <- create_ranking_by_method_plot(rnk_by_method, filename)
+		print(by_method_plot)
 
 		dev.off()
 	}
@@ -105,6 +114,18 @@ create_ranking_plot <- function(ranking_combinations, filename) {
 		      subtitle = "Hyperparameter combinations ranked by its average Silhouette score",
 		      x = "Silhouette score",
 		      y = "")
+
+	return(P)
+}
+
+create_ranking_by_method_plot <- function(ranking_by_method, filename) {
+	P <- ggplot(data = ranking_by_method, mapping = aes(x = method, y = sil_avg)) +
+		 geom_col(fill = "purple") +
+		 ylim(-1, 1) +
+		 labs(title = paste0("Dataset: ", filename),
+		      subtitle = "Algorithms ranked by their average Silhouette score",
+		      x = "Algorithm",
+		      y = "Silhouette score")
 
 	return(P)
 }
