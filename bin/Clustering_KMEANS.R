@@ -41,8 +41,8 @@ hyperparameter_plot <- function(H_frame, dataset) {
 		      scale_x_continuous(limits = c(2, 10)) +
 		      geom_line() +
 		      geom_point() +
-		      labs(title = "K-Means elbow plot",
-		           subtitle = paste0("Dataset: ", dataset),
+		      labs(title = paste0("Dataset: ", dataset),
+		           subtitle = "K-Means elbow plot",
 		           x = "Number of clusters",
 		           y = "Average Silhouette width")
 

@@ -41,8 +41,8 @@ hyperparameter_plot <- function(H_frame, dataset) {
 		 ylim(-1, 1) +
 		 geom_line() +
 		 geom_point() +
-		 labs(title = "HDBSCAN elbow plot",
-		      subtitle = paste0("Dataset: ", dataset),
+		 labs(title = paste0("Dataset: ", dataset),
+		      subtitle = "HDBSCAN elbow plot",
 		      x = "MinPts",
 		      y = "Average Silhouette width")
 

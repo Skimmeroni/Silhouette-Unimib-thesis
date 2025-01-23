@@ -56,8 +56,8 @@ hyperparameter_plot <- function(H_frame, dataset) {
 		 ylim(-1, 1) +
 		 geom_line() +
 		 geom_point() +
-		 labs(title = "DBSCAN elbow plot",
-		      subtitle = paste0("Dataset: ", dataset),
+		 labs(title = paste0("Dataset: ", dataset),
+		      subtitle = "DBSCAN elbow plot",
 		      x = "Epsilon",
 		      y = "Average Silhouette width")
 
@@ -81,8 +81,8 @@ customized_plot <- function(dataframe, dataset) {
 		 geom_bar(aes(fill = Cluster)) +
 		 theme(legend.position = "top") +
 		 ylim(0, 1) +
-		 labs(title = paste0("DBSCAN clustering with visual inspection"),
-		      subtitle = paste0("Dataset: ", dataset,
+		 labs(title = paste0("Dataset: ", dataset),
+		      subtitle = paste0("DBSCAN clustering with visual inspection",
 		                        "\nParameters used: ", visual_string),
 		      y = "Cluster size (in percentage)",
 		      x = "Cluster number")

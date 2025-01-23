@@ -1,38 +1,35 @@
 main <- function(clustering_methods, dataset_filenames) {
-	for (method in clustering_methods) {
-		cat("Current clustering algorithm:", method, "\n")
+	for (filename in dataset_filenames) {
+		cat("Current dataset:", filename, "\n")
+		dataset <- read.csv(paste0("data/", filename))
+		dataset <- na.omit(dataset)
 
-		# Load the functions specific for the clustering algorithm in use
-		file <- paste0("bin/Clustering_", method, ".R")
-		source(file)
-
-		result <- paste0("results/results_c_", method, ".pdf")
+		result <- paste0("results/results_", filename, ".pdf")
 		pdf(result)
 
 		rnk_combinations <- data.frame(sil_avg = numeric(),
-		                                   parameters = character())
+		                               parameters = character())
 
-		for (filename in dataset_filenames) {
+		for (method in clustering_methods) {
+			# Load the functions specific for the clustering algorithm in use
+			file <- paste0("bin/Clustering_", method, ".R")
+			source(file)
+
 			# Load the dataset and test some combinations of hyperparameters
-			dataset <- read.csv(paste0("data/", filename))
-			dataset <- na.omit(dataset)
 			hyp_combinations <- tune_hyperparameters(dataset)
 
 			# Extract the hyperparameter combination that maximizes Silhouette
-			optimal_set <- extract_opt_hyperparameters(hyp_combinations)
+			opt_set <- extract_opt_hyperparameters(hyp_combinations)
 
 			# Apply clustering with such hyperparameter combination
-			optimal_dataframe <- create_clustering_dataframe(dataset, optimal_set)
+			opt_dataframe <- create_clustering_dataframe(dataset, opt_set)
 
 			# Plot regarding hyperparameters
 			hyp_plot <- hyperparameter_plot(hyp_combinations, filename)
 			print(hyp_plot)
 
 			# Generic plot with cluster size (same for all algorithms)
-			generic_plot <- create_generic_plot(optimal_dataframe,
-			                                    optimal_set,
-			                                    filename,
-			                                    method)
+			generic_plot <- create_generic_plot(opt_dataframe, opt_set, filename, method)
 			print(generic_plot)
 
 			# Alternative plot, not using Silhouette (different for each
@@ -48,7 +45,7 @@ main <- function(clustering_methods, dataset_filenames) {
 
 		rnk_combinations <- rnk_combinations[order(rnk_combinations$sil_avg, decreasing = TRUE), ]
 		rnk_combinations <- head(rnk_combinations, 10)
-		rnk_plot <- create_ranking_plot(rnk_combinations, method)
+		rnk_plot <- create_ranking_plot(rnk_combinations, filename)
 		print(rnk_plot)
 
 		dev.off()
@@ -72,8 +69,8 @@ create_generic_plot <- function(dataframe, optimal_hyps, dataset, method) {
 		 geom_bar(aes(fill = Cluster)) +
 		 theme(legend.position = "top") +
 		 ylim(0, 1) +
-		 labs(title = paste0("Clustering: ", method),
-		      subtitle = paste0("Dataset: ", dataset,
+		 labs(title = paste0("Dataset: ", dataset),
+		      subtitle = paste0("Clustering: ", method,
 		                        "\nParameters used: ", tostring),
 		      y = "Cluster size (in percentage)",
 		      x = "Cluster number")
@@ -97,13 +94,14 @@ format_for_ranking <- function(hyps) {
 	return(ranking_combinations)
 }
 
-create_ranking_plot <- function(ranking_combinations, method) {
+create_ranking_plot <- function(ranking_combinations, filename) {
 	P <- ggplot(data = ranking_combinations, mapping = aes(x = sil_avg, y = parameters)) +
 		 geom_col(fill = "cyan") +
 		 xlim(-1, 1) +
-		 labs(title = paste0("Clustering: ", method),
+		 labs(title = paste0("Dataset: ", filename),
 		      subtitle = "Hyperparameter combinations ranked by its average Silhouette score",
-		      x = "Silhouette score")
+		      x = "Silhouette score",
+		      y = "")
 
 	return(P)
 }
