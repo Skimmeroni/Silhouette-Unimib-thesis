@@ -84,7 +84,7 @@ customized_plot <- function(dataframe, dataset) {
 		 labs(title = paste0("Dataset: ", dataset),
 		      subtitle = paste0("DBSCAN clustering with visual inspection",
 		                        "\nParameters used: ", visual_string),
-		      y = "Cluster size (in percentage)",
+		      y = "Cluster size (normalized to [0, 1])",
 		      x = "Cluster number")
 
 	return(P)

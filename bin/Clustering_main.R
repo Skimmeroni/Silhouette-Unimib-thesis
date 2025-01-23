@@ -72,7 +72,7 @@ create_generic_plot <- function(dataframe, optimal_hyps, dataset, method) {
 		 labs(title = paste0("Dataset: ", dataset),
 		      subtitle = paste0("Clustering: ", method,
 		                        "\nParameters used: ", tostring),
-		      y = "Cluster size (in percentage)",
+		      y = "Cluster size (normalized to [0, 1])",
 		      x = "Cluster number")
 
 	return(P)
