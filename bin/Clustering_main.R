@@ -40,11 +40,13 @@ main <- function(clustering_methods, dataset_filenames) {
 			}
 
 			# Merge results for ranking
-			rnk_combinations <- rbind(rnk_combinations, format_for_ranking(hyp_combinations))
+			rnk_this <- format_for_ranking(hyp_combinations)
+			rnk_this$method <- method
+			rnk_combinations <- rbind(rnk_combinations, rnk_this)
 		}
 
 		rnk_combinations <- rnk_combinations[order(rnk_combinations$sil_avg, decreasing = TRUE), ]
-		rnk_combinations <- head(rnk_combinations, 10)
+		rnk_combinations <- head(rnk_combinations, 15)
 		rnk_plot <- create_ranking_plot(rnk_combinations, filename)
 		print(rnk_plot)
 
@@ -95,8 +97,8 @@ format_for_ranking <- function(hyps) {
 }
 
 create_ranking_plot <- function(ranking_combinations, filename) {
-	P <- ggplot(data = ranking_combinations, mapping = aes(x = sil_avg, y = parameters)) +
-		 geom_col(fill = "cyan") +
+	P <- ggplot(data = ranking_combinations, mapping = aes(x = sil_avg, y = parameters, fill = method)) +
+		 geom_col() +
 		 xlim(-1, 1) +
 		 labs(title = paste0("Dataset: ", filename),
 		      subtitle = "Hyperparameter combinations ranked by its average Silhouette score",
