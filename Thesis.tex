@@ -599,6 +599,114 @@
 
 	\section{Uso di Silhouette su EHR}
 
+		\begin{table}[h]
+			\centering
+			\footnotesize
+			\begin{tabular}{| p{1.75cm} | p{1.75cm} | p{1.75cm} | p{1.75cm} | p{1.75cm} | p{1.75cm} |}
+				\hline
+				\multicolumn{6}{| p{12.5cm} |}{
+					\textit{Identifying heterogeneous subgroups of systemic autoimmune
+					diseases by applying a joint dimension reduction and clustering
+					approach to immunomarkers}
+				} \\
+				\hline
+				\textbf{Patologie} &
+				\textbf{N. pazienti} &
+				\textbf{Features} &
+				\textbf{Algoritmi} &
+				\textbf{Software} &
+				\textbf{Metriche} \\
+				\hline
+				Lupus Eritematoso Sistemico, Artrite Reumatoide,
+				Sindrome di Sjogren &
+				11923 &
+				biomarcatori (tradotti in variabili categoriali) &
+				Multiple Correspondence Analysis K-means (clustering e dimensionality
+				reduction insieme) &
+				clustrd (R) &
+				Silhouette \\
+				\hline
+				\multicolumn{6}{| p{12.5cm} |}{
+					\textit{Association of comorbid-socioeconomic clusters with
+					mortality in late onset epilepsy derived through unsupervised
+					machine learning}
+				} \\
+				\hline
+				\textbf{Patologie} &
+				\textbf{N. pazienti} &
+				\textbf{Features} &
+				\textbf{Algoritmi} &
+				\textbf{Software} &
+				\textbf{Metriche} \\
+				\hline
+				Epilessia (tardiva) &
+				11307 &
+				Fattori di rischio, comorbiditá (indice di Charlson) &
+				Agglomerative Hierarchical Clustering &
+				scikit-learn (Python), Python 3.6.3, Stata 16.1 &
+				Silhouette, Davies-Bouldin \\
+				\hline
+				\multicolumn{6}{| p{12.5cm} |}{
+					\textit{Exploration of critical care data by using unsupervised
+					machine learning}
+				} \\
+				\hline
+				\textbf{Patologie} &
+				\textbf{N. pazienti} &
+				\textbf{Features} &
+				\textbf{Algoritmi} &
+				\textbf{Software} &
+				\textbf{Metriche} \\
+				\hline
+				&
+				1503 &
+				Valori di test di routine di laboratorio (BUN, creatinina, glucosio, ...) &
+				Kmeans &
+				R 3.5.2 &
+				Total within-cluster variation, Silhouette, Gap statistic \\
+				\hline
+				\multicolumn{6}{| p{12.5cm} |}{
+					\textit{Identifying and evaluating clinical subtypes of Alzheimer’s
+					disease in care electronic health records using unsupervised machine
+					learning}
+				} \\
+				\hline
+				\textbf{Patologie} &
+				\textbf{N. pazienti} &
+				\textbf{Features} &
+				\textbf{Algoritmi} &
+				\textbf{Software} &
+				\textbf{Metriche} \\
+				\hline
+				Malattia di Alzheimer &
+				10065 &
+				sintomi tipici, comorbiditá, dati demografici &
+				K-Means, Kernel K-means, Affinity Propagation, Latent Class Analysis &
+				&
+				Silhouette, Coefficiente di Jaccard \\
+				\hline
+				\multicolumn{6}{| p{12.5cm} |}{
+					\textit{Utilization of Deep Learning for Subphenotype Identification
+					in Sepsis-Associated Acute Kidney Injury}
+				} \\
+				\hline
+				\textbf{Patologie} &
+				\textbf{N. pazienti} &
+				\textbf{Features} &
+				\textbf{Algoritmi} &
+				\textbf{Software} &
+				\textbf{Metriche} \\
+				\hline
+				Sepsi &
+				4001 &
+				Segni vitali, test di laboratorio &
+				K-Means &
+				scikit-learn (Python), matplotlib (Python), SAS 9.4, R 3.4.3 &
+				Silhouette, Davies-Bouldin, Calinksi-Harabasz \\
+				\hline
+			\end{tabular}
+		\end{table}
+
 	\section{Aspetti teorici di Silhouette}
 
 	\section{Dataset reali}
