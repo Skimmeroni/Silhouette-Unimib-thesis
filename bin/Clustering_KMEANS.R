@@ -1,19 +1,18 @@
 tune_hyperparameters <- function(dataset) {
 	library(cluster)
-	library(FCPS)
 
 	H_dataframe <- data.frame(k = numeric(), method = character(), sil_avg = vector())
 
 	for (m in c("euclidean", "manhattan", "binary")) {
-		distance_matrix <- as.matrix(dist(dataset, method = m))
+		distance_matrix <- dist(dataset, method = m)
 		sil_avgs_vector <- c()
 
 		for (i in 2:5) {
 			# Apply k-means with an increasing number of clusters
-			kmeans_result <- kmeansClustering(distance_matrix, ClusterNo = i)
+			kmeans_result <- kmeans(distance_matrix, center = i)
 
 			# Compute the Silhouette widths
-			sil_result <- silhouette(kmeans_result$Cls, distance_matrix)
+			sil_result <- silhouette(kmeans_result$cluster, distance_matrix)
 
 			# Extract the average Silhouette score
 			sil_avg <- summary(sil_result)$avg.width
