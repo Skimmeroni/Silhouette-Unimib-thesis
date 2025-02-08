@@ -35,13 +35,6 @@ main <- function(clustering_methods, dataset_filenames) {
 			generic_plot <- create_generic_plot(opt_dataframe, opt_set, filename, method)
 			print(generic_plot)
 
-			# Alternative plot, not using Silhouette (different for each
-			# algorithm). May or may not exist
-			custom_plot <- customized_plot(dataset, filename)
-			if (!is.null(custom_plot)) {
-				print(custom_plot)
-			}
-
 			# Merge results for ranking
 			rnk_this <- format_for_ranking(hyp_combinations)
 			rnk_this$method <- method

@@ -53,8 +53,3 @@ hyperparameter_plot <- function(H_frame, dataset) {
 
 	return(P)
 }
-
-customized_plot <- function(dataframe, dataset) {
-	# No-op
-	return(NULL)
-}
