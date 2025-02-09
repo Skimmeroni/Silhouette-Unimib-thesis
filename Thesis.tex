@@ -1,11 +1,14 @@
 \documentclass[italian]{article}
 
+\usepackage[backend = biber, style = alphabetic]{biblatex}
 \usepackage{amsmath}
 \usepackage{babel}
 \usepackage{booktabs}
 \usepackage{boxedminipage}
 \usepackage{graphics}
 \usepackage{pgfplotstable}
+
+\addbibresource{Thesis.bib}
 
 \begin{document}
 
@@ -23,7 +26,8 @@
 		genere nel clustering non supervisionato non vi è a disposizione
 		alcuna "ground truth".
 
-		La metrica Silhouette si propone di rispondere alle seguenti domande:
+		La metrica Silhouette, introdotta per la prima volta in \cite{ROUSSEEUW198753},
+		si propone di rispondere alle seguenti domande:
 
 		\begin{itemize}
 			\item
@@ -395,7 +399,11 @@
 
 		Per comparare le performance delle diverse implementazioni di
 		Silhouette ho eseguito due test, uno chiamato "sanity check" ed
-		uno chiamato "matrice binaria".
+		uno chiamato "matrice binaria". Il codice per la generazione dei
+		test è liberamente disponibile. Ho organizzato il codice seguendo
+		le linee guida riportate in \cite{10.1371/journal.pcbi.1000424}.
+		Ho anche tenuto un lab notebook per tenere traccia dei risultati
+		mano mano che venivano generati, facendo riferimento a \cite{10.1371/journal.pcbi.1004385}
 
 		\subsection{Sanity check}
 
@@ -599,6 +607,10 @@
 
 	\section{Uso di Silhouette su EHR}
 
+		Articoli citati: \cite{Chang2024}, \cite{Alexander2021}, \cite{HYUN2020105507},
+		\cite{Josephson_Gonzalez-Izquierdo_Engbers_Denaxas_Delgado-Garcia_Sajobi_Wang_Keezer_Wiebe_2023/10/01_2023},
+		\cite{01277230-202011000-00006}.
+
 		\begin{table}[h]
 			\centering
 			\footnotesize
@@ -709,6 +721,12 @@
 
 	\section{Aspetti teorici di Silhouette}
 
+		Articoli citati: \cite{10.1007/978-3-030-52348-0_2},
+		\cite{doi:10.3233/IDA-2012-0545}, \cite{Gao2019CUBOSAI},
+		\cite{NAGHIZADEH2020205}, \cite{10.1007/978-3-319-19369-4_5}.
+
 	\section{Dataset reali}
+
+	\printbibliography
 
 \end{document}
