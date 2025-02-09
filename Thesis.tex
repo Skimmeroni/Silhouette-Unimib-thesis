@@ -276,7 +276,6 @@
 			trova, qual'è il suo neighboring cluster, il suo valore di $s(i)$.
 
 			\begin{figure}[h]
-				%\includepdf[pages = 1, fitpaper = true, nup = 1x1]{doc/si.pdf}
 				\includegraphics[width = \textwidth]{doc/si.pdf}
 				\caption{Silhouette plot per il dataset \texttt{iris}.}
 				\label{fig:si}
@@ -308,6 +307,16 @@
 			$b(i)$ tende ad essere molto basso, dato che elementi molto vicini
 			vengono separati forzosamente.
 
+			\begin{figure}[h]
+				\centering
+				\includegraphics[width = 0.5\textwidth, height = 0.3\textheight]{doc/clusters-2.pdf}
+				\includegraphics[width = 0.5\textwidth, height = 0.3\textheight]{doc/clusters-4.pdf}
+				\includegraphics[width = 0.5\textwidth, height = 0.3\textheight]{doc/clusters-6.pdf}
+				\caption{Clustering con K-Means usando K = 2, 4, 6 per un dataset
+				auto generato in cui la struttura di cluster è ben visibile. }
+				\label{fig:k246}
+			\end{figure}
+
 			In generale, l'operato di un algoritmo di clustering può
 			considerarsi ottimale se il valore si $s(i)$ tende ad essere
 			molto alto per tutti gli elementi del dataset. A tale scopo,
@@ -325,26 +334,6 @@
 			grande: tale combinazione sarà quella che restituisce il clustering
 			che meglio interpreta il dataset.
 
-			\begin{figure}[h]
-				\includegraphics[width = \textwidth]{doc/clusters-2.pdf}
-				\caption{Clustering con K-Means usando K = 2 per un dataset
-				auto generato in cui la struttura di cluster è ben visibile. }
-				\label{fig:c2}
-			\end{figure}
-
-			\begin{figure}[h]
-				\includegraphics[width = \textwidth]{doc/clusters-4.pdf}
-				\caption{Clustering con K-Means usando K = 4 per un dataset
-				auto generato in cui la struttura di cluster è ben visibile. }
-				\label{fig:c4}
-			\end{figure}
-
-			\begin{figure}[h]
-				\includegraphics[width = \textwidth]{doc/clusters-6.pdf}
-				\caption{Clustering con K-Means usando K = 6 per un dataset
-				auto generato in cui la struttura di cluster è ben visibile. }
-				\label{fig:c6}
-			\end{figure}
 
 			Si noti come un valore della Silhouette media complessiva
 			pari a $0$ non significa necessariamente che il clustering
@@ -414,33 +403,25 @@
 			di clustering K-Means e calcolare sul risultato di quest'ultimo
 			la Silhouette media.
 
-			Lo scatter plot dei due dataset è riportato in
-			Figure~\ref{fig:scgood} e Figure~\ref{fig:scbad}.
-			Li ho costruiti utilizzando la funzione \texttt{rnorm},
-			che genera dei punti casuali a partire da una distribuzione
-			normale bivariata.
+			Lo scatter plot dei due dataset è riportato in Figure~\ref{fig:sc}.
+			Li ho costruiti utilizzando la funzione \texttt{rnorm}, che genera
+			dei punti casuali a partire da una distribuzione normale bivariata.
 			
 			Il primo dataset è stato costruito usando due distribuzioni
 			normali fuse insieme, entrambe con una deviazione standard
 			molto bassa, di modo che i punti siano concentrati attorno
-			alla media.
+			alla media. Il secondo dataset è costituito da una sola distribuzione
+			normale centrata in $(0, 0)$ con una deviazione standard molto ampia,
+			di modo che i punti siano molto dispersi.
 
 			\begin{figure}[h]
-				\includegraphics[width = \textwidth]{doc/sc_dataset_good.pdf}
-				\caption{Plot del dataset per il test sanity check, in cui
-				la struttura di cluster è ben visibile.}
-				\label{fig:scgood}
-			\end{figure}
-
-			Il secondo dataset è costituito da una sola distribuzione normale
-			centrata in $(0, 0)$ con una deviazione standard molto ampia, di
-			modo che i punti siano molto dispersi.
-
-			\begin{figure}[h]
-				\includegraphics[width = \textwidth]{doc/sc_dataset_bad.pdf}
-				\caption{Plot del dataset per il test sanity check, in cui
-				la struttura di cluster è completamente assente.}
-				\label{fig:scbad}
+				\centering
+				\includegraphics[width = 0.75\textwidth, height = 0.45\textheight]{doc/sc_dataset_good.pdf}
+				\includegraphics[width = 0.75\textwidth, height = 0.45\textheight]{doc/sc_dataset_bad.pdf}
+				\caption{Plot dei dataset per il test sanity check. Il primo
+				presenta una struttura di cluster ben definita, mentre nel
+				secondo la struttura di cluster è completamente assente.}
+				\label{fig:sc}
 			\end{figure}
 
 			I risultati per il test sanity check sono riportati di seguito.
@@ -451,73 +432,48 @@
 			appositamente costruito per escludere pacchetti problematici.
 
 			\begin{figure}[h]
-				\includegraphics[width = \textwidth, page = 1]{results/results_CLUSTER.pdf}
-				\caption{Plot del test sanity check per il pacchetto \texttt{cluster},
-				usando il dataset con struttura di cluster ben visibile.}
-				\label{fig:clustergood}
+				\begin{boxedminipage}{0.5\textwidth}
+					\includegraphics[width = \textwidth, page = 1]{results/results_CLUSTER.pdf}
+				\end{boxedminipage}
+				\begin{boxedminipage}{0.5\textwidth}
+					\includegraphics[width = \textwidth, page = 1]{results/results_DRCLUST.pdf}
+				\end{boxedminipage}
+				\begin{boxedminipage}{0.5\textwidth}
+					\includegraphics[width = \textwidth, page = 1]{results/results_TIDYCLUST.pdf}
+				\end{boxedminipage}
+				\begin{boxedminipage}{0.5\textwidth}
+					%\includegraphics[width = \textwidth, page = 1]{results/results_KIRA.pdf}
+				\end{boxedminipage}
+				\caption{Plot dei test sanity check usando il dataset con struttura di cluster
+				ben visibile.}
+				\label{fig:good}
 			\end{figure}
 
 			\begin{figure}[h]
-				\includegraphics[width = \textwidth, page = 2]{results/results_CLUSTER.pdf}
-				\caption{Plot del test sanity check per il pacchetto \texttt{cluster},
-				usando il dataset con struttura di cluster assente.}
-				\label{fig:clusterbad}
+				\begin{boxedminipage}{0.5\textwidth}
+					\includegraphics[width = \textwidth, page = 2]{results/results_CLUSTER.pdf}
+				\end{boxedminipage}
+				\begin{boxedminipage}{0.5\textwidth}
+					\includegraphics[width = \textwidth, page = 2]{results/results_DRCLUST.pdf}
+				\end{boxedminipage}
+				\begin{boxedminipage}{0.5\textwidth}
+					\includegraphics[width = \textwidth, page = 2]{results/results_TIDYCLUST.pdf}
+				\end{boxedminipage}
+				\begin{boxedminipage}{0.5\textwidth}
+					%\includegraphics[width = \textwidth, page = 2]{results/results_KIRA.pdf}
+				\end{boxedminipage}
+				\caption{Plot dei test sanity check usando il dataset con struttura di cluster
+				assente.}
+				\label{fig:bad}
 			\end{figure}
 
 			\begin{figure}[h]
-				\includegraphics[width = \textwidth, page = 1]{results/results_DRCLUST.pdf}
-				\caption{Plot del test sanity check per il pacchetto \texttt{drclust},
-				usando il dataset con struttura di cluster ben visibile.}
-				\label{fig:drclustgood}
-			\end{figure}
-
-			\begin{figure}[h]
-				\includegraphics[width = \textwidth, page = 2]{results/results_DRCLUST.pdf}
-				\caption{Plot del test sanity check per il pacchetto \texttt{drclust},
-				usando il dataset con struttura di cluster assente.}
-				\label{fig:drclustbad}
-			\end{figure}
-
-			\begin{figure}[h]
-				\includegraphics[width = \textwidth, page = 1]{results/results_TIDYCLUST.pdf}
-				\caption{Plot del test sanity check per il pacchetto \texttt{tidyclust},
-				usando il dataset con struttura di cluster ben visibile.}
-				\label{fig:tidyclustgood}
-			\end{figure}
-
-			\begin{figure}[h]
-				\includegraphics[width = \textwidth, page = 2]{results/results_TIDYCLUST.pdf}
-				\caption{Plot del test sanity check per il pacchetto \texttt{tidyclust},
-				usando il dataset con struttura di cluster assente.}
-				\label{fig:tidyclustbad}
-			\end{figure}
-
-			\begin{figure}[h]
-				%\includegraphics[width = \textwidth, page = 1]{results/results_KIRA.pdf}
-				\caption{Plot del test sanity check per il pacchetto \texttt{Kira},
-				usando il dataset con struttura di cluster ben visibile.}
-				\label{fig:kiragood}
-			\end{figure}
-
-			\begin{figure}[h]
-				%\includegraphics[width = \textwidth, page = 2]{results/results_KIRA.pdf}
-				\caption{Plot del test sanity check per il pacchetto \texttt{Kira},
-				usando il dataset con struttura di cluster assente.}
-				\label{fig:kirabad}
-			\end{figure}
-
-			\begin{figure}[h]
-				\includegraphics[width = \textwidth, page = 1]{results/results_RETICULATE.pdf}
+				\centering
+				\includegraphics[width = 0.75\textwidth, height = 0.45\textheight, page = 1]{results/results_RETICULATE.pdf}
+				\includegraphics[width = 0.75\textwidth, height = 0.45\textheight, page = 2]{results/results_RETICULATE.pdf}
 				\caption{Plot del test sanity check usando \texttt{scikit-learn} attraverso
-				\texttt{reticulate}, usando il dataset con struttura di cluster ben visibile.}
-				\label{fig:reticulategood}
-			\end{figure}
-
-			\begin{figure}[h]
-				\includegraphics[width = \textwidth, page = 2]{results/results_RETICULATE.pdf}
-				\caption{Plot del test sanity check usando \texttt{scikit-learn} attraverso
-				\texttt{reticulate}, usando il dataset con struttura di cluster assente.}
-				\label{fig:reticulatebad}
+				\texttt{reticulate}.}
+				\label{fig:reticulate}
 			\end{figure}
 
 		\subsection{Matrice binaria}
@@ -551,27 +507,20 @@
 			probabilmente l'uno usa l'altro come subroutine.
 
 			\begin{figure}[h]
-				\includegraphics[width = \textwidth, page = 3]{results/results_CLUSTER.pdf}
-				\caption{Plot del test matrice binaria per il pacchetto \texttt{cluster}}
-				\label{fig:clusterbm}
-			\end{figure}
-
-			\begin{figure}[h]
-				\includegraphics[width = \textwidth, page = 3]{results/results_DRCLUST.pdf}
-				\caption{Plot del test matrice binaria per il pacchetto \texttt{drclust}}
-				\label{fig:drclustbm}
-			\end{figure}
-
-			\begin{figure}[h]
-				\includegraphics[width = \textwidth, page = 3]{results/results_TIDYCLUST.pdf}
-				\caption{Plot del test matrice binaria per il pacchetto \texttt{tidyclust}}
-				\label{fig:tidyclustbm}
-			\end{figure}
-
-			\begin{figure}[h]
-				%\includegraphics[width = \textwidth, page = 3]{results/results_KIRA.pdf}
-				\caption{Plot del test matrice binaria per il pacchetto \texttt{Kira}}
-				\label{fig:kirabm}
+				\begin{boxedminipage}{0.5\textwidth}
+					\includegraphics[width = \textwidth, page = 3]{results/results_CLUSTER.pdf}
+				\end{boxedminipage}
+				\begin{boxedminipage}{0.5\textwidth}
+					\includegraphics[width = \textwidth, page = 3]{results/results_DRCLUST.pdf}
+				\end{boxedminipage}
+				\begin{boxedminipage}{0.5\textwidth}
+					\includegraphics[width = \textwidth, page = 3]{results/results_TIDYCLUST.pdf}
+				\end{boxedminipage}
+				\begin{boxedminipage}{0.5\textwidth}
+					%\includegraphics[width = \textwidth, page = 3]{results/results_KIRA.pdf}
+				\end{boxedminipage}
+				\caption{Plot dei test matrice binaria.}
+				\label{fig:bm}
 			\end{figure}
 
 			\begin{figure}[h]
@@ -604,6 +553,21 @@
 			ed una matrice delle distanze, mentre gli altri pacchetti
 			richiedono in input espressamente il risultato dell'applicazione
 			di una loro implementazione di un algoritmo.
+
+			In Figure~\ref{fig:cmp} è presentata la differenza fra
+			\texttt{cluster} e \texttt{scikit-learn} sul test matrice
+			binaria. Come è possibile notare, la differenza fra i due
+			è contenuta.
+
+			\begin{figure}[h]
+				\centering
+				\includegraphics[width = 0.5\textwidth, height = 0.3\textheight, page = 1]{results/Final_comparison.pdf}
+				\includegraphics[width = 0.5\textwidth, height = 0.3\textheight, page = 2]{results/Final_comparison.pdf}
+				\includegraphics[width = 0.5\textwidth, height = 0.3\textheight, page = 3]{results/Final_comparison.pdf}
+				\caption{Differenze fra il test matrice binaria tra \texttt{cluster} (pacchetto R)
+				e \texttt{scikit-learn} (pacchetto Python).}
+				\label{fig:cmp}
+			\end{figure}
 
 	\section{Uso di Silhouette su EHR}
 
