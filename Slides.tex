@@ -1,0 +1,170 @@
+\documentclass{beamer}
+\usepackage{amsmath}
+\usepackage{bookmark}
+\usepackage{booktabs}
+\usepackage{pgfplotstable}
+
+\usetheme{Rochester}
+
+\title{Studio e approfondimento del coefficiente Silhouette per la
+valutazione interna di risultati di clustering non-supervisionato}
+\author{XXX YYY ZZZZZZ}
+\date{\today}
+
+\begin{document}
+
+    \begin{frame}
+        \titlepage
+    \end{frame}
+
+    %\begin{frame}
+    %    \frametitle{Outline}
+    %    \tableofcontents
+    %\end{frame}
+
+    \section{Clustering}
+
+        \begin{frame}
+            \frametitle{Clustering}
+
+            Da dizionario Merriam-Webster:
+
+            \vfill
+
+            \begin{block}{Cluster}
+                \emph{``A number of similar things that occur together''}
+            \end{block}
+
+            \vfill
+
+            \begin{block}{Cluster analysis}
+                \emph{``A statistical classification technique for discovering
+                      whether the individuals of a population fall into different groups
+                      by making quantitative comparisons of multiple characteristics''}
+            \end{block}
+        \end{frame}
+
+        \begin{frame}
+            \frametitle{Quanti sono i cluster?}
+
+            \begin{itemize}
+                \item
+                Gli algoritmi di clustering non sono in grado di fornire una
+                metrica oggettiva per determinare quale sia il corretto numero
+                di cluster
+                \item
+                Questo é particolarmente problematico negli algoritmi che hanno
+                il numero di cluster come iperparametro (e.g. K-Means)
+                \item
+                Nel clustering non supervisionato non vi è a disposizione
+                alcuna "ground truth"
+                \item
+                Un numero di cluster errato induce un raggruppamento non
+                rappresentativo del dataset, bensí un raggruppamento artificioso
+            \end{itemize}
+        \end{frame}
+
+        \begin{frame}
+            \frametitle{Introduzione di Silhouette}
+            Silhouette si propone di rispondere alle seguenti domande:
+
+            \begin{itemize}
+                \item
+                Il clustering è di buona qualità?
+                \item
+                Quali elementi sono stati ben classificati?
+                \item
+                Quali elementi sono inclassificabili?
+                \item
+                Il numero di cluster scelto è rappresentativo del dataset?
+            \end{itemize}
+        \end{frame}
+
+    \section{Silhouette}
+
+        \begin{frame}
+            \frametitle{Situazione iniziale}
+
+            \begin{itemize}
+                \item
+                Si consideri un dataset di dimensione $N \times M$
+                ($N$ elementi, $M$ attributi)
+                \item
+                Si assuma che gli attributi siano tutti dati numerici
+                (altezze, lunghezze, ecc...) e che siano tutti noti
+                \item
+                Da questo é possibile costruire una \textbf{matrice
+                delle distanze} $N \times N$
+                \item
+                La cella $(i, j)$ contiene il valore $d(i, j)$, che
+                rappresenta il grado di "dissomiglianza" fra $i$ e $j$
+            \end{itemize}
+        \end{frame}
+
+        \begin{frame}
+            \frametitle{Funzione di distanza}
+
+            Il grado di dissomiglianza fra $i$ e $j$ è calcolato mediante
+            una \textbf{funzione di distanza} applicata ai loro attributi.
+            Ad esempio:
+
+            \vfill
+
+            \begin{block}{Distanza Euclidea}
+                \begin{equation*}
+                    d(i, j) = \sqrt{\sum_{m = 1}^{M} (f_{i, m} - f_{j, m})^{2}}
+                \end{equation*}
+
+            Con $f_{i, m}$, $f_{j, m}$ valori del $m$-esimo attributo
+            \end{block}
+
+            \vfill
+
+            Altri esempi: \textbf{distanza di Manhattan},
+            \textbf{distanza di Minkowski}.
+        \end{frame}
+
+        \begin{frame}
+            \frametitle{K-Means}
+
+            \begin{table}[h]
+            \centering
+                \pgfplotstabletypeset[
+                col sep=comma,
+                header=true,
+                every head row/.style={before row=\toprule, after row=\midrule},
+                every last row/.style={after row=\bottomrule},
+                ]{data/sdist.csv}
+                \caption{Matrice delle distanze per il dataset \texttt{iris} (solo i primi 6 elementi).}
+                \label{tab:dist}
+            \end{table}
+
+            \vfill
+
+            Nota la matrice delle distanze, si applichi ad esempio K-Means
+            per suddividere il dataset in $K$ cluster
+        \end{frame}
+
+        %\begin{frame}
+            %\frametitle{}
+        %\end{frame}
+
+    %\section{Scelta dei pacchetti}
+
+    %\section{Uso di Silhouette su EHR}
+
+    %\section{Aspetti teorici di Silhouette}
+
+    %\section{Dataset reali}
+
+    \section{Fine}
+
+        \begin{frame}
+            \frametitle{Fine}
+            \centering
+            \Huge{Domande?}
+
+            \includegraphics{Chill.png}
+        \end{frame}
+
+\end{document}
