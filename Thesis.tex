@@ -1,16 +1,104 @@
-\documentclass[italian]{article}
+\documentclass[12pt]{report}
+\usepackage[top=2.5cm, bottom=2.5cm, left=4cm, right=2.5cm, centering, head=21.75 pt]{geometry}
 
-\usepackage[backend = biber, style = alphabetic]{biblatex}
+%\linespread{1.5}
+
 \usepackage{amsmath}
-\usepackage{babel}
+\usepackage{amsthm}
+\usepackage{subfigure}
 \usepackage{booktabs}
-\usepackage{boxedminipage}
-\usepackage{graphics}
-\usepackage{pgfplotstable}
+\usepackage{caption}
+\usepackage{amssymb}
 
+\usepackage[italian]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage{scrlayer-scrpage}
+\ifoot[]{}
+\cfoot[]{}
+\ofoot[\pagemark]{\pagemark}
+\pagestyle{scrplain}
+\usepackage{mathptmx}
+\usepackage{graphicx}
+\usepackage{csquotes}
+\usepackage[backend=biber, sorting=nty, ]{biblatex}
+\appto{\bibsetup}{\raggedright}
 \addbibresource{Thesis.bib}
 
+\usepackage{titlesec}
+\usepackage{float}
+
+\usepackage{listings}
+\renewcommand{\lstlistingname}{Code}
+\usepackage{xcolor}
+\definecolor{mygreen}{rgb}{0,0.6,0}
+\definecolor{mygray}{rgb}{0.5,0.5,0.5}
+\definecolor{mymauve}{rgb}{0.58,0,0.82}
+\definecolor{darkgray}{rgb}{.4,.4,.4}
+\definecolor{navy}{HTML}{000080}
+\definecolor{purple}{rgb}{0.65, 0.12, 0.82}
+\definecolor{codepurple}{rgb}{0.58,0,0.82}
+\definecolor{backcolour}{rgb}{0.95,0.95,0.92}
+
+\titleformat{\chapter}[block]
+	{\normalfont\LARGE\bfseries}{\thechapter.}{0.5em}{\LARGE}
+\titlespacing*{\chapter}{0pt}{-20pt}{25pt}
+
+\usepackage{boxedminipage}
+\usepackage{pgfplotstable}
+
 \begin{document}
+
+	\begin{titlepage}
+		\begin{center}
+			{\LARGE{Università degli Studi di Milano Bicocca \\}}
+			{\small{Dipartimento di Informatica, Sistemistica e Comunicazione}}\\
+			{\small{Corso di Laurea Triennale}}
+		\end{center}
+			
+		\begin{figure}[H]
+			\centering
+			%\includegraphics[width=0.4\textwidth]{Logo.png}
+		\end{figure}
+
+		\begin{center}
+			{\Large { ??? }}
+		\end{center}
+
+		\vspace{2cm}
+
+		\begin{minipage}[t]{0.47\textwidth}
+			{\large{\bf Relatore:\\ XXX YYY}}
+			\vspace{0.5cm}
+			{\large{\bf \\Correlatore:\\ XXX YYY}}
+		\end{minipage}\hfill\begin{minipage}[t]{0.47\textwidth}\raggedleft
+			{\large{\bf Candidato: \\XXX YYY\\ }}
+		\end{minipage}
+
+		\vspace{25mm}
+
+		\centering{\large{\bf ANNO ACCADEMICO 2023/2024 }}
+	\end{titlepage}
+
+	\tableofcontents
+	\thispagestyle{empty}
+
+	\listoffigures
+	\thispagestyle{empty}
+	\clearpage
+
+	\setcounter{page}{1}
+	%\addtocontents{toc}{\protect\thispagestyle{empty}}
+	%\addcontentsline{toc}{chapter}{Introduzione}
+	%\input{introduzione.tex}
+
+	%\clearpage
+
+	%\input{capitolo1.tex}
+
+	%\clearpage
+
+	%\addcontentsline{toc}{chapter}{Conclusioni}
+	%\input{conclusioni.tex}
 
 	\section{Clustering}
 
@@ -51,7 +139,7 @@
 		\subsection{Setup}
 
 			Si supponga di avere a disposizione un dataset di dimensione
-			$N times M$, dove $N$ indica il numero degli elementi e $M$ è
+			$N \times M$, dove $N$ indica il numero degli elementi e $M$ è
 			il numero di attributi. Per comodità, si assuma che gli attributi
 			siano tutti dati numerici (altezze, lunghezze, capacità, ecc...).
 			Per ogni elemento, tutti i valori di ciascun attributo sono noti.
