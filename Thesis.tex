@@ -100,7 +100,7 @@
 	%\addcontentsline{toc}{chapter}{Conclusioni}
 	%\input{conclusioni.tex}
 
-	\section{Clustering}
+	\chapter{Clustering}
 
 		Clustering è suddividere un dataset di un certo numero di elementi
 		in sottoparti chiamate cluster sulla base della loro affinità.
@@ -134,9 +134,9 @@
 			o è 'artificioso'?
 		\end{itemize}
 
-	\section{Silhouette}
+	\chapter{Silhouette}
 
-		\subsection{Setup}
+		\section{Setup}
 
 			Si supponga di avere a disposizione un dataset di dimensione
 			$N \times M$, dove $N$ indica il numero degli elementi e $M$ è
@@ -189,7 +189,7 @@
 			cluster, è interamente noto sia il numero di suoi elementi, sia
 			a quale cluster ciascun elemento del dataset è stato assegnato.
 
-		\subsection{Costruzione di $a(i)$ e $b(i)$}
+		\section{Costruzione di $a(i)$ e $b(i)$}
 
 			Per poter calcolare il coefficiente di Silhouette, è prima necessario
 			introdurre due quantità per ciascun elemento $i$ del dataset, indicate
@@ -239,7 +239,7 @@
 				b(i) = min_{C \neq A} D(i, C)
 			\end{equation}
 
-		\subsection{Calcolo di $s(i)$}
+		\section{Calcolo di $s(i)$}
 
 			Una volta calcolato $a(i)$ e $b(i)$ per l'elemento $i$ del dataset, è
 			possibile assegnarvi un valore di Silhouette $s(i)$, così calcolato:
@@ -353,7 +353,7 @@
 			%il valore di $s(i)$ cambia di segno. Questo perché, molto banalmente,
 			%le distanze rimangono le stesse ma i ruoli di $a(i)$ e $b(i)$ si invertono.
 
-		\subsection{Silhouette Plot}
+		\section{Silhouette Plot}
 
 			I valori $s(i)$ non sono, di per loro, particolarmente informativi.
 			È però possibile costruire un Silhouette plot di ciascun cluster
@@ -369,7 +369,7 @@
 				\label{fig:si}
 			\end{figure}
 
-		\subsection{Come interpretare Silhouette}
+		\section{Come interpretare Silhouette}
 
 			Il vantaggio di Silhouette è che non dipende da quale algoritmo
 			è stato usato per effettuare il clustering. Per tale motivo, può
@@ -431,7 +431,7 @@
 			fornito un risultato corretto, dato che effettivamente qualsiasi
 			risultato vale l'altro.
 
-		\subsection{Sviluppi futuri}
+		\section{Sviluppi futuri}
 
 			A partire dall'idea di base di Silhouette, è possibile costruirne
 			infinite varianti. Gli autori citano:
@@ -457,7 +457,7 @@
 
 			Tutte e tre le varianti sono toccate da articoli citati.
 
-	\section{Scelta dei pacchetti}
+	\chapter{Scelta dei pacchetti}
 
 		Il linguaggio \texttt{R} offre diverse implementazioni del
 		calcolo della Silhouette. Ho cercato alcune fra queste utilizzando
@@ -482,7 +482,7 @@
 		Ho anche tenuto un lab notebook per tenere traccia dei risultati
 		mano mano che venivano generati, facendo riferimento a \cite{10.1371/journal.pcbi.1004385}
 
-		\subsection{Sanity check}
+		\section{Sanity check}
 
 			Il test Sanity check prevede di utilizzare due dataset creati
 			artificialmente, il primo dove la struttura di cluster è
@@ -564,7 +564,7 @@
 				\label{fig:reticulate}
 			\end{figure}
 
-		\subsection{Matrice binaria}
+		\section{Matrice binaria}
 
 			Il test matrice binaria inizia con una matrice di dimensione
 			$2n times n$, costituita per metà da $0$ e per metà da $1$.
@@ -618,7 +618,7 @@
 				\label{fig:reticulatebm}
 			\end{figure}
 
-		\subsection{Considerazioni}
+		\section{Considerazioni}
 
 			Alla luce dei due test considerati, il pacchetto \texttt{Kira}
 			é stato immediatamente escluso, perché i risultati forniti dal
@@ -657,7 +657,7 @@
 				\label{fig:cmp}
 			\end{figure}
 
-	\section{Uso di Silhouette su EHR}
+	\chapter{Uso di Silhouette su EHR}
 
 		Articoli citati: \cite{Chang2024}, \cite{Alexander2021}, \cite{HYUN2020105507},
 		\cite{Josephson_Gonzalez-Izquierdo_Engbers_Denaxas_Delgado-Garcia_Sajobi_Wang_Keezer_Wiebe_2023/10/01_2023},
@@ -771,13 +771,13 @@
 			\end{tabular}
 		\end{table}
 
-	\section{Aspetti teorici di Silhouette}
+	\chapter{Aspetti teorici di Silhouette}
 
 		Articoli citati: \cite{10.1007/978-3-030-52348-0_2},
 		\cite{doi:10.3233/IDA-2012-0545}, \cite{Gao2019CUBOSAI},
 		\cite{NAGHIZADEH2020205}, \cite{10.1007/978-3-319-19369-4_5}.
 
-	\section{Dataset reali}
+	\chapter{Dataset reali}
 
 	\printbibliography
 
