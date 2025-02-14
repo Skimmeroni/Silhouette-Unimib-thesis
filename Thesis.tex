@@ -114,7 +114,7 @@
 		loro sia rispetto all'implementazione di \texttt{scikit-learn}
 		(\texttt{Python}).
 
-	\chapter{Clustering}
+	\chapter{Introduzione}
 
 		Clustering è suddividere un dataset di un certo numero di elementi
 		in sottoparti chiamate cluster sulla base della loro affinità.
@@ -148,9 +148,125 @@
 			o è 'artificioso'?
 		\end{itemize}
 
-	\chapter{Silhouette}
+		Articoli citati: \cite{Chang2024}, \cite{Alexander2021}, \cite{HYUN2020105507},
+		\cite{Josephson_Gonzalez-Izquierdo_Engbers_Denaxas_Delgado-Garcia_Sajobi_Wang_Keezer_Wiebe_2023/10/01_2023},
+		\cite{01277230-202011000-00006}.
 
-		\section{Setup}
+		Articoli citati: \cite{10.1007/978-3-030-52348-0_2},
+		\cite{doi:10.3233/IDA-2012-0545}, \cite{Gao2019CUBOSAI},
+		\cite{NAGHIZADEH2020205}, \cite{10.1007/978-3-319-19369-4_5}.
+
+		\begin{table}[h]
+			\centering
+			\footnotesize
+			\begin{tabular}{| p{1.75cm} | p{1.75cm} | p{1.75cm} | p{1.75cm} | p{1.75cm} | p{1.75cm} |}
+				\hline
+				\multicolumn{6}{| p{12.5cm} |}{
+					\textit{Identifying heterogeneous subgroups of systemic autoimmune
+					diseases by applying a joint dimension reduction and clustering
+					approach to immunomarkers}
+				} \\
+				\hline
+				\textbf{Patologie} &
+				\textbf{N. pazienti} &
+				\textbf{Features} &
+				\textbf{Algoritmi} &
+				\textbf{Software} &
+				\textbf{Metriche} \\
+				\hline
+				Lupus Eritematoso Sistemico, Artrite Reumatoide,
+				Sindrome di Sjogren &
+				11923 &
+				biomarcatori (tradotti in variabili categoriali) &
+				Multiple Correspondence Analysis K-means (clustering e dimensionality
+				reduction insieme) &
+				clustrd (R) &
+				Silhouette \\
+				\hline
+				\multicolumn{6}{| p{12.5cm} |}{
+					\textit{Association of comorbid-socioeconomic clusters with
+					mortality in late onset epilepsy derived through unsupervised
+					machine learning}
+				} \\
+				\hline
+				\textbf{Patologie} &
+				\textbf{N. pazienti} &
+				\textbf{Features} &
+				\textbf{Algoritmi} &
+				\textbf{Software} &
+				\textbf{Metriche} \\
+				\hline
+				Epilessia (tardiva) &
+				11307 &
+				Fattori di rischio, comorbiditá (indice di Charlson) &
+				Agglomerative Hierarchical Clustering &
+				scikit-learn (Python), Python 3.6.3, Stata 16.1 &
+				Silhouette, Davies-Bouldin \\
+				\hline
+				\multicolumn{6}{| p{12.5cm} |}{
+					\textit{Exploration of critical care data by using unsupervised
+					machine learning}
+				} \\
+				\hline
+				\textbf{Patologie} &
+				\textbf{N. pazienti} &
+				\textbf{Features} &
+				\textbf{Algoritmi} &
+				\textbf{Software} &
+				\textbf{Metriche} \\
+				\hline
+				&
+				1503 &
+				Valori di test di routine di laboratorio (BUN, creatinina, glucosio, ...) &
+				Kmeans &
+				R 3.5.2 &
+				Total within-cluster variation, Silhouette, Gap statistic \\
+				\hline
+				\multicolumn{6}{| p{12.5cm} |}{
+					\textit{Identifying and evaluating clinical subtypes of Alzheimer’s
+					disease in care electronic health records using unsupervised machine
+					learning}
+				} \\
+				\hline
+				\textbf{Patologie} &
+				\textbf{N. pazienti} &
+				\textbf{Features} &
+				\textbf{Algoritmi} &
+				\textbf{Software} &
+				\textbf{Metriche} \\
+				\hline
+				Malattia di Alzheimer &
+				10065 &
+				sintomi tipici, comorbiditá, dati demografici &
+				K-Means, Kernel K-means, Affinity Propagation, Latent Class Analysis &
+				&
+				Silhouette, Coefficiente di Jaccard \\
+				\hline
+				\multicolumn{6}{| p{12.5cm} |}{
+					\textit{Utilization of Deep Learning for Subphenotype Identification
+					in Sepsis-Associated Acute Kidney Injury}
+				} \\
+				\hline
+				\textbf{Patologie} &
+				\textbf{N. pazienti} &
+				\textbf{Features} &
+				\textbf{Algoritmi} &
+				\textbf{Software} &
+				\textbf{Metriche} \\
+				\hline
+				Sepsi &
+				4001 &
+				Segni vitali, test di laboratorio &
+				K-Means &
+				scikit-learn (Python), matplotlib (Python), SAS 9.4, R 3.4.3 &
+				Silhouette, Davies-Bouldin, Calinksi-Harabasz \\
+				\hline
+			\end{tabular}
+		\end{table}
+
+	\chapter{Metodi}
+
+		\section{Silhouette}
 
 			Si supponga di avere a disposizione un dataset di dimensione
 			$N \times M$, dove $N$ indica il numero degli elementi e $M$ è
@@ -203,8 +319,6 @@
 			cluster, è interamente noto sia il numero di suoi elementi, sia
 			a quale cluster ciascun elemento del dataset è stato assegnato.
 
-		\section{Costruzione di $a(i)$ e $b(i)$}
-
 			Per poter calcolare il coefficiente di Silhouette, è prima necessario
 			introdurre due quantità per ciascun elemento $i$ del dataset, indicate
 			rispettivamente con $a(i)$ e $b(i)$.
@@ -252,8 +366,6 @@
 			\begin{equation}
 				b(i) = min_{C \neq A} D(i, C)
 			\end{equation}
-
-		\section{Calcolo di $s(i)$}
 
 			Una volta calcolato $a(i)$ e $b(i)$ per l'elemento $i$ del dataset, è
 			possibile assegnarvi un valore di Silhouette $s(i)$, così calcolato:
@@ -367,8 +479,6 @@
 			%il valore di $s(i)$ cambia di segno. Questo perché, molto banalmente,
 			%le distanze rimangono le stesse ma i ruoli di $a(i)$ e $b(i)$ si invertono.
 
-		\section{Silhouette Plot}
-
 			I valori $s(i)$ non sono, di per loro, particolarmente informativi.
 			È però possibile costruire un Silhouette plot di ciascun cluster
 			come un bar chart dove ciascuna colonna $i$-esima ha altezza
@@ -382,8 +492,6 @@
 				\caption{Silhouette plot per il dataset \texttt{iris}.}
 				\label{fig:si}
 			\end{figure}
-
-		\section{Come interpretare Silhouette}
 
 			Il vantaggio di Silhouette è che non dipende da quale algoritmo
 			è stato usato per effettuare il clustering. Per tale motivo, può
@@ -436,7 +544,6 @@
 			grande: tale combinazione sarà quella che restituisce il clustering
 			che meglio interpreta il dataset.
 
-
 			Si noti come un valore della Silhouette media complessiva
 			pari a $0$ non significa necessariamente che il clustering
 			non sia andato a buon fine. Può infatti anche indicare che
@@ -445,58 +552,38 @@
 			fornito un risultato corretto, dato che effettivamente qualsiasi
 			risultato vale l'altro.
 
-		\section{Sviluppi futuri}
 
-			A partire dall'idea di base di Silhouette, è possibile costruirne
-			infinite varianti. Gli autori citano:
+		\section{Sanity check e matrice binaria}
 
-			\begin{itemize}
-				\item
-				Per determinare il miglior numero di cluster non è strettamente
-				necessario utilizzare la Silhouette media complessiva. Sarebbe
-				infatti possibile anche combinare gli $s(i)$ in modo diverso;
-				\item
-				La Silhouette media complessiva può essere essa stessa usata
-				come funzione obiettivo da massimizzare direttamente all'interno
-				di un algoritmo di clustering, anziché effettuare una valutazione
-				a posteriori;
-				\item
-				Se l'algoritmo di clustering si basa sulla costruzione di centroidi
-				o sulla elezione di rappresentanti, si potrebbe usare la distanza
-				da tali centroidi o rappresentanti come grado di dissomiglianza
-				anziché calcolare $a(i)$ o $D(i, C)$ per ogni $i$-esimo elemento,
-				semplificando il procedimento. Naturalmente, questo approccio
-				renderebbe Silhouette dipendente dal tipo di algoritmo usato. 
-			\end{itemize}
+			Il linguaggio \texttt{R} offre diverse implementazioni del
+			calcolo della Silhouette. A differenza di altri linguaggi come
+			Python, dove esiste un "consensus" (ufficiale o ufficioso) riguardo
+			a quali siano i pacchetti da utilizzare per un determinato scopo,
+			su \texttt{R} questo talvolta manca. Pertanto, prima di mettere
+			Silhouette sotto analisi, é necessario scegliere un pacchetto fra
+			quelli disponibili.
 
-			Tutte e tre le varianti sono toccate da articoli citati.
+			Ho cercato quante piú implementazioni di Silhouette possibili
+			utilizzando il sito \texttt{https://rdrr.io} e scegliendone
+			quante più possibili che provenissero dal repository CRAN.
+			In particolare, sono stati scelti \texttt{cluster},
+			\texttt{drclust}, \texttt{tidyclust} e \texttt{Kira}. Pacchetti
+			noti come \texttt{fpc}, che pure implementano Silhouette, li ho
+			esclusi a priori perché non aggiornati da tempo.
 
-	\chapter{Scelta dei pacchetti}
+			Oltre a questi, come controprova ho utilizzato l'implementazione
+			della Silhouette presente nel pacchetto \texttt{scikit-learn} per
+			\texttt{Python}. Questo è stato fatto attraverso il pacchetto
+			\texttt{reticulate}, che permette di chiamare funzioni \texttt{Python}
+			all'interno di codice \texttt{R}.
 
-		Il linguaggio \texttt{R} offre diverse implementazioni del
-		calcolo della Silhouette. Ho cercato alcune fra queste utilizzando
-		il sito \texttt{https://rdrr.io} e scegliendone quante più possibili
-		che provenissero dal repository CRAN. In particolare, sono stati
-		scelti \texttt{cluster}, \texttt{drclust}, \texttt{tidyclust} e
-		\texttt{Kira}. Pacchetti noti come \texttt{fpc}, che pure
-		implementano Silhouette, li ho esclusi a priori perché non
-		aggiornati da tempo.
-
-		Oltre a questi, come controprova ho utilizzato l'implementazione
-		della Silhouette presente nel pacchetto \texttt{scikit-learn} per
-		\texttt{Python}. Questo è stato fatto attraverso il pacchetto
-		\texttt{reticulate}, che permette di chiamare funzioni \texttt{Python}
-		all'interno di codice \texttt{R}.
-
-		Per comparare le performance delle diverse implementazioni di
-		Silhouette ho eseguito due test, uno chiamato "sanity check" ed
-		uno chiamato "matrice binaria". Il codice per la generazione dei
-		test è liberamente disponibile. Ho organizzato il codice seguendo
-		le linee guida riportate in \cite{10.1371/journal.pcbi.1000424}.
-		Ho anche tenuto un lab notebook per tenere traccia dei risultati
-		mano mano che venivano generati, facendo riferimento a \cite{10.1371/journal.pcbi.1004385}
-
-		\section{Sanity check}
+			Per comparare le performance delle diverse implementazioni di
+			Silhouette ho eseguito due test, uno chiamato "sanity check" ed
+			uno chiamato "matrice binaria". Il codice per la generazione dei
+			test è liberamente disponibile. Ho organizzato il codice seguendo
+			le linee guida riportate in \cite{10.1371/journal.pcbi.1000424}.
+			Ho anche tenuto un lab notebook per tenere traccia dei risultati
+			mano mano che venivano generati, facendo riferimento a \cite{10.1371/journal.pcbi.1004385}
 
 			Il test Sanity check prevede di utilizzare due dataset creati
 			artificialmente, il primo dove la struttura di cluster è
@@ -507,14 +594,13 @@
 
 			Lo scatter plot dei due dataset è riportato in Figure~\ref{fig:sc}.
 			Li ho costruiti utilizzando la funzione \texttt{rnorm}, che genera
-			dei punti casuali a partire da una distribuzione normale bivariata.
-			
-			Il primo dataset è stato costruito usando due distribuzioni
-			normali fuse insieme, entrambe con una deviazione standard
-			molto bassa, di modo che i punti siano concentrati attorno
-			alla media. Il secondo dataset è costituito da una sola distribuzione
-			normale centrata in $(0, 0)$ con una deviazione standard molto ampia,
-			di modo che i punti siano molto dispersi.
+			dei punti casuali a partire da una distribuzione normale bivariata.	
+			Il primo è stato costruito usando due distribuzioni normali fuse
+			insieme, entrambe con una deviazione standard molto bassa, di modo
+			che i punti siano concentrati attorno alla media. Il secondo è
+			costituito da una sola distribuzione normale centrata in $(0, 0)$
+			con una deviazione standard molto ampia, di modo che i punti siano
+			molto dispersi.
 
 			\begin{figure}[h]
 				\centering
@@ -525,6 +611,28 @@
 				secondo la struttura di cluster è completamente assente.}
 				\label{fig:sc}
 			\end{figure}
+
+			Il test matrice binaria inizia con una matrice di dimensione
+			$2n times n$, costituita per metà da $0$ e per metà da $1$.
+			Su tale matrice viene applicato K-Means con iperparametro
+			$K = 2$ e si calcola la Silhouette media complessiva del
+			risultato. Dopodiché, una qualsiasi delle righe viene sostituita
+			con un valore scelto casualmente nell'intervallo $(0, 1)$ e si
+			ripete il procedimento. Tale test viene ripetuto esattamente
+			$2n$ volte, ogni volta con una riga diversa.
+
+			I $2n$ valori della Silhouette media complessiva così trovati
+			sono poi riportati in un plot; l'idea è che tali valori debbano
+			essere alti nelle prime istanze del test quando gli $0$ e gli
+			$1$ sono ben separati e piano piano perdano si riducano così
+			come il dataset perde coesione. Ci si aspetta che i punti sul
+			grafico approssimino una distribuzione lineare.
+
+		% \section{Algoritmi}
+
+	\chapter{Risultati}
+
+		\section{Risultati dei test}
 
 			I risultati per il test sanity check sono riportati di seguito.
 			Il test sanity check non é stato particolarmente conclusivo,
@@ -578,24 +686,6 @@
 				\label{fig:reticulate}
 			\end{figure}
 
-		\section{Matrice binaria}
-
-			Il test matrice binaria inizia con una matrice di dimensione
-			$2n times n$, costituita per metà da $0$ e per metà da $1$.
-			Su tale matrice viene applicato K-Means con iperparametro
-			$K = 2$ e si calcola la Silhouette media complessiva del
-			risultato. Dopodiché, una qualsiasi delle righe viene sostituita
-			con un valore scelto casualmente nell'intervallo $(0, 1)$ e si
-			ripete il procedimento. Tale test viene ripetuto esattamente
-			$2n$ volte, ogni volta con una riga diversa.
-
-			I $2n$ valori della Silhouette media complessiva così trovati
-			sono poi riportati in un plot; l'idea è che tali valori debbano
-			essere alti nelle prime istanze del test quando gli $0$ e gli
-			$1$ sono ben separati e piano piano perdano si riducano così
-			come il dataset perde coesione. Ci si aspetta che i punti sul
-			grafico approssimino una distribuzione lineare.
-
 			I risultati per il test matrice binaria sono riportati
 			di seguito. Il test é stato piú informativo del precedente,
 			perché i valori restituiti avevano delle differenze
@@ -631,8 +721,6 @@
 				\texttt{scikit-learn} (attraverso \texttt{reticulate})}
 				\label{fig:reticulatebm}
 			\end{figure}
-
-		\section{Considerazioni}
 
 			Alla luce dei due test considerati, il pacchetto \texttt{Kira}
 			é stato immediatamente escluso, perché i risultati forniti dal
@@ -671,127 +759,48 @@
 				\label{fig:cmp}
 			\end{figure}
 
-	\chapter{Uso di Silhouette su EHR}
+		% \section{Risultati delle applicazioni su EHR}
 
-		Articoli citati: \cite{Chang2024}, \cite{Alexander2021}, \cite{HYUN2020105507},
-		\cite{Josephson_Gonzalez-Izquierdo_Engbers_Denaxas_Delgado-Garcia_Sajobi_Wang_Keezer_Wiebe_2023/10/01_2023},
-		\cite{01277230-202011000-00006}.
+	\chapter{Discussione}
 
-		\begin{table}[h]
-			\centering
-			\footnotesize
-			\begin{tabular}{| p{1.75cm} | p{1.75cm} | p{1.75cm} | p{1.75cm} | p{1.75cm} | p{1.75cm} |}
-				\hline
-				\multicolumn{6}{| p{12.5cm} |}{
-					\textit{Identifying heterogeneous subgroups of systemic autoimmune
-					diseases by applying a joint dimension reduction and clustering
-					approach to immunomarkers}
-				} \\
-				\hline
-				\textbf{Patologie} &
-				\textbf{N. pazienti} &
-				\textbf{Features} &
-				\textbf{Algoritmi} &
-				\textbf{Software} &
-				\textbf{Metriche} \\
-				\hline
-				Lupus Eritematoso Sistemico, Artrite Reumatoide,
-				Sindrome di Sjogren &
-				11923 &
-				biomarcatori (tradotti in variabili categoriali) &
-				Multiple Correspondence Analysis K-means (clustering e dimensionality
-				reduction insieme) &
-				clustrd (R) &
-				Silhouette \\
-				\hline
-				\multicolumn{6}{| p{12.5cm} |}{
-					\textit{Association of comorbid-socioeconomic clusters with
-					mortality in late onset epilepsy derived through unsupervised
-					machine learning}
-				} \\
-				\hline
-				\textbf{Patologie} &
-				\textbf{N. pazienti} &
-				\textbf{Features} &
-				\textbf{Algoritmi} &
-				\textbf{Software} &
-				\textbf{Metriche} \\
-				\hline
-				Epilessia (tardiva) &
-				11307 &
-				Fattori di rischio, comorbiditá (indice di Charlson) &
-				Agglomerative Hierarchical Clustering &
-				scikit-learn (Python), Python 3.6.3, Stata 16.1 &
-				Silhouette, Davies-Bouldin \\
-				\hline
-				\multicolumn{6}{| p{12.5cm} |}{
-					\textit{Exploration of critical care data by using unsupervised
-					machine learning}
-				} \\
-				\hline
-				\textbf{Patologie} &
-				\textbf{N. pazienti} &
-				\textbf{Features} &
-				\textbf{Algoritmi} &
-				\textbf{Software} &
-				\textbf{Metriche} \\
-				\hline
-				&
-				1503 &
-				Valori di test di routine di laboratorio (BUN, creatinina, glucosio, ...) &
-				Kmeans &
-				R 3.5.2 &
-				Total within-cluster variation, Silhouette, Gap statistic \\
-				\hline
-				\multicolumn{6}{| p{12.5cm} |}{
-					\textit{Identifying and evaluating clinical subtypes of Alzheimer’s
-					disease in care electronic health records using unsupervised machine
-					learning}
-				} \\
-				\hline
-				\textbf{Patologie} &
-				\textbf{N. pazienti} &
-				\textbf{Features} &
-				\textbf{Algoritmi} &
-				\textbf{Software} &
-				\textbf{Metriche} \\
-				\hline
-				Malattia di Alzheimer &
-				10065 &
-				sintomi tipici, comorbiditá, dati demografici &
-				K-Means, Kernel K-means, Affinity Propagation, Latent Class Analysis &
-				&
-				Silhouette, Coefficiente di Jaccard \\
-				\hline
-				\multicolumn{6}{| p{12.5cm} |}{
-					\textit{Utilization of Deep Learning for Subphenotype Identification
-					in Sepsis-Associated Acute Kidney Injury}
-				} \\
-				\hline
-				\textbf{Patologie} &
-				\textbf{N. pazienti} &
-				\textbf{Features} &
-				\textbf{Algoritmi} &
-				\textbf{Software} &
-				\textbf{Metriche} \\
-				\hline
-				Sepsi &
-				4001 &
-				Segni vitali, test di laboratorio &
-				K-Means &
-				scikit-learn (Python), matplotlib (Python), SAS 9.4, R 3.4.3 &
-				Silhouette, Davies-Bouldin, Calinksi-Harabasz \\
-				\hline
-			\end{tabular}
-		\end{table}
+		A partire dall'idea di base di Silhouette, è possibile costruirne
+		infinite varianti. Gli autori citano:
 
-	\chapter{Aspetti teorici di Silhouette}
+		\begin{itemize}
+			\item
+			Per determinare il miglior numero di cluster non è strettamente
+			necessario utilizzare la Silhouette media complessiva. Sarebbe
+			infatti possibile anche combinare gli $s(i)$ in modo diverso;
+			\item
+			La Silhouette media complessiva può essere essa stessa usata
+			come funzione obiettivo da massimizzare direttamente all'interno
+			di un algoritmo di clustering, anziché effettuare una valutazione
+			a posteriori;
+			\item
+			Se l'algoritmo di clustering si basa sulla costruzione di centroidi
+			o sulla elezione di rappresentanti, si potrebbe usare la distanza
+			da tali centroidi o rappresentanti come grado di dissomiglianza
+			anziché calcolare $a(i)$ o $D(i, C)$ per ogni $i$-esimo elemento,
+			semplificando il procedimento. Naturalmente, questo approccio
+			renderebbe Silhouette dipendente dal tipo di algoritmo usato. 
+		\end{itemize}
 
-		Articoli citati: \cite{10.1007/978-3-030-52348-0_2},
-		\cite{doi:10.3233/IDA-2012-0545}, \cite{Gao2019CUBOSAI},
-		\cite{NAGHIZADEH2020205}, \cite{10.1007/978-3-319-19369-4_5}.
+		Tutte e tre le varianti sono toccate da articoli citati.
 
-	\chapter{Dataset reali}
+	\chapter{Conclusioni}
+
+		Gli algoritmi sono stati applicati su dataset "grezzi", ovvero
+		senza operare alcun preprocessing che non fosse l'eliminare ogni
+		entry che avesse almeno un dato mancante. Si potrebbe ripetere
+		gli esperimenti adottando un approccio piú conservativo, ad
+		esempio sostituendo tali dati con valori di default ed osservare
+		se si presentano differenze.
+
+		Sarebbe inoltre interessante ripetere gli esperimenti operando
+		dimensionality reduction (\textit{principal component analysis},
+		ecc...), anche e soprattutto per poter visualizzare graficamente
+		il risultato del clustering pur essendo stato questo fatto su
+		dati $n$-dimensionali.
 
 	\printbibliography
 
