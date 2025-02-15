@@ -262,6 +262,105 @@
 				Silhouette, Davies-Bouldin, Calinksi-Harabasz \\
 				\hline
 			\end{tabular}
+			\caption{Riassunto degli articoli scientifici che applicano Silhouette su EHR}
+			\label{tbl:ehr}
+		\end{table}
+
+		\begin{table}[h]
+			\centering
+			\footnotesize
+			\begin{tabular}{| p{3.25cm} | p{1.75cm} | p{2cm} | p{1.75cm} | p{1.75cm} |}
+				\hline
+				\multicolumn{5}{| p{12.5cm} |}{
+					\textit{Silhouette Index as clustering evaluation tool}
+				} \\
+				\hline
+				\textbf{Sintesi} &
+				\textbf{Algoritmi} &
+				\textbf{Dataset} &
+				\textbf{Software} &
+				\textbf{Metriche} \\
+				\hline
+				É possibile utilizzare Silhouette come "stopping rule" direttamente
+				all'interno di un algoritmo di clustering? &
+				RPCT &
+				Dataset artificiale, generato mediante \texttt{cluster.Gen}, FCPS
+				Dataset artificiale costituito da tre distribuzioni uniformi &
+				clusterSim (R) &
+				Adjusted Rand Index \\
+				\hline
+				\multicolumn{5}{| p{12.5cm} |}{
+					\textit{Performance evaluation of the Silhouette index}
+				} \\
+				\hline
+				\textbf{Sintesi} &
+				\textbf{Algoritmi} &
+				\textbf{Dataset} &
+				\textbf{Software} &
+				\textbf{Metriche} \\
+				\hline
+				Qual'é il modo corretto per calcolare la Silhouette media? &
+				Complete-linkage, single-linkage &
+				Quattro dataset artificiali con una struttura di cluster ben definita,
+				`Iris`, `Wine` &
+				&
+				\\
+				\hline
+				\multicolumn{5}{| p{12.5cm} |}{
+					\textit{A comparison of clustering quality indices using outliers and noise}
+				} \\
+				\hline
+				\textbf{Sintesi} &
+				\textbf{Algoritmi} &
+				\textbf{Dataset} &
+				\textbf{Software} &
+				\textbf{Metriche} \\
+				\hline
+				Quali sono le prestazioni di Silhouette rispetto ad altre metriche? &
+				K-means, model-based clustering, hierarchical clustering, algoritmo "random" &
+				\texttt{clear} (struttura di cluster é ben definita),
+				\texttt{out} (parte dei dati sono noise),
+				\texttt{noi} (parte delle dimensioni sono noise) &
+				&
+				Calinski-Harabasz, C-index, Davies-Bouldin, Gamma, ARI \\
+				\hline
+				\multicolumn{5}{| p{12.5cm} |}{
+					\textit{Condensed Silhouette: An Optimized Filtering Process for Cluster Selection in K-Means}
+				} \\
+				\hline
+				\textbf{Sintesi} &
+				\textbf{Algoritmi} &
+				\textbf{Dataset} &
+				\textbf{Software} &
+				\textbf{Metriche} \\
+				\hline
+				Nel caso di algoritmi di clustering partizionale, é possibile
+				semplificare ulteriormente Silhouette? &
+				K-Means &
+				7 microarray gene expressions (migliaia di features), 7
+				dataset reali famosi (come Iris) &
+				Scikit-Learn (Python) &
+				\\
+				\hline
+				\multicolumn{5}{| p{12.5cm} |}{
+					\textit{CUBOS: An Internal Cluster Validity Index for Categorical Data}
+				} \\
+				\hline
+				\textbf{Sintesi} &
+				\textbf{Algoritmi} &
+				\textbf{Dataset} &
+				\textbf{Software} &
+				\textbf{Metriche} \\
+				\hline
+				É possibile estendere Silhouette per utilizzarla su valori discreti? &
+				IDC &
+				K-Modes &
+				UCI &
+				\\
+				\hline
+			\end{tabular}
+			\caption{Riassunto degli articoli scientifici che studiano Silhouette da un punto di vista teorico}
+			\label{tbl:theory}
 		\end{table}
 
 	\chapter{Metodi}
