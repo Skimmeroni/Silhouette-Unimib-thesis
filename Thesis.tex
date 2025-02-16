@@ -17,6 +17,7 @@
 \pagestyle{scrplain}
 \usepackage{mathptmx}
 \usepackage{graphicx}
+\usepackage{svg}
 \usepackage{csquotes}
 \usepackage[backend=biber, sorting=nty, ]{biblatex}
 \appto{\bibsetup}{\raggedright}
@@ -833,6 +834,117 @@
 
 			\subsection{Clustering per densità: DBSCAN}
 
+				\textbf{DBSCAN} è un esempio di algoritmo di clustering \textbf{per
+				densità}, ovvero che costruisce i cluster a partire da come gli
+				elementi di un dataset sono aggregati. In questo senso, i cluster
+				figurano come regioni di spazio densamente popolate, di forma del
+				tutto arbitraria, separate da spazio poco popolato.
+
+				DBSCAN prevede che vengano innanzitutto scelti due valori, un intero
+				chiamato MinPts ed un numero reale positivo $\epsilon$. A partire da
+				questi, per ogni elemento $p$ del dataset è possibile definire un
+				insieme $N_{\epsilon}(p)$, chiamato $\epsilon$\textbf{-vicinato}
+				($\epsilon$\textbf{-neighbourhood}). Tale insieme contiene tutti i
+				punti $q$ che hanno distanza da $p$ inferiore a $\epsilon$:
+
+				\begin{equation*}
+					N_{\epsilon} (p) = \{q | d(p, q) \leq \epsilon\}
+				\end{equation*}
+
+				Ogni elemento $p$ del dataset viene classificato sulla base del numero
+				di elementi di $N_{\epsilon}(p)$:
+
+				\begin{itemize}
+					\item
+					Se $N_{\epsilon}(p)$ ha almeno MinPts elementi, si dice che $p$ è un
+					\textbf{core point};
+					\item
+					Se $N_{\epsilon}(p)$ ha meno di MinPts elementi ma $p$ si trova
+					nell'$\epsilon$-vicinato di un altro elemento, allora si dice che
+					$p$ è un \textbf{border point};
+					\item
+					Se un elemento non non é né un core point né un border
+					point, é detto \textbf{noise point}.
+				\end{itemize}
+
+				Si dice che un elemento $q$ é \textbf{direttamente raggiungibile}
+				da $p$ se $p$ é un core point e $q$ si trova nell'$\epsilon$-vicinato
+				di $p$. Se un elemento $r$ é direttamente raggiungibile da $q$ e $q$
+				é direttamente raggiungibile da un elemento $p$, allora si dice che
+				$r$ é \textbf{indirettamente raggiungibile} da $p$ (si noti come
+				la raggiungibilità non sia una proprietà necessariamente simmetrica).
+
+				\begin{figure}[H]
+					\centering
+					\includesvg[width = 0.5\textwidth]{images/DBSCAN-Illustration.svg}
+					\caption{Ipotetica classificazione di alcuni elementi, usando
+					MinPts = 4. Gli elementi in rosso sono dei core point, perchè
+					hanno 4 o più elementi nel loro $\epsilon$-vicinato. Gli elementi
+					in giallo sono invece border point, perchè hanno meno di 4 elementi
+					nel loro $\epsilon$-vicinato ma sono nell'$\epsilon$-vicinato di
+					almeno un core point. Infine, gli elementi in blu sono dei
+					noise point, perchè oltre ad avere meno di 4 elementi nel loro
+					$\epsilon$-vicinato non sono nell'$epsilon$-vicinato di alcun
+					core point (By Chire - Own work, CC BY-SA 3.0,
+					https://commons.wikimedia.org/w/index.php?curid=17045963).}
+					\label{fig:dbscan-illustration}
+				\end{figure}
+
+				%Quando \tt{DBSCAN} viene invocato, viene inizializzato un
+				%cluster \tt{C}, dopodiché viene iterativamente esaminato
+				%ogni elemento \tt{p} del dataset \tt{D} di tipo \tt{not
+				%visited}. All'elemento \tt{p} viene innanzitutto cambiato
+				%tipo in \tt{visited}, dopodiché viene costruito
+				%l'\math{\epsilon}-vicinato di tale elemento. Se tale insieme
+				%contiene meno elementi di \tt{MinPts}, allora quel punto é
+				%certamente un noise point. Questo perché da una parte é troppo
+				%isolato per essere un core point, ma d'altra parte non é stato
+				%ancora visitato, e quindi non si trova
+				%nell'\math{\epsilon}-vicinato di nessun altro punto, pertanto
+				%non puó nemmeno essere un border point.
+
+				%Se l'\math{\epsilon}-vicinato di \tt{p} ha invece abbastanza
+				%elementi, allora tale punto deve essere un core point, e viene
+				%a tal scopo chiamata la procedura \tt{EXPAND-CLUSTER}. Questa
+				%innanzitutto aggiunge \tt{p} al cluster, dopodiché osserva tutti
+				%i punti \tt{q} che si trovano nell'\math{\epsilon}-vicinato di
+				%\tt{p}. Se \tt{q} é di tipo \tt{not visited}, viene cambiato il
+				%loro tipo in \tt{visited} e si osserva l'\math{\epsilon}-vicinato
+				%di \tt{q} a sua volta. Se l'\math{\epsilon}-vicinato di \tt{q}
+				%contiene piú elementi dell'\math{\epsilon}-vicinato di \tt{p},
+				%i due insiemi vengono uniti, perché gli elementi
+				%dell'\math{\epsilon}-vicinato di \tt{q} sono indirettamente
+				%raggiungibili a partire da \tt{p}. Se \tt{q} non appartiene ad
+				%alcun cluster, allora viene aggiunto al cluster in esame.
+
+				\begin{figure}[H]
+					\centering
+					\includesvg[width = 0.5\textwidth]{images/DBSCAN-density-data.svg}
+					\caption{Risultato dell'applicazione dell'algoritmo DBSCAN su un
+					ipotetico dataset. Le aree in blu e in verde rappresentano i due
+					cluster, mentre i punti in grigio sono i noise point (By Chire -
+					Own work, CC BY-SA 3.0, https://commons.wikimedia.org/w/index.php?curid=17085332)}
+					\label{fig:dbscan-density-data}
+				\end{figure}
+
+				Si osservi come la scelta di $\epsilon$ e MinPts influisca di molto
+				sul risultato finale. Infatti, scegliendo un valore di $\epsilon$ o
+				di MinPts troppo piccolo, quasi tutti gli elementi verranno classificati
+				come noise point, e quindi quasi tutti scartati. D'altro canto, un valore
+				di $\epsilon$ o di MinPts troppo grande potrebbe indurre un clustering
+				dove quasi tutti i punti sono inclusi nello stesso cluster.
+
+				A differenza di K-Means e K-Medians, che costruiscono sempre cluster
+				di forma ellissoidale, DBSCAN costruisce cluster di qualsiasi forma.
+				Questo è sia un aspetto positivo, perchè in questo modo è possibile
+				catturare strutture di cluster molto più variegate, sia negativo,
+				perchè la densità di un'area non sottende necessariamente alla
+				presenza di un cluster, e non tutte le aree dense lo sono allo
+				stesso modo. Occorre però evidenziare come, nonostante sia leggermente
+				inferiore a K-Means e K-Medians in termini di tempo di esecuzione
+				($O n \log(n)$, con $n$ numero di elementi del dataset), le sue
+				prestazioni sono state empiricamente dimostrate come molto competitive.
+
 			\subsection{Clustering gerarchico: HDBSCAN}
 
 	\chapter{Risultati}
@@ -928,6 +1040,15 @@
 			\end{figure}
 
 		\section{Risultati delle applicazioni su EHR}
+
+			Per K-Means, è stato testato un numero di cluster compreso fra $2$ e
+			$6$, mentre per K-Medians fra $2$ e $10$.
+
+			Per DBSCAN e HDBSCAN, MinPts è stato scelto nel range dal numero delle
+			dimensioni del dataset al doppio più uno delle dimensioni del dataset.
+
+			Per DBSCAN, $\epsilon$ è stato scelto partizionando la distanza massima
+			in parti uguali.
 
 			\begin{figure}[h]
 				\centering
@@ -1323,6 +1444,19 @@
 				\label{fig:comp5}
 			\end{figure}
 
+			Il valore di $\epsilon$ puó essere stimato costruendo un \textbf{KNN
+			plot}: fissato $k = \textrm{MinPts} - 1$, lungo l'asse delle ascisse
+			si riportano gli elementi ordinati in ordine crescente per distanza
+			dal loro $k$-esimo vicino, mentre sull'asse delle ordinate la distanza
+			stessa. In genere, una curva costruita sulla base di questi dati ha
+			inizialmente un andamento stabile per poi avere una crescita rapida:
+			il valore di $\epsilon$ é scelto il punto della curva in cui si ha
+			tale variazione di pendenza.
+
+			Come è possibile apprezzare nelle figure successive, i valori
+			di $\epsilon$ così restituiti inducono un clustering che è molto
+			simile a quello fornito utilizzando Silhouette.
+
 			\begin{figure}[h]
 				\centering
 				\includegraphics[width = 0.75\textwidth, height = 0.45\textheight, page = 1]{
@@ -1421,3 +1555,6 @@
 	\printbibliography
 
 \end{document}
+
+
+\end{sile}
