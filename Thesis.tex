@@ -1,8 +1,6 @@
 \documentclass[12pt]{report}
 \usepackage[top=2.5cm, bottom=2.5cm, left=4cm, right=2.5cm, centering, head=21.75 pt]{geometry}
 
-%\linespread{1.5}
-
 \usepackage{amsmath}
 \usepackage{amsthm}
 \usepackage{subfigure}
@@ -45,6 +43,8 @@
 
 \usepackage{boxedminipage}
 \usepackage{pgfplotstable}
+
+\usepackage{times}
 
 \begin{document}
 
@@ -116,19 +116,46 @@
 
 	\chapter{Introduzione}
 
-		Clustering è suddividere un dataset di un certo numero di elementi
-		in sottoparti chiamate cluster sulla base della loro affinità.
+		Con il termine \textbf{cluster analysis}, o semplicemente
+		\textbf{clustering}, si intende \emph{''una tecnica di
+		classificazione statistica atta a scoprire se gli individui
+		di una popolazione ricadono all'interno di certi gruppi mediante
+		comparazioni quantitative di loro molteplici caratteristiche``}
+		\footnote{\texttt{https://www.merriam-webster.com/dictionary/cluster\%20analysis}}.
+		Informalmente, il clustering consiste nel (tentare di) suddividere
+		un insieme di dati in gruppi, chiamati appunto \textbf{cluster},
+		di modo che ciascun gruppo contenga elementi simili fra di loro
+		ma dissimili rispetto a quelli degli altri gruppi.
 
-		Il problema è che diversi algoritmi di clustering non sono in grado di
-		fornire una metrica oggettiva per determinare quanto il clustering che
-		hanno indotto sia effettivamente rappresentativo della struttura del
-		dataset, o se sia semplicemente un raggruppamento arbitrario. Inoltre,
-		diversi algoritmi come K-Means richiedono il numero di cluster come
-		iperparametro, rendendo il discorso ancora più complesso, perché in
-		genere nel clustering non supervisionato non vi è a disposizione
-		alcuna "ground truth".
+		Il concetto di ``somiglianza''
 
-		La metrica Silhouette, introdotta per la prima volta in \cite{ROUSSEEUW198753},
+		Un \textbf{algoritmo di clustering} non é altro che un algoritmo
+		che abbia in input un insieme di dati e che abbia in output il
+		risultato del clustering, senza che sia necessario farlo manualmente.
+
+		Gli algoritmi di clustering si dividono in due macrocategorie:
+		\textbf{algoritmi supervisionati} e \textbf{algoritmi non
+		supervisionati}. Nei primi, viene usato un insieme di dati per
+		generalizzarne le proprietá, cercando di predire il risultato
+		per dati futuri, mentre nei secondi si cerca di catturare le
+		proprietá dei dati in sé e per sé.
+
+		Una volta applicato un algoritmo di clustering su un certo insieme
+		di dati, é ragionevole chiedersi se il risultato del clustering
+		effettivamente rispecchi la struttura dei dati o se l'algoritmo
+		abbia errato. Negli algoritmi di tipo supervisionato questo é
+		semplice, perché é possibile comparare i dati ottenuti con il
+		risultato atteso, similmente a come viene fatto in un modello di
+		regressione.
+
+		Negli algoritmi di tipo non supervisionato questo é molto piú
+		difficile, perché non c'é differenza fra l'insieme di dati
+		utilizzato per costruire il modello e l'insieme di dati usato
+		per testare il modello: sono lo stesso insieme. Una possibile
+		soluzione al problema é data da delle statistiche, il cui valore
+		rappresenta l'accuratezza del modello.
+
+		La metrica Silhouette \cite{ROUSSEEUW198753},
 		si propone di rispondere alle seguenti domande:
 
 		\begin{itemize}
@@ -1283,18 +1310,33 @@
 
 	\chapter{Conclusioni}
 
-		Gli algoritmi sono stati applicati su dataset "grezzi", ovvero
-		senza operare alcun preprocessing che non fosse l'eliminare ogni
-		entry che avesse almeno un dato mancante. Si potrebbe ripetere
-		gli esperimenti adottando un approccio piú conservativo, ad
-		esempio sostituendo tali dati con valori di default ed osservare
-		se si presentano differenze.
+		I test sono stati condotti usando esclusivamente EHR come dataset.
+		Naturalmente, sarebbe possibile estendere i test a dataset di diversa
+		natura, che possano contenere informazioni che le EHR non riportano.
 
-		Sarebbe inoltre interessante ripetere gli esperimenti operando
-		dimensionality reduction (\textit{principal component analysis},
-		ecc...), anche e soprattutto per poter visualizzare graficamente
-		il risultato del clustering pur essendo stato questo fatto su
-		dati $n$-dimensionali.
+		Gli algoritmi di clustering sono stati applicati su dataset dove
+		parte degli elementi avevano uno o piú attributi di valore ignoto.
+		Non essendo possibile operare il clustering con dati dei quali non
+		é noto il valore, l'approccio che ho utilizzato é consistito
+		semplicemente nell'eliminare dal dataset ogni elemento che avesse
+		almeno un dato mancante. Si potrebbe ripetere gli esperimenti
+		adottando un approccio piú conservativo, ad esempio sostituendo
+		tali dati con valori di default ed osservare se si presentano
+		differenze.
+
+		Un'alternativa simile é quella di utilizzare tecniche in grado di
+		predire i valori mancanti sulla base di quelli noti, ad esempio
+		calcolando la media di tutti i valori noti per un certo attributo
+		ed utilizzarla al posto dei valori mancanti.
+
+		Sarebbe inoltre interessante ripetere gli esperimenti
+		operando \textbf{dimensionality reduction}, come ad esempio
+		\textbf{principal component analysis} \cite{Hotelling1933AnalysisOA},
+		ovvero delle tecniche in grado di accorpare o di scartare del tutto
+		gli attributi che non hanno particolare rilevanza nel risultato
+		finale del clustering. Questo permetterebbe, ammesso di riuscire
+		a ridurre il numero delle dimensioni fino a due o a tre, di poter
+		visualizzare il risultato del clustering in uno scatter plot.
 
 	\printbibliography
 
