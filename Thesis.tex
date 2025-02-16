@@ -765,7 +765,75 @@
 			come il dataset perde coesione. Ci si aspetta che i punti sul
 			grafico approssimino una distribuzione lineare.
 
-		% \section{Algoritmi}
+		\section{Algoritmi}
+
+			Gli algoritmi di clustering sono innumerevoli, ed è
+			impossibile testarli tutti. In questa tesi ne ho scelti
+			quattro: \textbf{K-Means} \cite{1056489} e la sua variante
+			\textbf{K-Medians}, \textbf{DBSCAN} \cite{10.5555/3001460.3001507}
+			e \textbf{HDBSCAN} \cite{10.1007/978-3-642-37456-2_14}.
+
+			\subsection{Clustering partizionale: K-Means e K-Medians}
+
+				\textbf{K-Means} e \textbf{K-Medians} sono esempi di algoritmi
+				di clustering \textbf{partizionale}, ovvero che suddividono
+				l'insieme di dati in un certo numero di cluster operando diversi
+				"raffinamenti" spostando uno o più elementi da un cluster all'altro
+				fino a raggiungere la precisione desiderata. L'algoritmo può essere
+				descritto come segue:
+
+				\begin{enumerate}
+					\item
+						Sia scelga un intero $k$. Tale valore sarà il numero di cluster;
+					\item
+						Si scelgano $k$ elementi qualsiasi del dataset, detti \textbf{seed}.
+						Tali seed fungeranno da \textbf{centroidi} iniziali, ovvero da elementi
+						che rappresentano il "baricentro" o il "punto medio" di ciascun cluster;
+					\item
+						Per ciascun elemento del dataset che non é un centroide, si calcoli
+						la distanza fra tale elemento e tutti i centroidi. L'elemento viene
+						assegnato alla partizione il cui centroide ha la piú piccola distanza
+						da questo;
+					\item
+						Per ogni cluster se ne ricalcolino i centroidi, operando la media
+						aritmetica dei suoi valori;
+					\item
+						Se é stato raggiunto un criterio di terminazione, l'algoritmo termina.
+						Altrimenti, si riprende dal punto 3.
+				\end{enumerate}
+
+				Si noti come l'algoritmo non specifichi un criterio di terminazione. Un criterio
+				molto semplice consiste nel fissare un $\epsilon$ e valutare di quanto
+				si discosta il nuovo valore dei centroidi (calcolato al punto 4) dal
+				valore precedente: se questo scostamento é inferiore ad $\epsilon$,
+				l'algoritmo termina. Un criterio simile prevede di fissare un $\epsilon$
+				e di terminare l'algoritmo se il numero di elementi che vengono assegnati
+				ad un cluster diverso alla fine della corrente iterazione é inferiore ad
+				$\epsilon$.
+
+				L'algoritmo K-Medians è una variante di K-Means che usa le mediane dei
+				cluster come centroidi anzichè le loro medie. Per tal motivo, mentre
+				K-Means può utilizzare sostanzialmente qualsiasi funzione di distanza,
+				K-Medians utilizza sempre la distanza di Manhattan.
+
+				Sebbene K-Means e K-Medians siano efficienti (se il numero di
+				iterazioni è piccolo, il tempo di esecuzione è quasi-lineare) e
+				anche estremamente semplici, tanto da comparire come subroutine
+				in algoritmi più complessi, presentano dei problemi. Ad esempio,
+				dato che ogni elemento ha lo stesso peso nel computo dei centroidi,
+				anche un solo elemento che abbia valori anomali può destabilizzare
+				completamente il risultato finale. Inoltre, il parametro $k$ che
+				determina il numero di cluster potrebbe non avere alcuna relazione
+				con l'effettivo numero di cluster (se esistono) nell'insieme di
+				dati, e quindi un valore scorretto di $k$ porta a risultati che
+				non rispecchiano per nulla la vera struttura di cluster. Infine,
+				il raggruppamento di piú elementi sulla base di una distanza genera
+				dei cluster di forma ellittica, ma non tutti i dataset hanno una
+				struttura di cluster con questa forma.
+
+			\subsection{Clustering per densità: DBSCAN}
+
+			\subsection{Clustering gerarchico: HDBSCAN}
 
 	\chapter{Risultati}
 
