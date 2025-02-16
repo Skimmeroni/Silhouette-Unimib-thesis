@@ -87,18 +87,6 @@
 	\clearpage
 
 	\setcounter{page}{1}
-	%\addtocontents{toc}{\protect\thispagestyle{empty}}
-	%\addcontentsline{toc}{chapter}{Introduzione}
-	%\input{introduzione.tex}
-
-	%\clearpage
-
-	%\input{capitolo1.tex}
-
-	%\clearpage
-
-	%\addcontentsline{toc}{chapter}{Conclusioni}
-	%\input{conclusioni.tex}
 
 	\chapter{Abstract}
 
@@ -127,11 +115,33 @@
 		di modo che ciascun gruppo contenga elementi simili fra di loro
 		ma dissimili rispetto a quelli degli altri gruppi.
 
-		Il concetto di ``somiglianza''
+		La definizione del concetto di ``somiglianza'' sta nelle mani di
+		chi compie il clustering. In genere, l'analisi dei dati si occupa
+		di dati numerici (altezze, lunghezze, età, ampiezze), pertanto il
+		modo più naturale per formalizzare la somiglianza è dato da una
+		\textbf{funzione di distanza}. Matematicamente, una qualsiasi
+		funzione $d: \mathbb{R} \times \mathbb{R} \rightarrow \mathbb{R}$
+		è considerabile una funzione di distanza se possiede (almeno) le
+		seguenti proprietà:
+
+		\begin{itemize}
+			\item
+			Per ogni $x \in \mathbb{R}$, $d(x, x) = 0$;
+			\item
+			Per ogni $x, y \in \mathbb{R}$, se $x \neq y$ allora $d(x, y) > 0$;
+			\item
+			Per ogni $x, y \in \mathbb{R}$, $d(x, y) = d(y, x)$
+			(\textbf{simmetria});
+			\item
+			Per ogni $x, y, z \in \mathbb{R}$, $d(x, z) \leq d(x, y) + d(y, z)$
+			(\textbf{disuguaglianza triangolare}).
+		\end{itemize}
 
 		Un \textbf{algoritmo di clustering} non é altro che un algoritmo
 		che abbia in input un insieme di dati e che abbia in output il
-		risultato del clustering, senza che sia necessario farlo manualmente.
+		risultato del clustering. Algoritmi di questo tipo fanno uso di
+		una funzione di distanza per raggruppare gli elementi in cluster
+		senza che sia necessario farlo manualmente.
 
 		Gli algoritmi di clustering si dividono in due macrocategorie:
 		\textbf{algoritmi supervisionati} e \textbf{algoritmi non
@@ -148,15 +158,19 @@
 		risultato atteso, similmente a come viene fatto in un modello di
 		regressione.
 
-		Negli algoritmi di tipo non supervisionato questo é molto piú
-		difficile, perché non c'é differenza fra l'insieme di dati
-		utilizzato per costruire il modello e l'insieme di dati usato
-		per testare il modello: sono lo stesso insieme. Una possibile
-		soluzione al problema é data da delle statistiche, il cui valore
-		rappresenta l'accuratezza del modello.
+		Negli algoritmi di tipo non supervisionato questo é molto
+		piú difficile, perché non c'é differenza fra l'insieme di
+		dati utilizzato per costruire il modello e l'insieme di
+		dati usato per testare il modello: sono lo stesso insieme.
+		Una possibile soluzione al problema é data da delle statistiche,
+		il cui valore rappresenta l'accuratezza del modello. Alcuni
+		esempi sono: \textbf{Calinksi-Harabasz} \cite{Calinski01011974},
+		\textbf{Davies-Bouldin} \cite{4766909} e \textbf{Dunn Index}
+		\cite{Dunn01011974}.
 
-		La metrica Silhouette \cite{ROUSSEEUW198753},
-		si propone di rispondere alle seguenti domande:
+		La statistica di interesse per questa tesi è Silhouette
+		\cite{ROUSSEEUW198753}. Tale statistica, nelle parole
+		dell'autore, si propone di rispondere alle seguenti domande:
 
 		\begin{itemize}
 			\item
@@ -175,14 +189,6 @@
 			o è 'artificioso'?
 		\end{itemize}
 
-		Articoli citati: \cite{Chang2024}, \cite{Alexander2021}, \cite{HYUN2020105507},
-		\cite{Josephson_Gonzalez-Izquierdo_Engbers_Denaxas_Delgado-Garcia_Sajobi_Wang_Keezer_Wiebe_2023/10/01_2023},
-		\cite{01277230-202011000-00006}.
-
-		Articoli citati: \cite{10.1007/978-3-030-52348-0_2},
-		\cite{doi:10.3233/IDA-2012-0545}, \cite{Gao2019CUBOSAI},
-		\cite{NAGHIZADEH2020205}, \cite{10.1007/978-3-319-19369-4_5}.
-
 		\begin{table}[h]
 			\centering
 			\footnotesize
@@ -191,7 +197,7 @@
 				\multicolumn{6}{| p{12.5cm} |}{
 					\textit{Identifying heterogeneous subgroups of systemic autoimmune
 					diseases by applying a joint dimension reduction and clustering
-					approach to immunomarkers}
+					approach to immunomarkers} \cite{Chang2024}
 				} \\
 				\hline
 				\textbf{Patologie} &
@@ -214,6 +220,7 @@
 					\textit{Association of comorbid-socioeconomic clusters with
 					mortality in late onset epilepsy derived through unsupervised
 					machine learning}
+					\cite{Josephson_Gonzalez-Izquierdo_Engbers_Denaxas_Delgado-Garcia_Sajobi_Wang_Keezer_Wiebe_2023/10/01_2023}
 				} \\
 				\hline
 				\textbf{Patologie} &
@@ -232,7 +239,7 @@
 				\hline
 				\multicolumn{6}{| p{12.5cm} |}{
 					\textit{Exploration of critical care data by using unsupervised
-					machine learning}
+					machine learning} \cite{HYUN2020105507}
 				} \\
 				\hline
 				\textbf{Patologie} &
@@ -252,7 +259,7 @@
 				\multicolumn{6}{| p{12.5cm} |}{
 					\textit{Identifying and evaluating clinical subtypes of Alzheimer’s
 					disease in care electronic health records using unsupervised machine
-					learning}
+					learning} \cite{Alexander2021}
 				} \\
 				\hline
 				\textbf{Patologie} &
@@ -271,7 +278,7 @@
 				\hline
 				\multicolumn{6}{| p{12.5cm} |}{
 					\textit{Utilization of Deep Learning for Subphenotype Identification
-					in Sepsis-Associated Acute Kidney Injury}
+					in Sepsis-Associated Acute Kidney Injury} \cite{01277230-202011000-00006}
 				} \\
 				\hline
 				\textbf{Patologie} &
@@ -296,10 +303,11 @@
 		\begin{table}[h]
 			\centering
 			\footnotesize
-			\begin{tabular}{| p{3.25cm} | p{1.75cm} | p{2cm} | p{1.75cm} | p{1.75cm} |}
+			\begin{tabular}{| p{3.25cm} | p{1.75cm} | p{2.5cm} | p{1.5cm} | p{1.5cm} |}
 				\hline
 				\multicolumn{5}{| p{12.5cm} |}{
 					\textit{Silhouette Index as clustering evaluation tool}
+					\cite{10.1007/978-3-030-52348-0_2}
 				} \\
 				\hline
 				\textbf{Sintesi} &
@@ -318,6 +326,7 @@
 				\hline
 				\multicolumn{5}{| p{12.5cm} |}{
 					\textit{Performance evaluation of the Silhouette index}
+					\cite{10.1007/978-3-319-19369-4_5}
 				} \\
 				\hline
 				\textbf{Sintesi} &
@@ -329,12 +338,13 @@
 				Qual'é il modo corretto per calcolare la Silhouette media? &
 				Complete-linkage, single-linkage &
 				Quattro dataset artificiali con una struttura di cluster ben definita,
-				`Iris`, `Wine` &
+				\texttt{Iris}, \texttt{Wine} &
 				&
 				\\
 				\hline
 				\multicolumn{5}{| p{12.5cm} |}{
 					\textit{A comparison of clustering quality indices using outliers and noise}
+					\cite{doi:10.3233/IDA-2012-0545}
 				} \\
 				\hline
 				\textbf{Sintesi} &
@@ -353,6 +363,7 @@
 				\hline
 				\multicolumn{5}{| p{12.5cm} |}{
 					\textit{Condensed Silhouette: An Optimized Filtering Process for Cluster Selection in K-Means}
+					\cite{NAGHIZADEH2020205}
 				} \\
 				\hline
 				\textbf{Sintesi} &
@@ -371,6 +382,7 @@
 				\hline
 				\multicolumn{5}{| p{12.5cm} |}{
 					\textit{CUBOS: An Internal Cluster Validity Index for Categorical Data}
+					\cite{Gao2019CUBOSAI}
 				} \\
 				\hline
 				\textbf{Sintesi} &
