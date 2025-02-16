@@ -812,6 +812,15 @@
 				ad un cluster diverso alla fine della corrente iterazione é inferiore ad
 				$\epsilon$.
 
+				\begin{figure}[H]
+					\centering
+					\includesvg{images/K-Means-Example}
+					\caption{Applicazione dell'algoritmo K-Means ad un ipotetico dataset;
+					i tre colori indicano i tre cluster individuati dall'algoritmo (By I,
+					Weston.pace, CC BY-SA 3.0, https://commons.wikimedia.org/w/index.php?curid=2463085).}
+					\label{fig:k-means-example}
+				\end{figure}
+
 				L'algoritmo K-Medians è una variante di K-Means che usa le mediane dei
 				cluster come centroidi anzichè le loro medie. Per tal motivo, mentre
 				K-Means può utilizzare sostanzialmente qualsiasi funzione di distanza,
@@ -890,32 +899,27 @@
 					\label{fig:dbscan-illustration}
 				\end{figure}
 
-				%Quando \tt{DBSCAN} viene invocato, viene inizializzato un
-				%cluster \tt{C}, dopodiché viene iterativamente esaminato
-				%ogni elemento \tt{p} del dataset \tt{D} di tipo \tt{not
-				%visited}. All'elemento \tt{p} viene innanzitutto cambiato
-				%tipo in \tt{visited}, dopodiché viene costruito
-				%l'\math{\epsilon}-vicinato di tale elemento. Se tale insieme
-				%contiene meno elementi di \tt{MinPts}, allora quel punto é
-				%certamente un noise point. Questo perché da una parte é troppo
-				%isolato per essere un core point, ma d'altra parte non é stato
-				%ancora visitato, e quindi non si trova
-				%nell'\math{\epsilon}-vicinato di nessun altro punto, pertanto
-				%non puó nemmeno essere un border point.
+				Quando DBSCAN viene invocato viene inizializzato un cluster
+				$C$, dopodiché viene costruito l'$\epsilon$-vicinato di ogni
+				elemento $p$ che non sia stato ancora ispezionato. Se tale
+				insieme ha meno di MinPts elementi, allora $p$ é certamente
+				un noise point: questo perché é troppo isolato per poter
+				essere un core point e, non essendo ancora stato ispezionato,
+				non puó trovarsi nell'$\epsilon$-vicinato di nessun altro punto.
 
-				%Se l'\math{\epsilon}-vicinato di \tt{p} ha invece abbastanza
-				%elementi, allora tale punto deve essere un core point, e viene
-				%a tal scopo chiamata la procedura \tt{EXPAND-CLUSTER}. Questa
-				%innanzitutto aggiunge \tt{p} al cluster, dopodiché osserva tutti
-				%i punti \tt{q} che si trovano nell'\math{\epsilon}-vicinato di
-				%\tt{p}. Se \tt{q} é di tipo \tt{not visited}, viene cambiato il
-				%loro tipo in \tt{visited} e si osserva l'\math{\epsilon}-vicinato
-				%di \tt{q} a sua volta. Se l'\math{\epsilon}-vicinato di \tt{q}
-				%contiene piú elementi dell'\math{\epsilon}-vicinato di \tt{p},
-				%i due insiemi vengono uniti, perché gli elementi
-				%dell'\math{\epsilon}-vicinato di \tt{q} sono indirettamente
-				%raggiungibili a partire da \tt{p}. Se \tt{q} non appartiene ad
-				%alcun cluster, allora viene aggiunto al cluster in esame.
+				Se invece l'$\epsilon$-vicinato di $p$ ha almeno MinPts
+				elementi, allora tale elemento é certamente un core point.
+				Viene allora costruito un cluster $C$ nel quale $p$ viene
+				inserito, dopodiché vengono osservati tutti gli elementi
+				$q$ che si trovano nell'$\epsilon$-vicinato di $p$.
+				Se $q$ non é mai stato ispezionato, si osserva
+				l'$\epsilon$-vicinato di $q$ a sua volta: se questo
+				contiene piú elementi dell'$\epsilon$-vicinato di $p$,
+				allora $N_{\epsilon}(q)$ e $N_{\epsilon}(p)$ vengono
+				uniti in un insieme unico, perché gli elementi
+				dell'$\epsilon$-vicinato di $q$ sono indirettamente
+				raggiungibili a partire da $p$. Se $q$ non appartiene
+				ad alcun cluster, allora viene aggiunto al cluster in esame.
 
 				\begin{figure}[H]
 					\centering
@@ -946,6 +950,13 @@
 				prestazioni sono state empiricamente dimostrate come molto competitive.
 
 			\subsection{Clustering gerarchico: HDBSCAN}
+
+				\textbf{HDBSCAN} é un esempio di algoritmo di clustering
+				\textbf{gerarchico}, ovvero che costruisce i cluster formando
+				una struttura ad albero \footnote{In realtá, HDBSCAN é un
+				algoritmo ibrido fra il paradigma per densitá ed il paradigma
+				gerarchico. Un esempio semplice di algoritmo di clustering
+				``puramente'' gerarchico é \textbf{UPGMA} \cite{Sokal1958ASM}.}
 
 	\chapter{Risultati}
 
