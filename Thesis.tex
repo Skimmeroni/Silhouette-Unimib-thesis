@@ -58,13 +58,13 @@
 
 	\setcounter{page}{1}
 
-	\chapter{Abstract}
+	\chapter*{Abstract}
 
-		Silhouette é una metrica spesso utilizzata per individuare
+		Silhouette è una metrica spesso utilizzata per individuare
 		la combinazione di iperparametri di un algoritmo di clustering
-		non supervisionato che risulti nel clustering piú vicino possibile
-		alla vera struttura di cluster dei dati in analisi. Verrá introdotta
-		Silhouette e come calcolarla, alcune proprietá matematiche ed alcune
+		non supervisionato che risulti nel clustering più vicino possibile
+		alla vera struttura di cluster dei dati in analisi. Verrà introdotta
+		Silhouette e come calcolarla, alcune proprietà matematiche ed alcune
 		applicazioni concrete su dataset di EHR (\textit{Electronic Health
 		Records}). Verranno inoltre analizzati alcuni pacchetti per il
 		linguaggio \texttt{R} che implementano Silhouette per determinare
@@ -107,7 +107,7 @@
 			(\textbf{disuguaglianza triangolare}).
 		\end{itemize}
 
-		Un \textbf{algoritmo di clustering} non é altro che un algoritmo
+		Un \textbf{algoritmo di clustering} non è altro che un algoritmo
 		che abbia in input un insieme di dati e che abbia in output il
 		risultato del clustering. Algoritmi di questo tipo fanno uso di
 		una funzione di distanza per raggruppare gli elementi in cluster
@@ -121,23 +121,23 @@
 		Gli algoritmi di clustering si dividono in due macrocategorie:
 		\textbf{algoritmi supervisionati} e \textbf{algoritmi non
 		supervisionati}. Nei primi, viene usato un insieme di dati per
-		generalizzarne le proprietá, cercando di predire il risultato
+		generalizzarne le proprietà, cercando di predire il risultato
 		per dati futuri, mentre nei secondi si cerca di catturare le
-		proprietá dei dati in sé e per sé.
+		proprietà dei dati in sé e per sé.
 
 		Una volta applicato un algoritmo di clustering su un certo insieme
-		di dati, é ragionevole chiedersi se il risultato del clustering
+		di dati, è ragionevole chiedersi se il risultato del clustering
 		effettivamente rispecchi la struttura dei dati o se l'algoritmo
-		abbia errato. Negli algoritmi di tipo supervisionato questo é
-		semplice, perché é possibile comparare i dati ottenuti con il
+		abbia errato. Negli algoritmi di tipo supervisionato questo è
+		semplice, perché è possibile comparare i dati ottenuti con il
 		risultato atteso, similmente a come viene fatto in un modello di
 		regressione.
 
-		Negli algoritmi di tipo non supervisionato questo é molto
-		piú difficile, perché non c'é differenza fra l'insieme di
+		Negli algoritmi di tipo non supervisionato questo è molto
+		più difficile, perché non c'è differenza fra l'insieme di
 		dati utilizzato per costruire il modello e l'insieme di
 		dati usato per testare il modello: sono lo stesso insieme.
-		Una possibile soluzione al problema é data da delle statistiche,
+		Una possibile soluzione al problema è data da delle statistiche,
 		il cui valore rappresenta l'accuratezza del modello. Alcuni
 		esempi sono: \textbf{Calinksi-Harabasz} \cite{Calinski01011974},
 		\textbf{Davies-Bouldin} \cite{4766909} e \textbf{Dunn Index}
@@ -291,7 +291,7 @@
 				\textbf{Software} &
 				\textbf{Metriche} \\
 				\hline
-				É possibile utilizzare Silhouette come "stopping rule" direttamente
+				È possibile utilizzare Silhouette come "stopping rule" direttamente
 				all'interno di un algoritmo di clustering? &
 				RPCT &
 				Dataset artificiale, generato mediante \texttt{cluster.Gen}, FCPS
@@ -310,7 +310,7 @@
 				\textbf{Software} &
 				\textbf{Metriche} \\
 				\hline
-				Qual'é il modo corretto per calcolare la Silhouette media? &
+				Qual'è il modo corretto per calcolare la Silhouette media? &
 				Complete-linkage, single-linkage &
 				Quattro dataset artificiali con una struttura di cluster ben definita,
 				\texttt{Iris}, \texttt{Wine} &
@@ -330,7 +330,7 @@
 				\hline
 				Quali sono le prestazioni di Silhouette rispetto ad altre metriche? &
 				K-means, model-based clustering, hierarchical clustering, algoritmo "random" &
-				\texttt{clear} (struttura di cluster é ben definita),
+				\texttt{clear} (struttura di cluster è ben definita),
 				\texttt{out} (parte dei dati sono noise),
 				\texttt{noi} (parte delle dimensioni sono noise) &
 				&
@@ -347,7 +347,7 @@
 				\textbf{Software} &
 				\textbf{Metriche} \\
 				\hline
-				Nel caso di algoritmi di clustering partizionale, é possibile
+				Nel caso di algoritmi di clustering partizionale, è possibile
 				semplificare ulteriormente Silhouette? &
 				K-Means &
 				7 microarray gene expressions (migliaia di features), 7
@@ -366,7 +366,7 @@
 				\textbf{Software} &
 				\textbf{Metriche} \\
 				\hline
-				É possibile estendere Silhouette per utilizzarla su valori discreti? &
+				È possibile estendere Silhouette per utilizzarla su valori discreti? &
 				IDC &
 				K-Modes &
 				UCI &
@@ -385,14 +385,14 @@
 			dataset reali, come dataset ho utilizzato delle cartelle
 			cliniche elettroniche (EHR). Questi dataset, in formato
 			\texttt{.csv} (\emph{comma separated value}), sono liberamente
-			utilizzabili. Per comoditá, ho indicato tali dataset con la
+			utilizzabili. Per comodità, ho indicato tali dataset con la
 			malattia a cui si riferiscono: \texttt{Diabetes},
 			\texttt{Neuroblastoma}, \texttt{CardiacArrest},
 			\texttt{HeartFailure}, \texttt{Sepsis}. Nell'intestazione
-			dei plot é comunque possibile leggere il nome completo
+			dei plot è comunque possibile leggere il nome completo
 			del rispettivo dataset.
 
-			Per quanto riguarda la valutazione delle perfomance delle
+			Per quanto riguarda la valutazione delle performance delle
 			implementazioni di Silhouette ho utilizzato due dataset da
 			me generati, indicati con \texttt{sc\_dataset\_good} e
 			\texttt{sc\_dataset\_bad}. Li ho costruiti utilizzando la
@@ -402,7 +402,7 @@
 			\texttt{sc\_dataset\_good} è costituito da due distribuzioni
 			normali fuse insieme, entrambe con una deviazione standard
 			molto bassa, di modo che i punti siano concentrati attorno
-			alla media. \texttt{sc\_dataset\_bad} é costituito da una
+			alla media. \texttt{sc\_dataset\_bad} è costituito da una
 			sola distribuzione normale bivariata centrata in $(0, 0)$ e
 			con una deviazione standard molto ampia, di modo che i punti
 			siano molto dispersi. I loro scatter plot sono riportati in
@@ -426,13 +426,13 @@
 
 			Infine, diversi esempi si rifanno ad un dataset molto famoso
 			chiamato \texttt{iris} \cite{https://doi.org/10.1111/j.1469-1809.1936.tb02137.x}.
-			Tale dataset é costituito da $150$ elementi estratti da una
+			Tale dataset è costituito da $150$ elementi estratti da una
 			popolazione di fiori, ciascuno contenente cinque attributi,
 			in ordine: lunghezza del sepalo (in centimetri), larghezza
 			del sepalo, lunghezza del petalo, larghezza del petalo e
 			specie del fiore (\emph{Iris setosa}, \emph{Iris virginica}
 			oppure \emph{Iris versicolor}). Dato che l'ultimo attributo
-			non é numerico, viene in genere scartato. Nella
+			non è numerico, viene in genere scartato. Nella
 			Tabella~\ref{tab:iris-sample} sono riportati alcuni
 			elementi di tale dataset.
 
@@ -456,7 +456,7 @@
 					\hline
 				\end{tabular}
 				\caption{Primi elementi del dataset \texttt{iris},
-				cosí come compare nel linguaggio \texttt{R}.}
+				così come compare nel linguaggio \texttt{R}.}
 				\label{tab:iris-sample}
 			\end{table}
 
@@ -464,13 +464,13 @@
 
 			Si supponga di avere a disposizione un dataset di dimensione
 			$N \times M$, dove $N$ indica il numero degli elementi e $M$ è
-			il numero di attributi. Si assuma, per semplicitá, che tutti
+			il numero di attributi. Si assuma, per semplicità, che tutti
 			gli attributi siano tutti dati numerici (altezze, lunghezze,
 			capacità, ecc...) e che ogni valore di ogni attributo sia noto.
 
-			Per ciascuna coppia di elementi $i$ e $j$ del dataset é possibile
+			Per ciascuna coppia di elementi $i$ e $j$ del dataset è possibile
 			calcolare la loro distanza mediante una funzione di distanza. La
-			funzione di distanza piú intuitiva è la \textbf{distanza Euclidea},
+			funzione di distanza più intuitiva è la \textbf{distanza Euclidea},
 			che equivale alla distanza fra due punti nel piano cartesiano
 			$n$-dimensionale, definita come segue:
 
@@ -485,7 +485,7 @@
 			attributo per, rispettivamente, l'$i$-esimo ed il $j$-esimo
 			elemento del dataset.
 
-			Un'altro esempio di distanza é la \textbf{distanza di Manhattan},
+			Un'altro esempio di distanza è la \textbf{distanza di Manhattan},
 			calcolata come la somma fra le differenze in modulo di ciascuna
 			coppia di attributi:
 
@@ -496,7 +496,7 @@
 				|f_{i, M} - f_{j, M}|
 			\end{equation}
 
-			Ultimo esempio di distanza é la \textbf{distanza di Jaccard},
+			Ultimo esempio di distanza è la \textbf{distanza di Jaccard},
 			calcolata a partire dal numero di elementi che due insiemi $A$
 			e $B$ hanno in comune ed al numero di elementi che non hanno
 			in comune:
@@ -529,12 +529,12 @@
 				scartando l'ultimo attributo in quanto non numerico, usando
 				come funzione di distanza la distanza Euclidea. Per questioni
 				di spazio sono presenti solamente i primi 7 elementi. Si noti
-				come la matrice sia riportata solo per metá, perché per
-				definizione una matrice delle distanze é sempre simmetrica.}
+				come la matrice sia riportata solo per metà, perché per
+				definizione una matrice delle distanze è sempre simmetrica.}
 				\label{tab:dist}
 			\end{table}
 
-			La distanza Euclidea é la funzione di distanza che viene
+			La distanza Euclidea è la funzione di distanza che viene
 			utilizzata di default nella maggior parte delle implementazioni
 			di default degli algoritmi di clustering. Inoltre, nella maggior
 			parte dei casi, un algoritmo di clustering non necessita di
@@ -542,7 +542,7 @@
 			specificato diversamente, quando ci si riferisce ad una funzione
 			di distanza generica si intende la distanza Euclidea.
 
-		\section{Silhouette}
+		\section{Definizione di Silhouette}
 
 			Una volta nota la matrice delle distanze, si supponga di applicare
 			un algoritmo di clustering (K-Means, ad esempio) per suddividere il
@@ -784,17 +784,17 @@
 			fornito un risultato corretto, dato che effettivamente qualsiasi
 			risultato vale l'altro.
 
-		\section{Sanity check e matrice binaria}
+		\section{Test sanity check e matrice binaria}
 
 			Il linguaggio \texttt{R} offre diverse implementazioni del
 			calcolo della Silhouette. A differenza di altri linguaggi come
 			Python, dove esiste un "consensus" (ufficiale o ufficioso) riguardo
 			a quali siano i pacchetti da utilizzare per un determinato scopo,
 			su \texttt{R} questo talvolta manca. Pertanto, prima di mettere
-			Silhouette sotto analisi, é necessario scegliere un pacchetto fra
+			Silhouette sotto analisi, è necessario scegliere un pacchetto fra
 			quelli disponibili.
 
-			Ho cercato quante piú implementazioni di Silhouette possibili
+			Ho cercato quante più implementazioni di Silhouette possibili
 			utilizzando il sito \texttt{https://rdrr.io} e scegliendone
 			quante più possibili che provenissero dal repository CRAN.
 			In particolare, sono stati scelti \texttt{cluster},
@@ -839,7 +839,7 @@
 			come il dataset perde coesione. Ci si aspetta che i punti sul
 			grafico approssimino una distribuzione lineare.
 
-		\section{Algoritmi}
+		\section{Algoritmi di clustering}
 
 			Gli algoritmi di clustering sono innumerevoli, ed è
 			impossibile testarli tutti. In questa tesi ne ho scelti
@@ -864,25 +864,25 @@
 						Tali seed fungeranno da \textbf{centroidi} iniziali, ovvero da elementi
 						che rappresentano il "baricentro" o il "punto medio" di ciascun cluster;
 					\item
-						Per ciascun elemento del dataset che non é un centroide, si calcoli
+						Per ciascun elemento del dataset che non è un centroide, si calcoli
 						la distanza fra tale elemento e tutti i centroidi. L'elemento viene
-						assegnato alla partizione il cui centroide ha la piú piccola distanza
+						assegnato alla partizione il cui centroide ha la più piccola distanza
 						da questo;
 					\item
 						Per ogni cluster se ne ricalcolino i centroidi, operando la media
 						aritmetica dei suoi valori;
 					\item
-						Se é stato raggiunto un criterio di terminazione, l'algoritmo termina.
+						Se è stato raggiunto un criterio di terminazione, l'algoritmo termina.
 						Altrimenti, si riprende dal punto 3.
 				\end{enumerate}
 
 				Si noti come l'algoritmo non specifichi un criterio di terminazione. Un criterio
 				molto semplice consiste nel fissare un $\epsilon$ e valutare di quanto
 				si discosta il nuovo valore dei centroidi (calcolato al punto 4) dal
-				valore precedente: se questo scostamento é inferiore ad $\epsilon$,
+				valore precedente: se questo scostamento è inferiore ad $\epsilon$,
 				l'algoritmo termina. Un criterio simile prevede di fissare un $\epsilon$
 				e di terminare l'algoritmo se il numero di elementi che vengono assegnati
-				ad un cluster diverso alla fine della corrente iterazione é inferiore ad
+				ad un cluster diverso alla fine della corrente iterazione è inferiore ad
 				$\epsilon$.
 
 				\begin{figure}[H]
@@ -895,7 +895,7 @@
 				\end{figure}
 
 				L'algoritmo K-Medians è una variante di K-Means che usa le mediane dei
-				cluster come centroidi anzichè le loro medie. Per tal motivo, mentre
+				cluster come centroidi anziché le loro medie. Per tal motivo, mentre
 				K-Means può utilizzare sostanzialmente qualsiasi funzione di distanza,
 				K-Medians utilizza sempre la distanza di Manhattan.
 
@@ -910,7 +910,7 @@
 				con l'effettivo numero di cluster (se esistono) nell'insieme di
 				dati, e quindi un valore scorretto di $k$ porta a risultati che
 				non rispecchiano per nulla la vera struttura di cluster. Infine,
-				il raggruppamento di piú elementi sulla base di una distanza genera
+				il raggruppamento di più elementi sulla base di una distanza genera
 				dei cluster di forma ellittica, ma non tutti i dataset hanno una
 				struttura di cluster con questa forma.
 
@@ -945,27 +945,27 @@
 					nell'$\epsilon$-vicinato di un altro elemento, allora si dice che
 					$p$ è un \textbf{border point};
 					\item
-					Se un elemento non non é né un core point né un border
-					point, é detto \textbf{noise point}.
+					Se un elemento non non è né un core point né un border
+					point, è detto \textbf{noise point}.
 				\end{itemize}
 
-				Si dice che un elemento $q$ é \textbf{direttamente raggiungibile}
-				da $p$ se $p$ é un core point e $q$ si trova nell'$\epsilon$-vicinato
-				di $p$. Se un elemento $r$ é direttamente raggiungibile da $q$ e $q$
-				é direttamente raggiungibile da un elemento $p$, allora si dice che
-				$r$ é \textbf{indirettamente raggiungibile} da $p$ (si noti come
+				Si dice che un elemento $q$ è \textbf{direttamente raggiungibile}
+				da $p$ se $p$ è un core point e $q$ si trova nell'$\epsilon$-vicinato
+				di $p$. Se un elemento $r$ è direttamente raggiungibile da $q$ e $q$
+				è direttamente raggiungibile da un elemento $p$, allora si dice che
+				$r$ è \textbf{indirettamente raggiungibile} da $p$ (si noti come
 				la raggiungibilità non sia una proprietà necessariamente simmetrica).
 
 				\begin{figure}[H]
 					\centering
 					\includesvg[width = 0.5\textwidth]{images/DBSCAN-Illustration.svg}
 					\caption{Ipotetica classificazione di alcuni elementi, usando
-					MinPts = 4. Gli elementi in rosso sono dei core point, perchè
+					MinPts = 4. Gli elementi in rosso sono dei core point, perché
 					hanno 4 o più elementi nel loro $\epsilon$-vicinato. Gli elementi
-					in giallo sono invece border point, perchè hanno meno di 4 elementi
+					in giallo sono invece border point, perché hanno meno di 4 elementi
 					nel loro $\epsilon$-vicinato ma sono nell'$\epsilon$-vicinato di
 					almeno un core point. Infine, gli elementi in blu sono dei
-					noise point, perchè oltre ad avere meno di 4 elementi nel loro
+					noise point, perché oltre ad avere meno di 4 elementi nel loro
 					$\epsilon$-vicinato non sono nell'$epsilon$-vicinato di alcun
 					core point (By Chire - Own work, CC BY-SA 3.0,
 					https://commons.wikimedia.org/w/index.php?curid=17045963).}
@@ -975,19 +975,19 @@
 				Quando DBSCAN viene invocato viene inizializzato un cluster
 				$C$, dopodiché viene costruito l'$\epsilon$-vicinato di ogni
 				elemento $p$ che non sia stato ancora ispezionato. Se tale
-				insieme ha meno di MinPts elementi, allora $p$ é certamente
-				un noise point: questo perché é troppo isolato per poter
+				insieme ha meno di MinPts elementi, allora $p$ è certamente
+				un noise point: questo perché è troppo isolato per poter
 				essere un core point e, non essendo ancora stato ispezionato,
-				non puó trovarsi nell'$\epsilon$-vicinato di nessun altro punto.
+				non può trovarsi nell'$\epsilon$-vicinato di nessun altro punto.
 
 				Se invece l'$\epsilon$-vicinato di $p$ ha almeno MinPts
-				elementi, allora tale elemento é certamente un core point.
+				elementi, allora tale elemento è certamente un core point.
 				Viene allora costruito un cluster $C$ nel quale $p$ viene
 				inserito, dopodiché vengono osservati tutti gli elementi
 				$q$ che si trovano nell'$\epsilon$-vicinato di $p$.
-				Se $q$ non é mai stato ispezionato, si osserva
+				Se $q$ non è mai stato ispezionato, si osserva
 				l'$\epsilon$-vicinato di $q$ a sua volta: se questo
-				contiene piú elementi dell'$\epsilon$-vicinato di $p$,
+				contiene più elementi dell'$\epsilon$-vicinato di $p$,
 				allora $N_{\epsilon}(q)$ e $N_{\epsilon}(p)$ vengono
 				uniti in un insieme unico, perché gli elementi
 				dell'$\epsilon$-vicinato di $q$ sono indirettamente
@@ -1013,9 +1013,9 @@
 
 				A differenza di K-Means e K-Medians, che costruiscono sempre cluster
 				di forma ellissoidale, DBSCAN costruisce cluster di qualsiasi forma.
-				Questo è sia un aspetto positivo, perchè in questo modo è possibile
+				Questo è sia un aspetto positivo, perché in questo modo è possibile
 				catturare strutture di cluster molto più variegate, sia negativo,
-				perchè la densità di un'area non sottende necessariamente alla
+				perché la densità di un'area non sottende necessariamente alla
 				presenza di un cluster, e non tutte le aree dense lo sono allo
 				stesso modo. Occorre però evidenziare come, nonostante sia leggermente
 				inferiore a K-Means e K-Medians in termini di tempo di esecuzione
@@ -1024,23 +1024,32 @@
 
 			\subsection{Clustering gerarchico: HDBSCAN}
 
-				\textbf{HDBSCAN} é un esempio di algoritmo di clustering
+				\textbf{HDBSCAN} è un esempio di algoritmo di clustering
 				\textbf{gerarchico}, ovvero che costruisce i cluster formando
-				una struttura ad albero \footnote{In realtá, HDBSCAN é un
-				algoritmo ibrido fra il paradigma per densitá ed il paradigma
+				una struttura ad albero \footnote{In realtà, HDBSCAN è un
+				algoritmo ibrido fra il paradigma per densità ed il paradigma
 				gerarchico. Un esempio semplice di algoritmo di clustering
 				``puramente'' gerarchico é \textbf{UPGMA} \cite{Sokal1958ASM}.}
 
-	\chapter{Risultati}
+			Per K-Means, è stato testato un numero di cluster compreso fra $2$ e
+			$6$, mentre per K-Medians fra $2$ e $10$.
 
-		\section{Risultati dei test}
+			Per DBSCAN e HDBSCAN, MinPts è stato scelto nel range dal numero delle
+			dimensioni del dataset al doppio più uno delle dimensioni del dataset.
+
+			Per DBSCAN, $\epsilon$ è stato scelto partizionando la distanza massima
+			in parti uguali.
+
+	\chapter{Risultati ottenuti}
+
+		\section{Risultati dei test sanity check su pacchetti R}
 
 			Il risultati del test sanity check sono riportati nei plot
 			seguenti. Per ciascun pacchetto sono riportati sia i valori
 			della Silhouette media complessiva, sia il tempo di esecuzione
 			necessario. Il colore degli elementi rappresenta il cluster
-			nel quale é stato assegnato. Per ciascun pacchetto il test
-			é stato ripetuto due volte: una volta usando \texttt{sc\_dataset\_good}
+			nel quale è stato assegnato. Per ciascun pacchetto il test
+			è stato ripetuto due volte: una volta usando \texttt{sc\_dataset\_good}
 			ed una volta usando \texttt{sc\_dataset\_bad}.
 
 			\begin{figure}[H]
@@ -1113,10 +1122,12 @@
 				\label{fig:reticulatebad}
 			\end{figure}
 
+		\section{Risultati dei test matrice binaria su pacchetti R}
+
 			I risultati per il test matrice binaria sono riportati nei plot
 			seguenti. Per ciascun dataset, sono riportati i valori della
 			Silhouette media complessiva per ciascuna delle 20 iterazioni
-			dell'algoritmo. Sull'asse delle ascisse é riportato il numero
+			dell'algoritmo. Sull'asse delle ascisse è riportato il numero
 			delle iterazioni, mentre su quello delle ordinate il valore
 			della Silhouette media complessiva. Essendo Silhouette un valore
 			compreso fra $-1$ e $1$, le ordinate sono normalizzate su tale
@@ -1158,16 +1169,22 @@
 				\label{fig:reticulatebm}
 			\end{figure}
 
-		\section{Risultati delle applicazioni su EHR}
+		\section{Risultati delle applicazioni di algoritmi di clustering su EHR}
 
-			Per K-Means, è stato testato un numero di cluster compreso fra $2$ e
-			$6$, mentre per K-Medians fra $2$ e $10$.
+			I risultati dell'applicazione dei quattro algoritmi di clustering
+			sui dataset EHR citati sono riportati di seguito. Ciascuna
+			combinazione algoritmo/dataset è formata da due plot.
 
-			Per DBSCAN e HDBSCAN, MinPts è stato scelto nel range dal numero delle
-			dimensioni del dataset al doppio più uno delle dimensioni del dataset.
+			Il primo plot è una o più linee spezzate dove ciascun punto ha per
+			ascissa il valore di un certo parametro e per ordinata il valore
+			della Silhouette media complessiva del clustering operato usando
+			tale parametro. Nel caso in cui i parametri dell'algoritmo siano
+			due, sono riportate più rette, e ciascuna retta rappresenta la
+			scelta di uno dei due parametri.
 
-			Per DBSCAN, $\epsilon$ è stato scelto partizionando la distanza massima
-			in parti uguali.
+			Il secondo plot è un grafico a barre dove ciascuna colonna
+			rappresenta, in percentuale, il numero di elementi che l'algoritmo
+			ha assegnato a tale cluster.
 
 			\begin{figure}[H]
 				\centering
@@ -1459,15 +1476,15 @@
 
 		\section{Pacchetti}
 
-			Il test sanity check non é stato particolarmente conclusivo,
+			Il test sanity check non è stato particolarmente conclusivo,
 			perché tutti e cinque i pacchetti hanno fornito valori molto
 			simili (circa $0.9$ per il primo dataset e circa $0.4$ per il
-			secondo). Questo é un risultato atteso, perché il test era
+			secondo). Questo è un risultato atteso, perché il test era
 			appositamente costruito per escludere pacchetti problematici.
 
-			Il test é stato piú informativo del precedente,
+			Il test è stato più informativo del precedente,
 			perché i valori restituiti avevano delle differenze
-			evidenziabili. In particolare, \texttt{Kira} é stato il
+			evidenziabili. In particolare, \texttt{Kira} è stato il
 			pacchetto con le performance peggiori, perché i valori
 			della Silhouette media complessiva sono rimasti pressoché
 			identici. I pacchetti \texttt{cluster}, \texttt{drclust}
@@ -1477,21 +1494,21 @@
 			probabilmente l'uno usa l'altro come subroutine.
 
 			Alla luce dei due test considerati, il pacchetto \texttt{Kira}
-			é stato immediatamente escluso, perché i risultati forniti dal
+			è stato immediatamente escluso, perché i risultati forniti dal
 			test della matrice binaria non sono affatto incoraggianti.
 			Dato che i pacchetti \texttt{cluster} e \texttt{tidyclust}
-			hanno fornito un risultato identico, fra i due é stato preferito
+			hanno fornito un risultato identico, fra i due è stato preferito
 			\texttt{cluster}, perché fra i due era quello con il tempo di
-			esecuzione piú basso. Il pacchetto \texttt{scikit-learn}
-			attraverso \texttt{reticulate} non é stato preso in
+			esecuzione più basso. Il pacchetto \texttt{scikit-learn}
+			attraverso \texttt{reticulate} non è stato preso in
 			considerazione, perché era stato incluso semplicemente
 			come metro di paragone.
 
 			Fra \texttt{cluster} e \texttt{drclust} ho preferito scegliere
-			\texttt{cluster}. Questo sia perché il tempo di esecuzione é
+			\texttt{cluster}. Questo sia perché il tempo di esecuzione è
 			inferiore, sia perché il pacchetto \texttt{cluster} si trova
-			spesso giá incluso nelle installazioni di \texttt{R} (garanzia
-			di affidabilitá) sia perché é l'unico pacchetto il cui input
+			spesso già incluso nelle installazioni di \texttt{R} (garanzia
+			di affidabilità) sia perché è l'unico pacchetto il cui input
 			non dipende dall'algoritmo usato. Infatti, \texttt{cluster}
 			ha in input il risultato di un qualsiasi algoritmo di clustering
 			ed una matrice delle distanze, mentre gli altri pacchetti
@@ -1515,11 +1532,11 @@
 
 		\section{EHR}
 
-			Come é possibile notare nei plot mostrati in precedenza,
+			Come è possibile notare nei plot mostrati in precedenza,
 			l'algoritmo scelto influenza notevolmente il numero di
 			cluster che vengono individuati, pure se in ogni caso si
 			tratta di iperparametri massimizzati usando Silhouette.
-			Questo é in accordo con gli articoli citati. Di seguito
+			Questo è in accordo con gli articoli citati. Di seguito
 			sono riportate le performance degli algoritmi di clustering.
 
 			\begin{figure}[H]
@@ -1593,20 +1610,20 @@
 			metodo di ottimizzazione degli iperparametri alternativo, e
 			vedere se i due risultati sono simili.
 
-			Fissato MinPts come il doppio piú uno delle dimensioni del dataset,
-			il valore di $\epsilon$ puó essere stimato costruendo un \textbf{KNN
+			Fissato MinPts come il doppio più uno delle dimensioni del dataset,
+			il valore di $\epsilon$ può essere stimato costruendo un \textbf{KNN
 			plot}: fissato $k = \textrm{MinPts} - 1$, lungo l'asse delle ascisse
 			si riportano gli elementi ordinati in ordine crescente per distanza
 			dal loro $k$-esimo vicino, mentre sull'asse delle ordinate la distanza
 			stessa. In genere, una curva costruita sulla base di questi dati ha
 			inizialmente un andamento stabile per poi avere una crescita rapida:
-			il valore di $\epsilon$ é scelto il punto della curva in cui si ha
+			il valore di $\epsilon$ è scelto il punto della curva in cui si ha
 			tale variazione di pendenza.
 
 			Come è possibile apprezzare nelle figure successive, i valori
 			di $\epsilon$ così restituiti inducono un clustering che è molto
 			simile a quello fornito utilizzando Silhouette. Questo indica che
-			Silhouette é effettivamente in grado di restituire una combinazione
+			Silhouette è effettivamente in grado di restituire una combinazione
 			ottimale di iperparametri.
 
 			\begin{figure}[H]
@@ -1676,33 +1693,41 @@
 
 	\chapter{Conclusioni}
 
-		I test sono stati condotti usando esclusivamente EHR come dataset.
-		Naturalmente, sarebbe possibile estendere i test a dataset di diversa
-		natura, che possano contenere informazioni che le EHR non riportano.
+		Data la natura di questa tesi, é evidente come questo non possa
+		essere altro che un lavoro esplorativo. Le idee qui presentate
+		potrebbero essere estese in diversi modi, alcuni riportati di
+		seguito.
 
-		Gli algoritmi di clustering sono stati applicati su dataset dove
-		parte degli elementi avevano uno o piú attributi di valore ignoto.
-		Non essendo possibile operare il clustering con dati dei quali non
-		é noto il valore, l'approccio che ho utilizzato é consistito
-		semplicemente nell'eliminare dal dataset ogni elemento che avesse
+		Innanzitutto, i test sono stati condotti usando esclusivamente EHR
+		come dataset. Sebbene queste contengano moltissime informazioni, non
+		sono una risorsa omnicomprensiva. Si potrebbe pertanto ripetere i
+		test utilizzando anche o soltanto dataset di dati biomedici che
+		contengono dati che le EHR ignorano, dando un quadro piú completo.
+
+		Inoltre, gli algoritmi di clustering sono stati applicati su dataset
+		dove parte degli elementi avevano uno o più attributi di valore
+		ignoto. Non essendo possibile operare il clustering con dati dei
+		quali non è noto il valore, l'approccio che ho utilizzato è
+		semplicemente stato quello di eliminare ogni elemento che avesse
 		almeno un dato mancante. Si potrebbe ripetere gli esperimenti
-		adottando un approccio piú conservativo, ad esempio sostituendo
+		adottando un approccio più conservativo, ad esempio sostituendo
 		tali dati con valori di default ed osservare se si presentano
 		differenze.
 
-		Un'alternativa simile é quella di utilizzare tecniche in grado di
+		Un'alternativa simile è quella di utilizzare tecniche in grado di
 		predire i valori mancanti sulla base di quelli noti, ad esempio
 		calcolando la media di tutti i valori noti per un certo attributo
 		ed utilizzarla al posto dei valori mancanti.
 
-		Sarebbe inoltre interessante ripetere gli esperimenti
-		operando \textbf{dimensionality reduction}, come ad esempio
-		\textbf{principal component analysis} \cite{Hotelling1933AnalysisOA},
-		ovvero delle tecniche in grado di accorpare o di scartare del tutto
-		gli attributi che non hanno particolare rilevanza nel risultato
-		finale del clustering. Questo permetterebbe, ammesso di riuscire
-		a ridurre il numero delle dimensioni fino a due o a tre, di poter
-		visualizzare il risultato del clustering in uno scatter plot.
+		Infine, sarebbe interessante ripetere gli esperimenti operando
+		\textbf{dimensionality reduction}, come ad esempio \textbf{principal
+		component analysis} \cite{Hotelling1933AnalysisOA}, ovvero tecniche
+		in grado di accorpare o di scartare del tutto gli attributi che non
+		hanno particolare rilevanza nel risultato finale del clustering.
+		Questo permetterebbe, ammesso di riuscire a ridurre il numero delle
+		dimensioni fino a due o a tre, di poter visualizzare il risultato
+		del clustering in uno scatter plot, a prescindere dal numero originale
+		delle dimensioni.
 
 	\printbibliography
 
