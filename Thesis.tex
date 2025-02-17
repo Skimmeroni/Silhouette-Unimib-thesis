@@ -56,23 +56,25 @@
 	\thispagestyle{empty}
 	\clearpage
 
-	\setcounter{page}{1}
-
 	\chapter*{Abstract}
+	\thispagestyle{empty}
 
-		Silhouette è una metrica spesso utilizzata per individuare
-		la combinazione di iperparametri di un algoritmo di clustering
-		non supervisionato che risulti nel clustering più vicino possibile
-		alla vera struttura di cluster dei dati in analisi. Verrà introdotta
-		Silhouette e come calcolarla, alcune proprietà matematiche ed alcune
-		applicazioni concrete su dataset di EHR (\textit{Electronic Health
-		Records}). Verranno inoltre analizzati alcuni pacchetti per il
-		linguaggio \texttt{R} che implementano Silhouette per determinare
-		quale sia il migliore, comparandone le performance sia fra di
-		loro sia rispetto all'implementazione di \texttt{scikit-learn}
-		(\texttt{Python}).
+		Il clustering non supervisionato non ha a disposizione una "ground
+		truth" per valutare quanto il proprio operato sia effettivamente
+		rappresentativo della struttura del dataset esaminato. Per adempiere
+		a tale scopo sono state introdotte delle metriche in grado di stimare
+		a posteriori (a clustering compiuto) le performance dell'algoritmo.
+		Nel presente lavoro ne verrá presentata una in particolare, Silhouette.
+		Verrà introdotta tale metrica, come calcolarla, alcune proprietà
+		matematiche e verrá applicata al risultato del clustering su delle
+		EHR (\textit{Electronic Health Records}). Verranno inoltre analizzati
+		alcuni pacchetti per il linguaggio R che implementano Silhouette per
+		determinare quale sia il migliore. Verranno infine fatte delle
+		considerazioni in merito alla metrica stessa e alla sua capacitá
+		di stimare le performance degli algoritmi di clustering.
 
 	\chapter{Introduzione}
+	\setcounter{page}{1}
 
 		Con il termine \textbf{cluster analysis}, o semplicemente
 		\textbf{clustering}, si intende \emph{''una tecnica di
@@ -114,8 +116,9 @@
 		senza che sia necessario farlo manualmente.
 
 		\begin{figure}[H]
+			\centering
 			\includesvg[width = 0.5\textwidth]{images/Cluster-2.svg}
-			\label{Ipotetico esempio di clustering}
+			\caption{Ipotetico esempio di clustering}
 		\end{figure}
 
 		Gli algoritmi di clustering si dividono in due macrocategorie:
