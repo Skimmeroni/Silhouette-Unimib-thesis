@@ -823,7 +823,6 @@
 			di clustering K-Means e calcolare sul risultato di quest'ultimo
 			la Silhouette media.
 
-
 			Il test matrice binaria inizia con una matrice di dimensione
 			$2n times n$, costituita per metà da $0$ e per metà da $1$.
 			Su tale matrice viene applicato K-Means con iperparametro
@@ -1036,91 +1035,126 @@
 
 		\section{Risultati dei test}
 
-			I risultati per il test sanity check sono riportati di seguito.
-			Il test sanity check non é stato particolarmente conclusivo,
-			perché tutti e cinque i pacchetti hanno fornito valori molto
-			simili (circa $0.9$ per il primo dataset e circa $0.4$ per il
-			secondo). Questo é un risultato atteso, perché il test era
-			appositamente costruito per escludere pacchetti problematici.
+			Il risultati del test sanity check sono riportati nei plot
+			seguenti. Per ciascun pacchetto sono riportati sia i valori
+			della Silhouette media complessiva, sia il tempo di esecuzione
+			necessario. Il colore degli elementi rappresenta il cluster
+			nel quale é stato assegnato. Per ciascun pacchetto il test
+			é stato ripetuto due volte: una volta usando \texttt{sc\_dataset\_good}
+			ed una volta usando \texttt{sc\_dataset\_bad}.
 
 			\begin{figure}[H]
-				\begin{boxedminipage}{0.5\textwidth}
-					\includegraphics[width = \textwidth, page = 1]{results/results_CLUSTER.pdf}
-				\end{boxedminipage}
-				\begin{boxedminipage}{0.5\textwidth}
-					\includegraphics[width = \textwidth, page = 1]{results/results_DRCLUST.pdf}
-				\end{boxedminipage}
-				\begin{boxedminipage}{0.5\textwidth}
-					\includegraphics[width = \textwidth, page = 1]{results/results_TIDYCLUST.pdf}
-				\end{boxedminipage}
-				\begin{boxedminipage}{0.5\textwidth}
-					\includegraphics[width = \textwidth, page = 1]{results/results_KIRA.pdf}
-				\end{boxedminipage}
-				\caption{Plot dei test sanity check usando il dataset con struttura di cluster
-				ben visibile.}
-				\label{fig:good}
-			\end{figure}
-
-			\begin{figure}[H]
-				\begin{boxedminipage}{0.5\textwidth}
-					\includegraphics[width = \textwidth, page = 2]{results/results_CLUSTER.pdf}
-				\end{boxedminipage}
-				\begin{boxedminipage}{0.5\textwidth}
-					\includegraphics[width = \textwidth, page = 2]{results/results_DRCLUST.pdf}
-				\end{boxedminipage}
-				\begin{boxedminipage}{0.5\textwidth}
-					\includegraphics[width = \textwidth, page = 2]{results/results_TIDYCLUST.pdf}
-				\end{boxedminipage}
-				\begin{boxedminipage}{0.5\textwidth}
-					\includegraphics[width = \textwidth, page = 2]{results/results_KIRA.pdf}
-				\end{boxedminipage}
-				\caption{Plot dei test sanity check usando il dataset con struttura di cluster
-				assente.}
-				\label{fig:bad}
+				\centering
+				\includegraphics[width = 0.65\textwidth, page = 1]{results/results_CLUSTER.pdf}
+				\caption{Risultato del test sanity check per il pacchetto \texttt{cluster}, usando \texttt{sc\_dataset\_good} come dataset.}
+				\label{fig:clustergood}
 			\end{figure}
 
 			\begin{figure}[H]
 				\centering
-				\includegraphics[width = 0.75\textwidth, height = 0.45\textheight, page = 1]{results/results_RETICULATE.pdf}
-				\includegraphics[width = 0.75\textwidth, height = 0.45\textheight, page = 2]{results/results_RETICULATE.pdf}
-				\caption{Plot del test sanity check usando \texttt{scikit-learn} attraverso
-				\texttt{reticulate}.}
-				\label{fig:reticulate}
-			\end{figure}
-
-			I risultati per il test matrice binaria sono riportati
-			di seguito. Il test é stato piú informativo del precedente,
-			perché i valori restituiti avevano delle differenze
-			evidenziabili. In particolare, \texttt{Kira} é stato il
-			pacchetto con le performance peggiori, perché i valori
-			della Silhouette media complessiva sono rimasti pressoché
-			identici. I pacchetti \texttt{cluster}, \texttt{drclust}
-			e \texttt{tidyclust} hanno invece avuto risultati molto
-			simili. In particolare, \texttt{cluster} e \texttt{tidyclust}
-			hanno avuto risultati perfettamente identici, segno che
-			probabilmente l'uno usa l'altro come subroutine.
-
-			\begin{figure}[H]
-				\begin{boxedminipage}{0.5\textwidth}
-					\includegraphics[width = \textwidth, page = 3]{results/results_CLUSTER.pdf}
-				\end{boxedminipage}
-				\begin{boxedminipage}{0.5\textwidth}
-					\includegraphics[width = \textwidth, page = 3]{results/results_DRCLUST.pdf}
-				\end{boxedminipage}
-				\begin{boxedminipage}{0.5\textwidth}
-					\includegraphics[width = \textwidth, page = 3]{results/results_TIDYCLUST.pdf}
-				\end{boxedminipage}
-				\begin{boxedminipage}{0.5\textwidth}
-					\includegraphics[width = \textwidth, page = 3]{results/results_KIRA.pdf}
-				\end{boxedminipage}
-				\caption{Plot dei test matrice binaria.}
-				\label{fig:bm}
+				\includegraphics[width = 0.65\textwidth, page = 1]{results/results_DRCLUST.pdf}
+				\caption{Risultato del test sanity check per il pacchetto \texttt{drclust}, usando \texttt{sc\_dataset\_good} come dataset.}
+				\label{fig:drclustgood}
 			\end{figure}
 
 			\begin{figure}[H]
-				\includegraphics[width = \textwidth, page = 3]{results/results_RETICULATE.pdf}
-				\caption{Plot del test matrice binaria per il pacchetto
-				\texttt{scikit-learn} (attraverso \texttt{reticulate})}
+				\centering
+				\includegraphics[width = 0.65\textwidth, page = 1]{results/results_TIDYCLUST.pdf}
+				\caption{Risultato del test sanity check per il pacchetto \texttt{tidyclust}, usando \texttt{sc\_dataset\_good} come dataset.}
+				\label{fig:tidyclustgood}
+			\end{figure}
+
+			\begin{figure}[H]
+				\centering
+				\includegraphics[width = 0.65\textwidth, page = 1]{results/results_KIRA.pdf}
+				\caption{Risultato del test sanity check per il pacchetto \texttt{kira}, usando \texttt{sc\_dataset\_good} come dataset.}
+				\label{fig:kiragood}
+			\end{figure}
+
+			\begin{figure}[H]
+				\centering
+				\includegraphics[width = 0.65\textwidth, page = 1]{results/results_RETICULATE.pdf}
+				\caption{Risultato del test sanity check per il pacchetto \texttt{scikit-learn} tramite \texttt{reticulate}, usando \texttt{sc\_dataset\_good} come dataset.}
+				\label{fig:reticulategood}
+			\end{figure}
+
+			\begin{figure}[H]
+				\centering
+				\includegraphics[width = 0.65\textwidth, page = 2]{results/results_CLUSTER.pdf}
+				\caption{Risultato del test sanity check per il pacchetto \texttt{cluster}, usando \texttt{sc\_dataset\_bad} come dataset.}
+				\label{fig:clusterbad}
+			\end{figure}
+
+			\begin{figure}[H]
+				\centering
+				\includegraphics[width = 0.65\textwidth, page = 2]{results/results_DRCLUST.pdf}
+				\caption{Risultato del test sanity check per il pacchetto \texttt{drclust}, usando \texttt{sc\_dataset\_bad} come dataset.}
+				\label{fig:drclustbad}
+			\end{figure}
+
+			\begin{figure}[H]
+				\centering
+				\includegraphics[width = 0.65\textwidth, page = 2]{results/results_TIDYCLUST.pdf}
+				\caption{Risultato del test sanity check per il pacchetto \texttt{tidyclust}, usando \texttt{sc\_dataset\_bad} come dataset.}
+				\label{fig:tidyclustbad}
+			\end{figure}
+
+			\begin{figure}[H]
+				\centering
+				\includegraphics[width = 0.65\textwidth, page = 2]{results/results_KIRA.pdf}
+				\caption{Risultato del test sanity check per il pacchetto \texttt{kira}, usando \texttt{sc\_dataset\_bad} come dataset.}
+				\label{fig:kirabad}
+			\end{figure}
+			
+			\begin{figure}[H]
+				\centering
+				\includegraphics[width = 0.65\textwidth, page = 2]{results/results_RETICULATE.pdf}
+				\caption{Risultato del test sanity check per il pacchetto \texttt{scikit-learn} tramite \texttt{reticulate}, usando \texttt{sc\_dataset\_bad} come dataset.}
+				\label{fig:reticulatebad}
+			\end{figure}
+
+			I risultati per il test matrice binaria sono riportati nei plot
+			seguenti. Per ciascun dataset, sono riportati i valori della
+			Silhouette media complessiva per ciascuna delle 20 iterazioni
+			dell'algoritmo. Sull'asse delle ascisse é riportato il numero
+			delle iterazioni, mentre su quello delle ordinate il valore
+			della Silhouette media complessiva. Essendo Silhouette un valore
+			compreso fra $-1$ e $1$, le ordinate sono normalizzate su tale
+			intervallo. Sovrimposta a tale sequenza di punti figura la retta
+			di regressione lineare.
+
+			\begin{figure}[H]
+				\centering
+				\includegraphics[width = 0.65\textwidth, page = 3]{results/results_CLUSTER.pdf}
+				\caption{Risultato del test matrice binaria per il pacchetto \texttt{cluster}.}
+				\label{fig:clusterbm}
+			\end{figure}
+
+			\begin{figure}[H]
+				\centering
+				\includegraphics[width = 0.65\textwidth, page = 3]{results/results_DRCLUST.pdf}
+				\caption{Risultato del test matrice binaria per il pacchetto \texttt{drclust}.}
+				\label{fig:drclustbm}
+			\end{figure}
+
+			\begin{figure}[H]
+				\centering
+				\includegraphics[width = 0.65\textwidth, page = 3]{results/results_TIDYCLUST.pdf}
+				\caption{Risultato del test matrice binaria per il pacchetto \texttt{tidyclust}.}
+				\label{fig:tidyclustbm}
+			\end{figure}
+
+			\begin{figure}[H]
+				\centering
+				\includegraphics[width = 0.65\textwidth, page = 3]{results/results_KIRA.pdf}
+				\caption{Risultato del test matrice binaria per il pacchetto \texttt{kira}.}
+				\label{fig:kirabm}
+			\end{figure}
+			
+			\begin{figure}[H]
+				\centering
+				\includegraphics[width = 0.65\textwidth, page = 3]{results/results_RETICULATE.pdf}
+				\caption{Risultato del test matrice binaria per il pacchetto \texttt{scikit-learn} tramite \texttt{reticulate}.}
 				\label{fig:reticulatebm}
 			\end{figure}
 
@@ -1144,7 +1178,7 @@
 					results/results_HeartFailure.csv.pdf
 				}
 				\caption{Risultati dell'algoritmo K-Means per il dataset
-				\texttt{HeartFailure.csv}}
+				\texttt{HeartFailure}}
 				\label{fig:kmeans1}
 			\end{figure}
 
@@ -1157,7 +1191,7 @@
 					results/results_HeartFailure.csv.pdf
 				}
 				\caption{Risultati dell'algoritmo K-Medians per il dataset
-				\texttt{HeartFailure.csv}}
+				\texttt{HeartFailure}}
 				\label{fig:kmedians1}
 			\end{figure}
 
@@ -1170,7 +1204,7 @@
 					results/results_HeartFailure.csv.pdf
 				}
 				\caption{Risultati dell'algoritmo DBSCAN per il dataset
-				\texttt{HeartFailure.csv}}
+				\texttt{HeartFailure}}
 				\label{fig:dbscan1}
 			\end{figure}
 
@@ -1183,7 +1217,7 @@
 					results/results_HeartFailure.csv.pdf
 				}
 				\caption{Risultati dell'algoritmo HDBSCAN per il dataset
-				\texttt{HeartFailure.csv}}
+				\texttt{HeartFailure}}
 				\label{fig:hdbscan1}
 			\end{figure}
 
@@ -1196,7 +1230,7 @@
 					results/results_CardiacArrest.csv.pdf
 				}
 				\caption{Risultati dell'algoritmo K-Means per il dataset
-				\texttt{CardiacArrest.csv}}
+				\texttt{CardiacArrest}}
 				\label{fig:kmeans2}
 			\end{figure}
 
@@ -1209,7 +1243,7 @@
 					results/results_CardiacArrest.csv.pdf
 				}
 				\caption{Risultati dell'algoritmo K-Medians per il dataset
-				\texttt{CardiacArrest.csv}}
+				\texttt{CardiacArrest}}
 				\label{fig:kmedians2}
 			\end{figure}
 
@@ -1222,7 +1256,7 @@
 					results/results_CardiacArrest.csv.pdf
 				}
 				\caption{Risultati dell'algoritmo DBSCAN per il dataset
-				\texttt{CardiacArrest.csv}}
+				\texttt{CardiacArrest}}
 				\label{fig:dbscan2}
 			\end{figure}
 
@@ -1235,7 +1269,7 @@
 					results/results_CardiacArrest.csv.pdf
 				}
 				\caption{Risultati dell'algoritmo HDBSCAN per il dataset
-				\texttt{CardiacArrest.csv}}
+				\texttt{CardiacArrest}}
 				\label{fig:hdbscan2}
 			\end{figure}
 
@@ -1248,7 +1282,7 @@
 					results/results_Neuroblastoma.csv.pdf
 				}
 				\caption{Risultati dell'algoritmo K-Means per il dataset
-				\texttt{Neuroblastoma.csv}}
+				\texttt{Neuroblastoma}}
 				\label{fig:kmeans3}
 			\end{figure}
 
@@ -1261,7 +1295,7 @@
 					results/results_Neuroblastoma.csv.pdf
 				}
 				\caption{Risultati dell'algoritmo K-Medians per il dataset
-				\texttt{Neuroblastoma.csv}}
+				\texttt{Neuroblastoma}}
 				\label{fig:kmedians3}
 			\end{figure}
 
@@ -1274,7 +1308,7 @@
 					results/results_Neuroblastoma.csv.pdf
 				}
 				\caption{Risultati dell'algoritmo DBSCAN per il dataset
-				\texttt{Neuroblastoma.csv}}
+				\texttt{Neuroblastoma}}
 				\label{fig:dbscan3}
 			\end{figure}
 
@@ -1287,7 +1321,7 @@
 					results/results_Neuroblastoma.csv.pdf
 				}
 				\caption{Risultati dell'algoritmo HDBSCAN per il dataset
-				\texttt{Neuroblastoma.csv}}
+				\texttt{Neuroblastoma}}
 				\label{fig:hdbscan3}
 			\end{figure}
 
@@ -1300,7 +1334,7 @@
 					results/results_Diabetes.csv.pdf
 				}
 				\caption{Risultati dell'algoritmo K-Means per il dataset
-				\texttt{Diabetes.csv}}
+				\texttt{Diabetes}}
 				\label{fig:kmeans4}
 			\end{figure}
 
@@ -1313,7 +1347,7 @@
 					results/results_Diabetes.csv.pdf
 				}
 				\caption{Risultati dell'algoritmo K-Medians per il dataset
-				\texttt{Diabetes.csv}}
+				\texttt{Diabetes}}
 				\label{fig:kmedians4}
 			\end{figure}
 
@@ -1326,7 +1360,7 @@
 					results/results_Diabetes.csv.pdf
 				}
 				\caption{Risultati dell'algoritmo DBSCAN per il dataset
-				\texttt{Diabetes.csv}}
+				\texttt{Diabetes}}
 				\label{fig:dbscan4}
 			\end{figure}
 
@@ -1339,7 +1373,7 @@
 					results/results_Diabetes.csv.pdf
 				}
 				\caption{Risultati dell'algoritmo HDBSCAN per il dataset
-				\texttt{Diabetes.csv}}
+				\texttt{Diabetes}}
 				\label{fig:hdbscan4}
 			\end{figure}
 
@@ -1352,7 +1386,7 @@
 					results/results_Sepsis.csv.pdf
 				}
 				\caption{Risultati dell'algoritmo K-Means per il dataset
-				\texttt{Sepsis.csv}}
+				\texttt{Sepsis}}
 				\label{fig:kmeans5}
 			\end{figure}
 
@@ -1365,7 +1399,7 @@
 					results/results_Sepsis.csv.pdf
 				}
 				\caption{Risultati dell'algoritmo K-Medians per il dataset
-				\texttt{Sepsis.csv}}
+				\texttt{Sepsis}}
 				\label{fig:kmedians5}
 			\end{figure}
 
@@ -1378,7 +1412,7 @@
 					results/results_Sepsis.csv.pdf
 				}
 				\caption{Risultati dell'algoritmo DBSCAN per il dataset
-				\texttt{Sepsis.csv}}
+				\texttt{Sepsis}}
 				\label{fig:dbscan5}
 			\end{figure}
 
@@ -1391,7 +1425,7 @@
 					results/results_Sepsis.csv.pdf
 				}
 				\caption{Risultati dell'algoritmo HDBSCAN per il dataset
-				\texttt{Sepsis.csv}}
+				\texttt{Sepsis}}
 				\label{fig:hdbscan5}
 			\end{figure}
 
@@ -1424,6 +1458,23 @@
 			Tutte e tre le varianti sono toccate da articoli citati.
 
 		\section{Pacchetti}
+
+			Il test sanity check non é stato particolarmente conclusivo,
+			perché tutti e cinque i pacchetti hanno fornito valori molto
+			simili (circa $0.9$ per il primo dataset e circa $0.4$ per il
+			secondo). Questo é un risultato atteso, perché il test era
+			appositamente costruito per escludere pacchetti problematici.
+
+			Il test é stato piú informativo del precedente,
+			perché i valori restituiti avevano delle differenze
+			evidenziabili. In particolare, \texttt{Kira} é stato il
+			pacchetto con le performance peggiori, perché i valori
+			della Silhouette media complessiva sono rimasti pressoché
+			identici. I pacchetti \texttt{cluster}, \texttt{drclust}
+			e \texttt{tidyclust} hanno invece avuto risultati molto
+			simili. In particolare, \texttt{cluster} e \texttt{tidyclust}
+			hanno avuto risultati perfettamente identici, segno che
+			probabilmente l'uno usa l'altro come subroutine.
 
 			Alla luce dei due test considerati, il pacchetto \texttt{Kira}
 			é stato immediatamente escluso, perché i risultati forniti dal
@@ -1480,7 +1531,7 @@
 					results/results_HeartFailure.csv.pdf
 				}
 				\caption{Riassunto dei risultati dei vari algoritmi per il dataset
-				\texttt{HeartFailure.csv}}
+				\texttt{HeartFailure}}
 				\label{fig:comp1}
 			\end{figure}
 
@@ -1493,7 +1544,7 @@
 					results/results_CardiacArrest.csv.pdf
 				}
 				\caption{Riassunto dei risultati dei vari algoritmi per il dataset
-				\texttt{CardiacArrest.csv}}
+				\texttt{CardiacArrest}}
 				\label{fig:comp2}
 			\end{figure}
 
@@ -1506,7 +1557,7 @@
 					results/results_Neuroblastoma.csv.pdf
 				}
 				\caption{Riassunto dei risultati dei vari algoritmi per il dataset
-				\texttt{Neuroblastoma.csv}}
+				\texttt{Neuroblastoma}}
 				\label{fig:comp3}
 			\end{figure}
 
@@ -1519,7 +1570,7 @@
 					results/results_Diabetes.csv.pdf
 				}
 				\caption{Riassunto dei risultati dei vari algoritmi per il dataset
-				\texttt{Diabetes.csv}}
+				\texttt{Diabetes}}
 				\label{fig:comp4}
 			\end{figure}
 
@@ -1532,7 +1583,7 @@
 					results/results_Sepsis.csv.pdf
 				}
 				\caption{Riassunto dei risultati dei vari algoritmi per il dataset
-				\texttt{Sepsis.csv}}
+				\texttt{Sepsis}}
 				\label{fig:comp5}
 			\end{figure}
 
@@ -1567,7 +1618,7 @@
 					results/DBSCAN_visual_comparison.pdf
 				}
 				\caption{Risultati dell'algoritmo DBSCAN per il dataset
-				\texttt{HeartFailure.csv}, usando un KNN-plot per stimare $\epsilon$}
+				\texttt{HeartFailure}, usando un KNN-plot per stimare $\epsilon$}
 				\label{fig:dbscan-extra1}
 			\end{figure}
 
@@ -1580,7 +1631,7 @@
 					results/DBSCAN_visual_comparison.pdf
 				}
 				\caption{Risultati dell'algoritmo DBSCAN per il dataset
-				\texttt{CardiacArrest.csv}, usando un KNN-plot per stimare $\epsilon$}
+				\texttt{CardiacArrest}, usando un KNN-plot per stimare $\epsilon$}
 				\label{fig:dbscan-extra2}
 			\end{figure}
 
@@ -1593,7 +1644,7 @@
 					results/DBSCAN_visual_comparison.pdf
 				}
 				\caption{Risultati dell'algoritmo DBSCAN per il dataset
-				\texttt{Neuroblastoma.csv}, usando un KNN-plot per stimare $\epsilon$}
+				\texttt{Neuroblastoma}, usando un KNN-plot per stimare $\epsilon$}
 				\label{fig:dbscan-extra3}
 			\end{figure}
 
@@ -1606,7 +1657,7 @@
 					results/DBSCAN_visual_comparison.pdf
 				}
 				\caption{Risultati dell'algoritmo DBSCAN per il dataset
-				\texttt{Diabetes.csv}, usando un KNN-plot per stimare $\epsilon$}
+				\texttt{Diabetes}, usando un KNN-plot per stimare $\epsilon$}
 				\label{fig:dbscan-extra4}
 			\end{figure}
 
@@ -1619,7 +1670,7 @@
 					results/DBSCAN_visual_comparison.pdf
 				}
 				\caption{Risultati dell'algoritmo DBSCAN per il dataset
-				\texttt{Sepsis.csv}, usando un KNN-plot per stimare $\epsilon$}
+				\texttt{Sepsis}, usando un KNN-plot per stimare $\epsilon$}
 				\label{fig:dbscan-extra5}
 			\end{figure}
 
