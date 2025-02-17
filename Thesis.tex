@@ -1274,8 +1274,13 @@
 			scelta di uno dei due parametri.
 
 			Il secondo plot è un grafico a barre dove ciascuna colonna
-			rappresenta, in percentuale, il numero di elementi che l'algoritmo
-			ha assegnato a tale cluster.
+			rappresenta, in percentuale, il numero di elementi che
+			l'algoritmo ha assegnato a tale cluster. Il valore dei
+			parametri (o del parametro) forniti all'algoritmo in tale
+			clustering é sempre quello che ha indotto il clustering che
+			restituisse il massimo valore della Silhouette media complessiva.
+			Tali parametri sono quelli che, nel primo plot, hanno il valore
+			piú alto.
 
 			\begin{figure}[H]
 				\centering
@@ -1620,14 +1625,42 @@
 				\label{fig:cmp3}
 			\end{figure}
 
-		\section{EHR}
+		\section{Performance degli algoritmi di clustering su EHR}
 
 			Come è possibile notare nei plot mostrati in precedenza,
 			l'algoritmo scelto influenza notevolmente il numero di
 			cluster che vengono individuati, pure se in ogni caso si
-			tratta di iperparametri massimizzati usando Silhouette.
-			Questo è in accordo con gli articoli citati. Di seguito
-			sono riportate le performance degli algoritmi di clustering.
+			tratta di iperparametri massimizzati sulla base della
+			Silhouette media complessiva. Questo è effettivamente in
+			accordo con gli articoli citati
+			\cite{doi:10.3233/IDA-2012-0545}.
+
+			Se si osservano i risultati del clustering sui dataset
+			\texttt{CardiacArrest} e \texttt{Sepsis}, si osserva che
+			K-Means e K-Medians individuano solamente due cluster di
+			dimensione comparabile, mentre \texttt{DBSCAN} e
+			\texttt{HDBSCAN} addirittura solamente uno. Nonostante
+			questo possa sembrare anomalo, é invece un risultato a
+			favore delle capacitá di Silhouette.
+
+			Come anticipato, se la Silhouette media complessiva si ha
+			applicando un algoritmo di clustering con parametri che
+			inducono la totale assenza di una struttura di cluster,
+			questo significa che il dataset é effettivamente privo di
+			una struttura di cluster. Il fatto che i quattro algoritmi
+			siano concordi pende ulteriormente a favore di Silhouette.
+
+			Di seguito sono riportati dei plot che comparano le
+			performance degli algoritmi di clustering per ciascun
+			dataset. Sono presenti due plot per ciascun dataset.
+
+			Il primo plot riporta le combinazioni di parametri di ciascun
+			algoritmo che hanno restituito i piú alti valori della Silhouette
+			media complessiva per quel dataset. Essendo le combinazioni in
+			grande numero, sono state riportate solamente le 15 combinazioni
+			che hanno restituito i valori maggiori. Il secondo plot riporta
+			il valore della Silhouette media complessiva che ogni algoritmo,
+			con una certa combinazione di parametri, é riuscito a raggiungere.
 
 			\begin{figure}[H]
 				\centering
@@ -1694,11 +1727,13 @@
 				\label{fig:comp5}
 			\end{figure}
 
+			\clearpage
+
 			DBSCAN figura spesso come algoritmo dalle alte performance.
 			Per tale motivo mi sono chiesto se fosse possibile testare
 			le prestazioni di Silhouette su DBSCAN comparandolo con un
-			metodo di ottimizzazione degli iperparametri alternativo, e
-			vedere se i due risultati sono simili.
+			metodo alternativo di ottimizzazione dei parametri, e vedere
+			se i due risultati sono simili.
 
 			Fissato MinPts come il doppio più uno delle dimensioni del dataset,
 			il valore di $\epsilon$ può essere stimato costruendo un \textbf{KNN
@@ -1708,13 +1743,22 @@
 			stessa. In genere, una curva costruita sulla base di questi dati ha
 			inizialmente un andamento stabile per poi avere una crescita rapida:
 			il valore di $\epsilon$ è scelto il punto della curva in cui si ha
-			tale variazione di pendenza.
+			tale variazione di pendenza, chiamato informalmente "gomito"
+			(\emph{knee}).
 
-			Come è possibile apprezzare nelle figure successive, i valori
-			di $\epsilon$ così restituiti inducono un clustering che è molto
-			simile a quello fornito utilizzando Silhouette. Questo indica che
-			Silhouette è effettivamente in grado di restituire una combinazione
-			ottimale di iperparametri.
+			Di seguito ho riportato dei plot analoghi del tutto analoghi a
+			quelli in Figura~\ref{fig:dbscan1}, Figura~\ref{fig:dbscan2},
+			Figura~\ref{fig:dbscan3}, Figura~\ref{fig:dbscan4} e
+			Figura~\ref{fig:dbscan5}, ma dove il clustering é stato fatto
+			usando come valore di MinPts $D + 1$ e come valore di $\epsilon$
+			il valore ricavato osservando il KNN plot del dataset. Come é
+			possibile apprezzare, i risultati sono effettivamente concordi
+			con quelli ottenuti usando Silhouette come scelta dei parametri
+			ottimali.
+
+			Questa controprova, unita alle considerazioni appena fatte e agli
+			articoli citati, indica che Silhouette è effettivamente in grado
+			di giudicare correttamente l'operato di un algoritmo di clustering.
 
 			\begin{figure}[H]
 				\centering
