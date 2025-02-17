@@ -64,13 +64,13 @@
 		rappresentativo della struttura del dataset esaminato. Per adempiere
 		a tale scopo sono state introdotte delle metriche in grado di stimare
 		a posteriori (a clustering compiuto) le performance dell'algoritmo.
-		Nel presente lavoro ne verrá presentata una in particolare, Silhouette.
+		Nel presente lavoro ne verrà presentata una in particolare, Silhouette.
 		Verrà introdotta tale metrica, come calcolarla, alcune proprietà
-		matematiche e verrá applicata al risultato del clustering su delle
+		matematiche e verrà applicata al risultato del clustering su delle
 		EHR (\textit{Electronic Health Records}). Verranno inoltre analizzati
 		alcuni pacchetti per il linguaggio R che implementano Silhouette per
 		determinare quale sia il migliore. Verranno infine fatte delle
-		considerazioni in merito alla metrica stessa e alla sua capacitá
+		considerazioni in merito alla metrica stessa e alla sua capacità
 		di stimare le performance degli algoritmi di clustering.
 
 	\chapter{Introduzione}
@@ -127,20 +127,21 @@
 		più difficile, perché non c'è differenza fra l'insieme di
 		dati utilizzato per costruire il modello e l'insieme di
 		dati usato per testare il modello: sono lo stesso insieme.
-		É peró comunque possibile osservare l'operato di un algoritmo
+		È però comunque possibile osservare l'operato di un algoritmo
 		di clustering ``a posteriori'' e studiarlo matematicamente.
 
-		Questo approccio viene seguito da degli indici formulati
-		specificatamente per questo scopo. Cosí come la media o la
-		deviazione standard riassumono in un solo numero una proprietá
+		Questo approccio viene seguito da degli \textbf{indici} (talvolta
+		chiamati \textbf{metriche} o \textbf{coefficienti}) formulati
+		specificatamente per questo scopo. Così come la media o la
+		deviazione standard riassumono in un solo numero una proprietà
 		di un insieme di dati (il suo centro nel primo caso e la sua
 		dispersione nel secondo), indici di questo tipo riassumono in
-		un solo numero la bontá dell'operato di un algoritmo di clustering.
+		un solo numero la bontà dell'operato di un algoritmo di clustering.
 		Alcuni esempi di indici di questo tipo sono: \textbf{Calinksi-Harabasz}
 		\cite{Calinski01011974}, \textbf{Davies-Bouldin} \cite{4766909} e
 		\textbf{Dunn Index} \cite{Dunn01011974}.
 
-		Fra queste, per questa tesi é stata scelta Silhouette
+		Fra queste, per questa tesi è stata scelta Silhouette
 		\cite{ROUSSEEUW198753}. Tale indice, nelle parole
 		dell'autore, si propone di rispondere alle seguenti
 		domande:
@@ -164,11 +165,12 @@
 
 		Per testare Silhouette su dei dataset realmente esistenti sono
 		stati usati dati provenienti da cartelle cliniche elettroniche
-		(EHR). Questo é routine nella letteratura scientifica: alcuni
+		(EHR). Questo è routine nella letteratura scientifica: alcuni
 		articoli che sono andati in questa direzione sono riassunti
 		nella Tabella~\ref{tbl:ehr}. La Tabella~\ref{tbl:theory} riassume
-		invece alcuni articoli che analizzano le proprietá di Silhouette
-		e ne propongono delle varianti.
+		invece alcuni articoli che analizzano le proprietà di Silhouette
+		e ne propongono delle varianti, e che verranno citati nelle
+		considerazioni finali.
 
 		\begin{table}[h]
 			\centering
@@ -759,16 +761,16 @@
 				prestazioni sono state empiricamente dimostrate come molto competitive.
 
 				Nell'applicare DBSCAN alle EHR ho testato come valore di MinPts
-				tutti i valori compresi fra $D + 1$ e $3D$, dove $D$ é il numero
+				tutti i valori compresi fra $D + 1$ e $3D$, dove $D$ è il numero
 				delle dimensioni del dataset. Come regola pratica, gli autori
 				di DBSCAN suggeriscono di usare MinPts = $2D$, ma ho voluto
-				comunque testare quante piú combinazioni possibili. Per quanto
+				comunque testare quante più combinazioni possibili. Per quanto
 				riguarda $\epsilon$, ho considerato l'intervallo che andasse da
-				$0$ alla distanza piú grande presente fra due elementi del
+				$0$ alla distanza più grande presente fra due elementi del
 				dataset e l'ho partizionato in $50$ parti, ottenendo $50$ 
 				valori.
 
-				\textbf{HDBSCAN}, variante di DBSCAN, é un esempio di
+				\textbf{HDBSCAN}, variante di DBSCAN, è un esempio di
 				algoritmo di clustering \textbf{gerarchico}, ovvero che
 				costruisce i cluster formando una struttura ad albero
 				\footnote{In realtà, HDBSCAN è un algoritmo ibrido fra
@@ -779,18 +781,18 @@
 				Anziché richiedere sia MinPts sia $\epsilon$, HDBSCAN
 				richiede solamente MinPts. Questo perché l'algoritmo
 				reitera DBSCAN su vari valori di $\epsilon$, che determina
-				in automatico, e determina quali cluster figurano piú spesso
+				in automatico, e determina quali cluster figurano più spesso
 				in ciascuna iterazione. Per tal motivo, la scelta di MinPts
-				per HDBSCAN é stata analoga a quella per DBSCAN, ovvero
+				per HDBSCAN è stata analoga a quella per DBSCAN, ovvero
 				nell'intervallo $[D + 1, 3D]$.
 
 		\section{Calcolo di Silhouette}
 
 			Per poter calcolare Silhouette è prima necessario introdurre due
 			quantità assegnate a ciascun elemento $i$ del dataset, indicate
-			rispettivamente con $a(i)$ e $b(i)$. A partire da queste sará
+			rispettivamente con $a(i)$ e $b(i)$. A partire da queste sarà
 			possibile calcolare un valore $s(i)$, e la media di tutti gli
-			$s(i)$ per ciascun $i$ sará il valore di interesse.
+			$s(i)$ per ciascun $i$ sarà il valore di interesse.
 
 			Dato un dataset con $N$ elementi e $D$ dimensioni, se ne calcoli
 			la matrice delle distanze e si applichi su questo un algoritmo
@@ -986,15 +988,15 @@
 			I valori $s(i)$ non sono, di per loro, particolarmente informativi.
 			È però possibile costruire un Silhouette plot di ciascun cluster
 			come un bar chart dove ciascuna colonna $i$-esima ha altezza
-			proporzionale a $s(i)$. Un esempio é riportato in Figura~\ref{fig:si}.
+			proporzionale a $s(i)$. Un esempio è riportato in Figura~\ref{fig:si}.
 
 			\begin{figure}[H]
 				\centering
 				\includegraphics[width = 0.75\textwidth]{doc/si.pdf}
 				\caption{Silhouette plot per il dataset \texttt{iris}, ottenuto
 				dopo aver applicato K-Means con $K = 3$. Per ciascun elemento
-				$i$ é riportato il valore di $s(i)$ ed il cluster a cui $i$
-				é stato assegnato.}
+				$i$ è riportato il valore di $s(i)$ ed il cluster a cui $i$
+				è stato assegnato.}
 				\label{fig:si}
 			\end{figure}
 
@@ -1009,8 +1011,8 @@
 			Se si ha invece interesse a sapere qual'è il numero ottimale
 			di cluster, è possibile considerare la Silhouette media
 			complessiva come la media di tutti gli $s(i)$ per ogni
-			elemento dell'intero dataset. Piú il valore della Silhouette
-			media complessiva si avvicina ad $1$, piú il clustering
+			elemento dell'intero dataset. Più il valore della Silhouette
+			media complessiva si avvicina ad $1$, più il clustering
 			interpreta correttamente la natura del dataset.
 
 			\begin{figure}[H]
@@ -1034,14 +1036,14 @@
 			distanze nel mezzo. Silhouette può evidenziare questa situazione
 			perché il valore di $a(i)$ tende ad essere molto alto, essendo
 			i membri del dataset molto distanti dai loro centroidi. Di
-			conseguenza, la Silhouette media complessiva sará bassa.
+			conseguenza, la Silhouette media complessiva sarà bassa.
 
 			\begin{figure}[H]
 				\centering
 				\includegraphics[width = 0.7\textwidth]{doc/clusters-2.pdf}
 				\caption{Clustering indotto da K-Means con $K = 2$ su un
 				dataset costituito da punti di normali bivariate, dove
-				il numero di cluster é inferiore del numero di cluster
+				il numero di cluster è inferiore del numero di cluster
 				naturali. Si noti il valore della Silhouette media
 				complessiva basso.}
 				\label{fig:k2}
@@ -1053,14 +1055,14 @@
 			Silhouette può evidenziare questa situazione perché il valore di
 			$b(i)$ tende ad essere molto basso, dato che elementi molto vicini
 			vengono separati forzosamente. Anche in questo caso, la Silhouette
-			media complessiva sará bassa.
+			media complessiva sarà bassa.
 
 			\begin{figure}[H]
 				\centering
 				\includegraphics[width = 0.7\textwidth]{doc/clusters-6.pdf}
 				\caption{Clustering indotto da K-Means con $K = 6$ su un
 				dataset costituito da punti di normali bivariate, dove
-				il numero di cluster é superiore al numero di cluster
+				il numero di cluster è superiore al numero di cluster
 				naturali. Si noti il valore della Silhouette media
 				complessiva basso.}
 				\label{fig:k6}
@@ -1087,7 +1089,7 @@
 			Ho cercato quante più implementazioni di Silhouette possibili
 			utilizzando il sito \texttt{https://rdrr.io} e scegliendo
 			solamente quelli provenienti dal repository CRAN, di modo da
-			avere la certezza di reperire solamente pacchetti di qualitá.
+			avere la certezza di reperire solamente pacchetti di qualità.
 			In particolare, ho scelto \texttt{cluster}, \texttt{drclust},
 			\texttt{tidyclust} e \texttt{Kira}. Pacchetti noti come
 			\texttt{fpc}, che pure implementano Silhouette, li ho esclusi
@@ -1098,7 +1100,7 @@
 			\texttt{Python}. Questo è stato fatto attraverso il pacchetto
 			\texttt{reticulate}, che permette di chiamare funzioni \texttt{Python}
 			all'interno di codice \texttt{R}. Essendo \texttt{scikit-learn} 
-			considerata una implementazione fidata, é possibile usarla come
+			considerata una implementazione fidata, è possibile usarla come
 			riferimento per fare dei confronti.
 
 			Per comparare le performance delle diverse implementazioni di
@@ -1108,7 +1110,7 @@
 			Il test sanity check prevede di applicare K-Means con $K = 2$
 			sui dataset \texttt{sc\_dataset\_good} e \texttt{sc\_dataset\_bad}
 			e calcolare la Silhouette media complessiva per entrambi. L'idea
-			é che una implementazione corretta di Silhouette fornisca un
+			è che una implementazione corretta di Silhouette fornisca un
 			valore molto alto per la Silhouette media complessiva rispetto
 			al primo dataset, dove il numero di cluster scelto rispecchia
 			perfettamente la struttura del dataset, ed un valore molto basso
@@ -1127,8 +1129,8 @@
 			sono poi riportati in un plot; l'idea è che tali valori debbano
 			essere alti nelle prime istanze del test quando gli $0$ e gli
 			$1$ sono ben separati e, mano a mano che nel dataset vengono
-			introdotti valori casuali, si abbassino sempre piú. Pur
-			ammettendo delle flutturazioni, ci si aspetta che tali
+			introdotti valori casuali, si abbassino sempre più. Pur
+			ammettendo delle fluttuazioni, ci si aspetta che tali
 			valori si distribuiscano linearmente.
 
 	\chapter{Risultati ottenuti}
@@ -1277,10 +1279,10 @@
 			rappresenta, in percentuale, il numero di elementi che
 			l'algoritmo ha assegnato a tale cluster. Il valore dei
 			parametri (o del parametro) forniti all'algoritmo in tale
-			clustering é sempre quello che ha indotto il clustering che
+			clustering è sempre quello che ha indotto il clustering che
 			restituisse il massimo valore della Silhouette media complessiva.
 			Tali parametri sono quelli che, nel primo plot, hanno il valore
-			piú alto.
+			più alto.
 
 			\begin{figure}[H]
 				\centering
@@ -1546,16 +1548,16 @@
 
 		\section{Classificazione dei pacchetti R}
 
-			Sulla base dei test sanity check e matrice binaria é possibile
+			Sulla base dei test sanity check e matrice binaria è possibile
 			trarre delle conclusioni in merito a quale pacchetto R che
-			implementa Silhouette é da preferire.
+			implementa Silhouette è da preferire.
 
 			Il test sanity check non è stato particolarmente conclusivo,
 			perché tutti e cinque i pacchetti hanno fornito valori molto
 			simili (circa $0.9$ per \texttt{sc\_dataset\_good} e circa
 			$0.4$ per \texttt{sc\_dataset\_bad}) e del tutto concordi con
 			i risultati attesi. Questo non deve sorprendere, perché l'idea
-			del test era di creare una situazione cosí estrema da evidenziare
+			del test era di creare una situazione così estrema da evidenziare
 			immediatamente la presenza di pacchetti problematici.
 
 			Il test matrice binaria è stato invece più informativo, perché
@@ -1585,7 +1587,7 @@
 			ed una matrice delle distanze, mentre gli altri pacchetti
 			richiedono in input espressamente il risultato di un algoritmo
 			proveniente dal pacchetto da cui provengono, riducendone la
-			portabilitá.
+			portabilità.
 
 			Questo mi ha portato a scegliere \texttt{cluster} come
 			pacchetto che implementasse Silhouette. Naturalmente, il
@@ -1598,7 +1600,7 @@
 			che a \texttt{scikit-learn}, usando tre dimensioni diverse per
 			la matrice, allo scopo di verificare di quanto i valori trovati
 			si discostano. Come è possibile notare, la differenza fra i due
-			è contenuta, e descresce con l'aumentare dell'aumentare delle
+			è contenuta, e decresce con l'aumentare dell'aumentare delle
 			dimensioni della matrice.
 
 			\begin{figure}[H]
@@ -1630,9 +1632,9 @@
 			Come è possibile notare nei plot mostrati in precedenza,
 			l'algoritmo scelto influenza notevolmente il numero di
 			cluster che vengono individuati, pure se in ogni caso si
-			tratta di iperparametri massimizzati sulla base della
-			Silhouette media complessiva. Questo è effettivamente in
-			accordo con gli articoli citati
+			tratta di parametri massimizzati sulla base della Silhouette
+			media complessiva. Questo è effettivamente in accordo con
+			gli articoli citati
 			\cite{doi:10.3233/IDA-2012-0545}.
 
 			Se si osservano i risultati del clustering sui dataset
@@ -1640,13 +1642,13 @@
 			K-Means e K-Medians individuano solamente due cluster di
 			dimensione comparabile, mentre \texttt{DBSCAN} e
 			\texttt{HDBSCAN} addirittura solamente uno. Nonostante
-			questo possa sembrare anomalo, é invece un risultato a
-			favore delle capacitá di Silhouette.
+			questo possa sembrare anomalo, è invece un risultato a
+			favore delle capacità di Silhouette.
 
 			Come anticipato, se la Silhouette media complessiva si ha
 			applicando un algoritmo di clustering con parametri che
 			inducono la totale assenza di una struttura di cluster,
-			questo significa che il dataset é effettivamente privo di
+			questo significa che il dataset è effettivamente privo di
 			una struttura di cluster. Il fatto che i quattro algoritmi
 			siano concordi pende ulteriormente a favore di Silhouette.
 
@@ -1655,12 +1657,12 @@
 			dataset. Sono presenti due plot per ciascun dataset.
 
 			Il primo plot riporta le combinazioni di parametri di ciascun
-			algoritmo che hanno restituito i piú alti valori della Silhouette
+			algoritmo che hanno restituito i più alti valori della Silhouette
 			media complessiva per quel dataset. Essendo le combinazioni in
 			grande numero, sono state riportate solamente le 15 combinazioni
 			che hanno restituito i valori maggiori. Il secondo plot riporta
 			il valore della Silhouette media complessiva che ogni algoritmo,
-			con una certa combinazione di parametri, é riuscito a raggiungere.
+			con una certa combinazione di parametri, è riuscito a raggiungere.
 
 			\begin{figure}[H]
 				\centering
@@ -1749,9 +1751,9 @@
 			Di seguito ho riportato dei plot analoghi del tutto analoghi a
 			quelli in Figura~\ref{fig:dbscan1}, Figura~\ref{fig:dbscan2},
 			Figura~\ref{fig:dbscan3}, Figura~\ref{fig:dbscan4} e
-			Figura~\ref{fig:dbscan5}, ma dove il clustering é stato fatto
+			Figura~\ref{fig:dbscan5}, ma dove il clustering è stato fatto
 			usando come valore di MinPts $D + 1$ e come valore di $\epsilon$
-			il valore ricavato osservando il KNN plot del dataset. Come é
+			il valore ricavato osservando il KNN plot del dataset. Come è
 			possibile apprezzare, i risultati sono effettivamente concordi
 			con quelli ottenuti usando Silhouette come scelta dei parametri
 			ottimali.
@@ -1827,42 +1829,83 @@
 
 		\section{Oltre Silhouette?}
 
-			A partire dall'idea di base di Silhouette, è possibile costruirne
-			infinite varianti. Gli autori citano:
+			Le idee alla base di Silhouette possono essere estese in
+			innumerevoli modi, alcuni dei quali suggeriti dagli autori
+			stessi. Ad esempio, sarebbe possibile calcolare la Silhouette
+			media complessiva non calcolando il valore di Silhouette per
+			ciascun elemento del dataset e poi facendo la media rispetto
+			alla cardinalità dell'intero dataset, bensì calcolando la
+			Silhouette media per ciascun cluster e poi facendo la media rispetto
+			al numero di cluster.
 
-			\begin{itemize}
-				\item
-				Per determinare il miglior numero di cluster non è strettamente
-				necessario utilizzare la Silhouette media complessiva. Sarebbe
-				infatti possibile anche combinare gli $s(i)$ in modo diverso;
-				\item
-				La Silhouette media complessiva può essere essa stessa usata
-				come funzione obiettivo da massimizzare direttamente all'interno
-				di un algoritmo di clustering, anziché effettuare una valutazione
-				a posteriori;
-				\item
-				Se l'algoritmo di clustering si basa sulla costruzione di centroidi
-				o sulla elezione di rappresentanti, si potrebbe usare la distanza
-				da tali centroidi o rappresentanti come grado di dissomiglianza
-				anziché calcolare $a(i)$ o $D(i, C)$ per ogni $i$-esimo elemento,
-				semplificando il procedimento. Naturalmente, questo approccio
-				renderebbe Silhouette dipendente dal tipo di algoritmo usato. 
-			\end{itemize}
+			Questo approccio non si rivela però fruttifero. Sono state infatti
+			testate \cite{10.1007/978-3-319-19369-4_5} entrambe le versioni
+			della Silhouette media complessiva sia su dataset artificiali,
+			sia su dataset reali come \texttt{iris}, per vedere se fra le
+			due si presentano differenze. In effetti, il metodo di calcolo
+			originale riesce ad individuare il numero corretto di cluster
+			in sostanzialmente tutti i casi, mentre il secondo tende a
+			fallire (talvolta in maniera anche grossolana).
 
-			Tutte e tre le varianti sono toccate da articoli citati.
+			Un'altra proposta degli autori è quella di usare la Silhouette
+			direttamente nella funzione obiettivo da massimizzare all'interno
+			di un algoritmo di clustering, anziché usarla in una valutazione
+			a posteriori (in sostanza, basare il criterio di terminazione
+			dell'algoritmo sulla Silhouette media complessiva).
+
+			Anche in questo caso, però, l'approccio non si rivela
+			fruttifero. Sono state infatti testate \cite{10.1007/978-3-030-52348-0_2}
+			le prestazioni di un algoritmo che effettivamente usa la Silhouette
+			nella sua funzione obiettivo, ovvero \textbf{Recursive Partitioning
+			Clustering Tree} (\textbf{RPCT}). In tutti i dataset utilizzati
+			(sia creati ad hoc, sia dataset reali), le prestazioni di RPCT
+			si sono però rivelate scadenti. L'autore evidenzia come la
+			Silhouette media complessiva possa essere utilizzata come
+			criterio di terminazione con prestazioni accettabili solamente 
+			se la forma del dataset è "tipica", come una distribuzione
+			gaussiana.
+
+			Un'ultima proposta avanzata dagli autori riguarda una possibile
+			``scorciatoia''. Infatti, se l'algoritmo di clustering sul cui
+			operato viene applicata Silhouette si basa sulla costruzione di
+			centroidi o sulla elezione di rappresentanti (come K-Means), si
+			potrebbe usare la distanza da tali centroidi o rappresentanti
+			come grado di dissomiglianza anziché calcolare $a(i)$ o $D(i, C)$
+			per ogni $i$-esimo elemento, semplificando il procedimento.
+			Naturalmente, questo avrebbe lo svantaggio di ridurre la
+			portabilitá di Silhouette, non potendo piú venire applicata a 
+			qualsiasi algoritmo.
+
+			Questo approccio é stato effettivamente tentato con successo
+			\cite{NAGHIZADEH2020205}. Gli autori dello studio hanno modificato
+			la formula del calcolo di $a(i)$ e $b(i)$ di modo che questa
+			considerasse solamente i centroidi dei cluster e non tutti i
+			punti, ed hanno testato le capacità di tale formula sul risultato
+			di K-Means su diversi dataset. Ciò che è emerso è che le capacità
+			predittive di questa nuova Silhouette, chiamata \emph{Condensed
+			Silhouette}, sono leggermente inferiori a quelle della Silhouette
+			originale, ma è quasi il doppio più veloce da calcolare.
+
+			Infine, Silhouette è stata in origine pensata perché operasse su
+			valori continui, ma articoli successivi hanno tentato di estendere
+			Silhouette a valori discreti. In particolare, la metrica
+			\textbf{CUBOS} \cite{Gao2019CUBOSAI} combina l'approccio usato da
+			Silhouette (che gli autori giudicano il migliore) con una funzione
+			di distanza appositamente pensata per dati categoriali, e le
+			performance di tale metrica sono promettenti.
 
 	\chapter{Conclusioni}
 
-		Data la natura di questa tesi, é evidente come questo non possa
+		Data la natura di questa tesi, è evidente come questo non possa
 		essere altro che un lavoro esplorativo. Le idee qui presentate
 		potrebbero essere estese in diversi modi, alcuni riportati di
 		seguito.
 
 		Innanzitutto, i test sono stati condotti usando esclusivamente EHR
 		come dataset. Sebbene queste contengano moltissime informazioni, non
-		sono una risorsa omnicomprensiva. Si potrebbe pertanto ripetere i
+		sono una risorsa onnicomprensiva. Si potrebbe pertanto ripetere i
 		test utilizzando anche o soltanto dataset di dati biomedici che
-		contengono dati che le EHR ignorano, dando un quadro piú completo.
+		contengono dati che le EHR ignorano, dando un quadro più completo.
 
 		Inoltre, gli algoritmi di clustering sono stati applicati su dataset
 		dove parte degli elementi avevano uno o più attributi di valore
@@ -1889,11 +1932,11 @@
 		del clustering in uno scatter plot, a prescindere dal numero originale
 		delle dimensioni.
 
-	\chapter*{Disponibilitá del codice}
+	\chapter*{Disponibilità del codice}
 
 		Il codice per la generazione dei test e per l'applicazione degli
 		algoritmi di clustering ai dataset EHR è liberamente disponibile.
-		Il codice in questione puó essere reperito al seguente link:
+		Il codice in questione può essere reperito al seguente link:
 
 		\texttt{https://github.com/Skimmeroni/Silhouette-Unimib-thesis}.
 
@@ -1905,6 +1948,3 @@
 	\printbibliography
 
 \end{document}
-
-
-\end{sile}
