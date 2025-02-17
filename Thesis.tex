@@ -626,7 +626,7 @@
 			ulteriori per ciascun elemento come, ad esempio: in quale cluster si
 			trova, qual'è il suo neighboring cluster, il suo valore di $s(i)$.
 
-			\begin{figure}[h]
+			\begin{figure}[H]
 				\includegraphics[width = \textwidth]{doc/si.pdf}
 				\caption{Silhouette plot per il dataset \texttt{iris}.}
 				\label{fig:si}
@@ -656,7 +656,7 @@
 			$b(i)$ tende ad essere molto basso, dato che elementi molto vicini
 			vengono separati forzosamente.
 
-			\begin{figure}[h]
+			\begin{figure}[H]
 				\centering
 				\includegraphics[width = 0.5\textwidth, height = 0.3\textheight]{doc/clusters-2.pdf}
 				\includegraphics[width = 0.5\textwidth, height = 0.3\textheight]{doc/clusters-4.pdf}
@@ -740,7 +740,7 @@
 			con una deviazione standard molto ampia, di modo che i punti siano
 			molto dispersi.
 
-			\begin{figure}[h]
+			\begin{figure}[H]
 				\centering
 				\includegraphics[width = 0.75\textwidth, height = 0.45\textheight]{doc/sc_dataset_good.pdf}
 				\includegraphics[width = 0.75\textwidth, height = 0.45\textheight]{doc/sc_dataset_bad.pdf}
@@ -969,7 +969,7 @@
 			secondo). Questo é un risultato atteso, perché il test era
 			appositamente costruito per escludere pacchetti problematici.
 
-			\begin{figure}[h]
+			\begin{figure}[H]
 				\begin{boxedminipage}{0.5\textwidth}
 					\includegraphics[width = \textwidth, page = 1]{results/results_CLUSTER.pdf}
 				\end{boxedminipage}
@@ -987,7 +987,7 @@
 				\label{fig:good}
 			\end{figure}
 
-			\begin{figure}[h]
+			\begin{figure}[H]
 				\begin{boxedminipage}{0.5\textwidth}
 					\includegraphics[width = \textwidth, page = 2]{results/results_CLUSTER.pdf}
 				\end{boxedminipage}
@@ -1005,7 +1005,7 @@
 				\label{fig:bad}
 			\end{figure}
 
-			\begin{figure}[h]
+			\begin{figure}[H]
 				\centering
 				\includegraphics[width = 0.75\textwidth, height = 0.45\textheight, page = 1]{results/results_RETICULATE.pdf}
 				\includegraphics[width = 0.75\textwidth, height = 0.45\textheight, page = 2]{results/results_RETICULATE.pdf}
@@ -1026,7 +1026,7 @@
 			hanno avuto risultati perfettamente identici, segno che
 			probabilmente l'uno usa l'altro come subroutine.
 
-			\begin{figure}[h]
+			\begin{figure}[H]
 				\begin{boxedminipage}{0.5\textwidth}
 					\includegraphics[width = \textwidth, page = 3]{results/results_CLUSTER.pdf}
 				\end{boxedminipage}
@@ -1043,7 +1043,7 @@
 				\label{fig:bm}
 			\end{figure}
 
-			\begin{figure}[h]
+			\begin{figure}[H]
 				\includegraphics[width = \textwidth, page = 3]{results/results_RETICULATE.pdf}
 				\caption{Plot del test matrice binaria per il pacchetto
 				\texttt{scikit-learn} (attraverso \texttt{reticulate})}
@@ -1061,263 +1061,263 @@
 			Per DBSCAN, $\epsilon$ è stato scelto partizionando la distanza massima
 			in parti uguali.
 
-			\begin{figure}[h]
+			\begin{figure}[H]
 				\centering
 				\includegraphics[width = 0.75\textwidth, height = 0.45\textheight, page = 1]{
-					results/results_journal.pone.0158570_S2File_depression_heart_failure_v2.csv.pdf
+					results/results_HeartFailure.csv.pdf
 				}
 				\includegraphics[width = 0.75\textwidth, height = 0.45\textheight, page = 2]{
-					results/results_journal.pone.0158570_S2File_depression_heart_failure_v2.csv.pdf
+					results/results_HeartFailure.csv.pdf
 				}
 				\caption{Risultati dell'algoritmo K-Means per il dataset
-				\texttt{results\_journal.pone.0158570\_S2File\_depression\_heart\_failure\_v2.csv}}
+				\texttt{HeartFailure.csv}}
 				\label{fig:kmeans1}
 			\end{figure}
 
-			\begin{figure}[h]
+			\begin{figure}[H]
 				\centering
 				\includegraphics[width = 0.75\textwidth, height = 0.45\textheight, page = 3]{
-					results/results_journal.pone.0158570_S2File_depression_heart_failure_v2.csv.pdf
+					results/results_HeartFailure.csv.pdf
 				}
 				\includegraphics[width = 0.75\textwidth, height = 0.45\textheight, page = 4]{
-					results/results_journal.pone.0158570_S2File_depression_heart_failure_v2.csv.pdf
+					results/results_HeartFailure.csv.pdf
 				}
 				\caption{Risultati dell'algoritmo K-Medians per il dataset
-				\texttt{results\_journal.pone.0158570\_S2File\_depression\_heart\_failure\_v2.csv}}
+				\texttt{HeartFailure.csv}}
 				\label{fig:kmedians1}
 			\end{figure}
 
-			\begin{figure}[h]
+			\begin{figure}[H]
 				\centering
 				\includegraphics[width = 0.75\textwidth, height = 0.45\textheight, page = 5]{
-					results/results_journal.pone.0158570_S2File_depression_heart_failure_v2.csv.pdf
+					results/results_HeartFailure.csv.pdf
 				}
 				\includegraphics[width = 0.75\textwidth, height = 0.45\textheight, page = 6]{
-					results/results_journal.pone.0158570_S2File_depression_heart_failure_v2.csv.pdf
+					results/results_HeartFailure.csv.pdf
 				}
 				\caption{Risultati dell'algoritmo DBSCAN per il dataset
-				\texttt{results\_journal.pone.0158570\_S2File\_depression\_heart\_failure\_v2.csv}}
+				\texttt{HeartFailure.csv}}
 				\label{fig:dbscan1}
 			\end{figure}
 
-			\begin{figure}[h]
+			\begin{figure}[H]
 				\centering
 				\includegraphics[width = 0.75\textwidth, height = 0.45\textheight, page = 7]{
-					results/results_journal.pone.0158570_S2File_depression_heart_failure_v2.csv.pdf
+					results/results_HeartFailure.csv.pdf
 				}
 				\includegraphics[width = 0.75\textwidth, height = 0.45\textheight, page = 8]{
-					results/results_journal.pone.0158570_S2File_depression_heart_failure_v2.csv.pdf
+					results/results_HeartFailure.csv.pdf
 				}
 				\caption{Risultati dell'algoritmo HDBSCAN per il dataset
-				\texttt{results\_journal.pone.0158570\_S2File\_depression\_heart\_failure\_v2.csv}}
+				\texttt{HeartFailure.csv}}
 				\label{fig:hdbscan1}
 			\end{figure}
 
-			\begin{figure}[h]
+			\begin{figure}[H]
 				\centering
 				\includegraphics[width = 0.75\textwidth, height = 0.45\textheight, page = 1]{
-					results/results_journal.pone.0175818_S1Dataset_Spain_cardiac_arrest_EDITED..csv.pdf
+					results/results_CardiacArrest.csv.pdf
 				}
 				\includegraphics[width = 0.75\textwidth, height = 0.45\textheight, page = 2]{
-					results/results_journal.pone.0175818_S1Dataset_Spain_cardiac_arrest_EDITED..csv.pdf
+					results/results_CardiacArrest.csv.pdf
 				}
 				\caption{Risultati dell'algoritmo K-Means per il dataset
-				\texttt{results\_journal.pone.0175818\_S1Dataset\_Spain\_cardiac\_arrest\_EDITED..csv}}
+				\texttt{CardiacArrest.csv}}
 				\label{fig:kmeans2}
 			\end{figure}
 
-			\begin{figure}[h]
+			\begin{figure}[H]
 				\centering
 				\includegraphics[width = 0.75\textwidth, height = 0.45\textheight, page = 3]{
-					results/results_journal.pone.0175818_S1Dataset_Spain_cardiac_arrest_EDITED..csv.pdf
+					results/results_CardiacArrest.csv.pdf
 				}
 				\includegraphics[width = 0.75\textwidth, height = 0.45\textheight, page = 4]{
-					results/results_journal.pone.0175818_S1Dataset_Spain_cardiac_arrest_EDITED..csv.pdf
+					results/results_CardiacArrest.csv.pdf
 				}
 				\caption{Risultati dell'algoritmo K-Medians per il dataset
-				\texttt{results\_journal.pone.0175818\_S1Dataset\_Spain\_cardiac\_arrest\_EDITED..csv}}
+				\texttt{CardiacArrest.csv}}
 				\label{fig:kmedians2}
 			\end{figure}
 
-			\begin{figure}[h]
+			\begin{figure}[H]
 				\centering
 				\includegraphics[width = 0.75\textwidth, height = 0.45\textheight, page = 5]{
-					results/results_journal.pone.0175818_S1Dataset_Spain_cardiac_arrest_EDITED..csv.pdf
+					results/results_CardiacArrest.csv.pdf
 				}
 				\includegraphics[width = 0.75\textwidth, height = 0.45\textheight, page = 6]{
-					results/results_journal.pone.0175818_S1Dataset_Spain_cardiac_arrest_EDITED..csv.pdf
+					results/results_CardiacArrest.csv.pdf
 				}
 				\caption{Risultati dell'algoritmo DBSCAN per il dataset
-				\texttt{results\_journal.pone.0175818\_S1Dataset\_Spain\_cardiac\_arrest\_EDITED..csv}}
+				\texttt{CardiacArrest.csv}}
 				\label{fig:dbscan2}
 			\end{figure}
 
-			\begin{figure}[h]
+			\begin{figure}[H]
 				\centering
 				\includegraphics[width = 0.75\textwidth, height = 0.45\textheight, page = 7]{
-					results/results_journal.pone.0175818_S1Dataset_Spain_cardiac_arrest_EDITED..csv.pdf
+					results/results_CardiacArrest.csv.pdf
 				}
 				\includegraphics[width = 0.75\textwidth, height = 0.45\textheight, page = 8]{
-					results/results_journal.pone.0175818_S1Dataset_Spain_cardiac_arrest_EDITED..csv.pdf
+					results/results_CardiacArrest.csv.pdf
 				}
 				\caption{Risultati dell'algoritmo HDBSCAN per il dataset
-				\texttt{results\_journal.pone.0175818\_S1Dataset\_Spain\_cardiac\_arrest\_EDITED..csv}}
+				\texttt{CardiacArrest.csv}}
 				\label{fig:hdbscan2}
 			\end{figure}
 
-			\begin{figure}[h]
+			\begin{figure}[H]
 				\centering
 				\includegraphics[width = 0.75\textwidth, height = 0.45\textheight, page = 1]{
-					results/results_10_7717_peerj_5665_dataYM2018_neuroblastoma.csv.pdf
+					results/results_Neuroblastoma.csv.pdf
 				}
 				\includegraphics[width = 0.75\textwidth, height = 0.45\textheight, page = 2]{
-					results/results_10_7717_peerj_5665_dataYM2018_neuroblastoma.csv.pdf
+					results/results_Neuroblastoma.csv.pdf
 				}
 				\caption{Risultati dell'algoritmo K-Means per il dataset
-				\texttt{results\_10\_7717\_peerj\_5665\_dataYM2018\_neuroblastoma.csv}}
+				\texttt{Neuroblastoma.csv}}
 				\label{fig:kmeans3}
 			\end{figure}
 
-			\begin{figure}[h]
+			\begin{figure}[H]
 				\centering
 				\includegraphics[width = 0.75\textwidth, height = 0.45\textheight, page = 3]{
-					results/results_10_7717_peerj_5665_dataYM2018_neuroblastoma.csv.pdf
+					results/results_Neuroblastoma.csv.pdf
 				}
 				\includegraphics[width = 0.75\textwidth, height = 0.45\textheight, page = 4]{
-					results/results_10_7717_peerj_5665_dataYM2018_neuroblastoma.csv.pdf
+					results/results_Neuroblastoma.csv.pdf
 				}
 				\caption{Risultati dell'algoritmo K-Medians per il dataset
-				\texttt{results\_10\_7717\_peerj\_5665\_dataYM2018\_neuroblastoma.csv}}
+				\texttt{Neuroblastoma.csv}}
 				\label{fig:kmedians3}
 			\end{figure}
 
-			\begin{figure}[h]
+			\begin{figure}[H]
 				\centering
 				\includegraphics[width = 0.75\textwidth, height = 0.45\textheight, page = 5]{
-					results/results_10_7717_peerj_5665_dataYM2018_neuroblastoma.csv.pdf
+					results/results_Neuroblastoma.csv.pdf
 				}
 				\includegraphics[width = 0.75\textwidth, height = 0.45\textheight, page = 6]{
-					results/results_10_7717_peerj_5665_dataYM2018_neuroblastoma.csv.pdf
+					results/results_Neuroblastoma.csv.pdf
 				}
 				\caption{Risultati dell'algoritmo DBSCAN per il dataset
-				\texttt{results\_10\_7717\_peerj\_5665\_dataYM2018\_neuroblastoma.csv}}
+				\texttt{Neuroblastoma.csv}}
 				\label{fig:dbscan3}
 			\end{figure}
 
-			\begin{figure}[h]
+			\begin{figure}[H]
 				\centering
 				\includegraphics[width = 0.75\textwidth, height = 0.45\textheight, page = 7]{
-					results/results_10_7717_peerj_5665_dataYM2018_neuroblastoma.csv.pdf
+					results/results_Neuroblastoma.csv.pdf
 				}
 				\includegraphics[width = 0.75\textwidth, height = 0.45\textheight, page = 8]{
-					results/results_10_7717_peerj_5665_dataYM2018_neuroblastoma.csv.pdf
+					results/results_Neuroblastoma.csv.pdf
 				}
 				\caption{Risultati dell'algoritmo HDBSCAN per il dataset
-				\texttt{results\_10\_7717\_peerj\_5665\_dataYM2018\_neuroblastoma.csv}}
+				\texttt{Neuroblastoma.csv}}
 				\label{fig:hdbscan3}
 			\end{figure}
 
-			\begin{figure}[h]
+			\begin{figure}[H]
 				\centering
 				\includegraphics[width = 0.75\textwidth, height = 0.45\textheight, page = 1]{
-					results/results_journal.pone.0216416_Takashi2019_diabetes_type1_dataset_preprocessed.csv.pdf
+					results/results_Diabetes.csv.pdf
 				}
 				\includegraphics[width = 0.75\textwidth, height = 0.45\textheight, page = 2]{
-					results/results_journal.pone.0216416_Takashi2019_diabetes_type1_dataset_preprocessed.csv.pdf
+					results/results_Diabetes.csv.pdf
 				}
 				\caption{Risultati dell'algoritmo K-Means per il dataset
-				\texttt{results\_journal.pone.0216416\_Takashi2019\_diabetes\_type1\_dataset\_preprocessed.csv}}
+				\texttt{Diabetes.csv}}
 				\label{fig:kmeans4}
 			\end{figure}
 
-			\begin{figure}[h]
+			\begin{figure}[H]
 				\centering
 				\includegraphics[width = 0.75\textwidth, height = 0.45\textheight, page = 3]{
-					results/results_journal.pone.0216416_Takashi2019_diabetes_type1_dataset_preprocessed.csv.pdf
+					results/results_Diabetes.csv.pdf
 				}
 				\includegraphics[width = 0.75\textwidth, height = 0.45\textheight, page = 4]{
-					results/results_journal.pone.0216416_Takashi2019_diabetes_type1_dataset_preprocessed.csv.pdf
+					results/results_Diabetes.csv.pdf
 				}
 				\caption{Risultati dell'algoritmo K-Medians per il dataset
-				\texttt{results\_journal.pone.0216416\_Takashi2019\_diabetes\_type1\_dataset\_preprocessed.csv}}
+				\texttt{Diabetes.csv}}
 				\label{fig:kmedians4}
 			\end{figure}
 
-			\begin{figure}[h]
+			\begin{figure}[H]
 				\centering
 				\includegraphics[width = 0.75\textwidth, height = 0.45\textheight, page = 5]{
-					results/results_journal.pone.0216416_Takashi2019_diabetes_type1_dataset_preprocessed.csv.pdf
+					results/results_Diabetes.csv.pdf
 				}
 				\includegraphics[width = 0.75\textwidth, height = 0.45\textheight, page = 6]{
-					results/results_journal.pone.0216416_Takashi2019_diabetes_type1_dataset_preprocessed.csv.pdf
+					results/results_Diabetes.csv.pdf
 				}
 				\caption{Risultati dell'algoritmo DBSCAN per il dataset
-				\texttt{results\_journal.pone.0216416\_Takashi2019\_diabetes\_type1\_dataset\_preprocessed.csv}}
+				\texttt{Diabetes.csv}}
 				\label{fig:dbscan4}
 			\end{figure}
 
-			\begin{figure}[h]
+			\begin{figure}[H]
 				\centering
 				\includegraphics[width = 0.75\textwidth, height = 0.45\textheight, page = 7]{
-					results/results_journal.pone.0216416_Takashi2019_diabetes_type1_dataset_preprocessed.csv.pdf
+					results/results_Diabetes.csv.pdf
 				}
 				\includegraphics[width = 0.75\textwidth, height = 0.45\textheight, page = 8]{
-					results/results_journal.pone.0216416_Takashi2019_diabetes_type1_dataset_preprocessed.csv.pdf
+					results/results_Diabetes.csv.pdf
 				}
 				\caption{Risultati dell'algoritmo HDBSCAN per il dataset
-				\texttt{results\_journal.pone.0216416\_Takashi2019\_diabetes\_type1\_dataset\_preprocessed.csv}}
+				\texttt{Diabetes.csv}}
 				\label{fig:hdbscan4}
 			\end{figure}
 
-			\begin{figure}[h]
+			\begin{figure}[H]
 				\centering
 				\includegraphics[width = 0.75\textwidth, height = 0.45\textheight, page = 1]{
-					results/results_journal.pone.0148699_S1_Text_Sepsis_SIRS_EDITED.csv.pdf
+					results/results_Sepsis.csv.pdf
 				}
 				\includegraphics[width = 0.75\textwidth, height = 0.45\textheight, page = 2]{
-					results/results_journal.pone.0148699_S1_Text_Sepsis_SIRS_EDITED.csv.pdf
+					results/results_Sepsis.csv.pdf
 				}
 				\caption{Risultati dell'algoritmo K-Means per il dataset
-				\texttt{results\_journal.pone.0148699\_S1\_Text\_Sepsis\_SIRS\_EDITED.csv.csv}}
+				\texttt{Sepsis.csv}}
 				\label{fig:kmeans5}
 			\end{figure}
 
-			\begin{figure}[h]
+			\begin{figure}[H]
 				\centering
 				\includegraphics[width = 0.75\textwidth, height = 0.45\textheight, page = 3]{
-					results/results_journal.pone.0148699_S1_Text_Sepsis_SIRS_EDITED.csv.pdf
+					results/results_Sepsis.csv.pdf
 				}
 				\includegraphics[width = 0.75\textwidth, height = 0.45\textheight, page = 4]{
-					results/results_journal.pone.0148699_S1_Text_Sepsis_SIRS_EDITED.csv.pdf
+					results/results_Sepsis.csv.pdf
 				}
 				\caption{Risultati dell'algoritmo K-Medians per il dataset
-				\texttt{results\_journal.pone.0148699\_S1\_Text\_Sepsis\_SIRS\_EDITED.csv.csv}}
+				\texttt{Sepsis.csv}}
 				\label{fig:kmedians5}
 			\end{figure}
 
-			\begin{figure}[h]
+			\begin{figure}[H]
 				\centering
 				\includegraphics[width = 0.75\textwidth, height = 0.45\textheight, page = 5]{
-					results/results_journal.pone.0148699_S1_Text_Sepsis_SIRS_EDITED.csv.pdf
+					results/results_Sepsis.csv.pdf
 				}
 				\includegraphics[width = 0.75\textwidth, height = 0.45\textheight, page = 6]{
-					results/results_journal.pone.0148699_S1_Text_Sepsis_SIRS_EDITED.csv.pdf
+					results/results_Sepsis.csv.pdf
 				}
 				\caption{Risultati dell'algoritmo DBSCAN per il dataset
-				\texttt{results\_journal.pone.0148699\_S1\_Text\_Sepsis\_SIRS\_EDITED.csv.csv}}
+				\texttt{Sepsis.csv}}
 				\label{fig:dbscan5}
 			\end{figure}
 
-			\begin{figure}[h]
+			\begin{figure}[H]
 				\centering
 				\includegraphics[width = 0.75\textwidth, height = 0.45\textheight, page = 7]{
-					results/results_journal.pone.0148699_S1_Text_Sepsis_SIRS_EDITED.csv.pdf
+					results/results_Sepsis.csv.pdf
 				}
 				\includegraphics[width = 0.75\textwidth, height = 0.45\textheight, page = 8]{
-					results/results_journal.pone.0148699_S1_Text_Sepsis_SIRS_EDITED.csv.pdf
+					results/results_Sepsis.csv.pdf
 				}
 				\caption{Risultati dell'algoritmo HDBSCAN per il dataset
-				\texttt{results\_journal.pone.0148699\_S1\_Text\_Sepsis\_SIRS\_EDITED.csv.csv}}
+				\texttt{Sepsis.csv}}
 				\label{fig:hdbscan5}
 			\end{figure}
 
@@ -1378,7 +1378,7 @@
 			binaria. Come è possibile notare, la differenza fra i due
 			è contenuta.
 
-			\begin{figure}[h]
+			\begin{figure}[H]
 				\centering
 				\includegraphics[width = 0.5\textwidth, height = 0.3\textheight, page = 1]{results/Final_comparison.pdf}
 				\includegraphics[width = 0.5\textwidth, height = 0.3\textheight, page = 2]{results/Final_comparison.pdf}
@@ -1397,68 +1397,68 @@
 			Questo é in accordo con gli articoli citati. Di seguito
 			sono riportate le performance degli algoritmi di clustering.
 
-			\begin{figure}[h]
+			\begin{figure}[H]
 				\centering
 				\includegraphics[width = 0.75\textwidth, height = 0.45\textheight, page = 9]{
-					results/results_journal.pone.0158570_S2File_depression_heart_failure_v2.csv.pdf
+					results/results_HeartFailure.csv.pdf
 				}
 				\includegraphics[width = 0.75\textwidth, height = 0.45\textheight, page = 10]{
-					results/results_journal.pone.0158570_S2File_depression_heart_failure_v2.csv.pdf
+					results/results_HeartFailure.csv.pdf
 				}
 				\caption{Riassunto dei risultati dei vari algoritmi per il dataset
-				\texttt{results\_journal.pone.0158570\_S2File\_depression\_heart\_failure\_v2.csv}}
+				\texttt{HeartFailure.csv}}
 				\label{fig:comp1}
 			\end{figure}
 
-			\begin{figure}[h]
+			\begin{figure}[H]
 				\centering
 				\includegraphics[width = 0.75\textwidth, height = 0.45\textheight, page = 9]{
-					results/results_journal.pone.0175818_S1Dataset_Spain_cardiac_arrest_EDITED..csv.pdf
+					results/results_CardiacArrest.csv.pdf
 				}
 				\includegraphics[width = 0.75\textwidth, height = 0.45\textheight, page = 10]{
-					results/results_journal.pone.0175818_S1Dataset_Spain_cardiac_arrest_EDITED..csv.pdf
+					results/results_CardiacArrest.csv.pdf
 				}
 				\caption{Riassunto dei risultati dei vari algoritmi per il dataset
-				\texttt{results\_journal.pone.0175818\_S1Dataset\_Spain\_cardiac\_arrest\_EDITED..csv}}
+				\texttt{CardiacArrest.csv}}
 				\label{fig:comp2}
 			\end{figure}
 
-			\begin{figure}[h]
+			\begin{figure}[H]
 				\centering
 				\includegraphics[width = 0.75\textwidth, height = 0.45\textheight, page = 9]{
-					results/results_10_7717_peerj_5665_dataYM2018_neuroblastoma.csv.pdf
+					results/results_Neuroblastoma.csv.pdf
 				}
 				\includegraphics[width = 0.75\textwidth, height = 0.45\textheight, page = 10]{
-					results/results_10_7717_peerj_5665_dataYM2018_neuroblastoma.csv.pdf
+					results/results_Neuroblastoma.csv.pdf
 				}
 				\caption{Riassunto dei risultati dei vari algoritmi per il dataset
-				\texttt{results\_10\_7717\_peerj\_5665\_dataYM2018\_neuroblastoma.csv}}
+				\texttt{Neuroblastoma.csv}}
 				\label{fig:comp3}
 			\end{figure}
 
-			\begin{figure}[h]
+			\begin{figure}[H]
 				\centering
 				\includegraphics[width = 0.75\textwidth, height = 0.45\textheight, page = 9]{
-					results/results_journal.pone.0216416_Takashi2019_diabetes_type1_dataset_preprocessed.csv.pdf
+					results/results_Diabetes.csv.pdf
 				}
 				\includegraphics[width = 0.75\textwidth, height = 0.45\textheight, page = 10]{
-					results/results_journal.pone.0216416_Takashi2019_diabetes_type1_dataset_preprocessed.csv.pdf
+					results/results_Diabetes.csv.pdf
 				}
 				\caption{Riassunto dei risultati dei vari algoritmi per il dataset
-				\texttt{results\_journal.pone.0216416\_Takashi2019\_diabetes\_type1\_dataset\_preprocessed.csv}}
+				\texttt{Diabetes.csv}}
 				\label{fig:comp4}
 			\end{figure}
 
-			\begin{figure}[h]
+			\begin{figure}[H]
 				\centering
 				\includegraphics[width = 0.75\textwidth, height = 0.45\textheight, page = 9]{
-					results/results_journal.pone.0148699_S1_Text_Sepsis_SIRS_EDITED.csv.pdf
+					results/results_Sepsis.csv.pdf
 				}
 				\includegraphics[width = 0.75\textwidth, height = 0.45\textheight, page = 10]{
-					results/results_journal.pone.0148699_S1_Text_Sepsis_SIRS_EDITED.csv.pdf
+					results/results_Sepsis.csv.pdf
 				}
 				\caption{Riassunto dei risultati dei vari algoritmi per il dataset
-				\texttt{results\_journal.pone.0148699\_S1\_Text\_Sepsis\_SIRS\_EDITED.csv.csv}}
+				\texttt{Sepsis.csv}}
 				\label{fig:comp5}
 			\end{figure}
 
@@ -1484,7 +1484,7 @@
 			Silhouette é effettivamente in grado di restituire una combinazione
 			ottimale di iperparametri.
 
-			\begin{figure}[h]
+			\begin{figure}[H]
 				\centering
 				\includegraphics[width = 0.75\textwidth, height = 0.45\textheight, page = 1]{
 					doc/DBSCAN_optimal_MinPts.pdf
@@ -1492,12 +1492,12 @@
 				\includegraphics[width = 0.75\textwidth, height = 0.45\textheight, page = 1]{
 					results/DBSCAN_visual_comparison.pdf
 				}
-				\caption{Risultati dell'algoritmo DBSCAN mediante KNN-plot per il dataset
-				\texttt{results\_journal.pone.0158570\_S2File\_depression\_heart\_failure\_v2.csv}}
+				\caption{Risultati dell'algoritmo DBSCAN per il dataset
+				\texttt{HeartFailure.csv}, usando un KNN-plot per stimare $\epsilon$}
 				\label{fig:dbscan-extra1}
 			\end{figure}
 
-			\begin{figure}[h]
+			\begin{figure}[H]
 				\centering
 				\includegraphics[width = 0.75\textwidth, height = 0.45\textheight, page = 2]{
 					doc/DBSCAN_optimal_MinPts.pdf
@@ -1505,12 +1505,12 @@
 				\includegraphics[width = 0.75\textwidth, height = 0.45\textheight, page = 2]{
 					results/DBSCAN_visual_comparison.pdf
 				}
-				\caption{Risultati dell'algoritmo DBSCAN mediante KNN-plot per il dataset
-				\texttt{results\_journal.pone.0175818\_S1Dataset\_Spain\_cardiac\_arrest\_EDITED..csv}}
+				\caption{Risultati dell'algoritmo DBSCAN per il dataset
+				\texttt{CardiacArrest.csv}, usando un KNN-plot per stimare $\epsilon$}
 				\label{fig:dbscan-extra2}
 			\end{figure}
 
-			\begin{figure}[h]
+			\begin{figure}[H]
 				\centering
 				\includegraphics[width = 0.75\textwidth, height = 0.45\textheight, page = 3]{
 					doc/DBSCAN_optimal_MinPts.pdf
@@ -1518,12 +1518,12 @@
 				\includegraphics[width = 0.75\textwidth, height = 0.45\textheight, page = 3]{
 					results/DBSCAN_visual_comparison.pdf
 				}
-				\caption{Risultati dell'algoritmo DBSCAN mediante KNN-plot per il dataset
-				\texttt{results\_10\_7717\_peerj\_5665\_dataYM2018\_neuroblastoma.csv}}
+				\caption{Risultati dell'algoritmo DBSCAN per il dataset
+				\texttt{Neuroblastoma.csv}, usando un KNN-plot per stimare $\epsilon$}
 				\label{fig:dbscan-extra3}
 			\end{figure}
 
-			\begin{figure}[h]
+			\begin{figure}[H]
 				\centering
 				\includegraphics[width = 0.75\textwidth, height = 0.45\textheight, page = 4]{
 					doc/DBSCAN_optimal_MinPts.pdf
@@ -1531,12 +1531,12 @@
 				\includegraphics[width = 0.75\textwidth, height = 0.45\textheight, page = 4]{
 					results/DBSCAN_visual_comparison.pdf
 				}
-				\caption{Risultati dell'algoritmo DBSCAN mediante KNN-plot per il dataset
-				\texttt{results\_journal.pone.0216416\_Takashi2019\_diabetes\_type1\_dataset\_preprocessed.csv}}
+				\caption{Risultati dell'algoritmo DBSCAN per il dataset
+				\texttt{Diabetes.csv}, usando un KNN-plot per stimare $\epsilon$}
 				\label{fig:dbscan-extra4}
 			\end{figure}
 
-			\begin{figure}[h]
+			\begin{figure}[H]
 				\centering
 				\includegraphics[width = 0.75\textwidth, height = 0.45\textheight, page = 5]{
 					doc/DBSCAN_optimal_MinPts.pdf
@@ -1544,8 +1544,8 @@
 				\includegraphics[width = 0.75\textwidth, height = 0.45\textheight, page = 5]{
 					results/DBSCAN_visual_comparison.pdf
 				}
-				\caption{Risultati dell'algoritmo DBSCAN mediante KNN-plot per il dataset
-				\texttt{results\_journal.pone.0148699\_S1\_Text\_Sepsis\_SIRS\_EDITED.csv.csv}}
+				\caption{Risultati dell'algoritmo DBSCAN per il dataset
+				\texttt{Sepsis.csv}, usando un KNN-plot per stimare $\epsilon$}
 				\label{fig:dbscan-extra5}
 			\end{figure}
 
