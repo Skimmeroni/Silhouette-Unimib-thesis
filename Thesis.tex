@@ -621,7 +621,16 @@
 				dei cluster di forma ellittica, ma non tutti i dataset hanno una
 				struttura di cluster con questa forma.
 
-			\subsection{Clustering per densità: DBSCAN}
+				Nell'applicare K-Means alle EHR ho testato come valore di $K$ tutti
+				i valori compresi fra $2$ e $5$, mentre per quanto riguarda K-Medians
+				ho scelto tutti i valori compresi fra $2$ e $10$. Per ciascun valore
+				di $K$ ho ricavato il valore della Silhouette media complessiva
+				associata a tale valore. Ho scelto tali intervalli in particolare
+				banalmente perché i cluster ottenuti con valori al di fuori di tali
+				intervalli restituivano un valore di Silhouette media complessiva
+				molto basso, e quindi poco interessante.
+
+			\subsection{Clustering per densità: DBSCAN e HDBSCAN}
 
 				\textbf{DBSCAN} è un esempio di algoritmo di clustering \textbf{per
 				densità}, ovvero che costruisce i cluster a partire da come gli
@@ -729,23 +738,31 @@
 				($O n \log(n)$, con $n$ numero di elementi del dataset), le sue
 				prestazioni sono state empiricamente dimostrate come molto competitive.
 
-			\subsection{Clustering gerarchico: HDBSCAN}
+				Nell'applicare DBSCAN alle EHR ho testato come valore di MinPts
+				tutti i valori compresi fra $D + 1$ e $3D$, dove $D$ é il numero
+				delle dimensioni del dataset. Come regola pratica, gli autori
+				di DBSCAN suggeriscono di usare MinPts = $2D$, ma ho voluto
+				comunque testare quante piú combinazioni possibili. Per quanto
+				riguarda $\epsilon$, ho considerato l'intervallo che andasse da
+				$0$ alla distanza piú grande presente fra due elementi del
+				dataset e l'ho partizionato in $50$ parti, ottenendo $50$ 
+				valori.
 
-				\textbf{HDBSCAN} è un esempio di algoritmo di clustering
-				\textbf{gerarchico}, ovvero che costruisce i cluster formando
-				una struttura ad albero \footnote{In realtà, HDBSCAN è un
-				algoritmo ibrido fra il paradigma per densità ed il paradigma
-				gerarchico. Un esempio semplice di algoritmo di clustering
-				``puramente'' gerarchico é \textbf{UPGMA} \cite{Sokal1958ASM}.}
+				\textbf{HDBSCAN}, variante di DBSCAN, é un esempio di
+				algoritmo di clustering \textbf{gerarchico}, ovvero che
+				costruisce i cluster formando una struttura ad albero
+				\footnote{In realtà, HDBSCAN è un algoritmo ibrido fra
+				il paradigma per densità ed il paradigma gerarchico. Un
+				esempio semplice di algoritmo di clustering ``puramente''
+				gerarchico é \textbf{UPGMA} \cite{Sokal1958ASM}.}
 
-			Per K-Means, è stato testato un numero di cluster compreso fra $2$ e
-			$6$, mentre per K-Medians fra $2$ e $10$.
-
-			Per DBSCAN e HDBSCAN, MinPts è stato scelto nel range dal numero delle
-			dimensioni del dataset al doppio più uno delle dimensioni del dataset.
-
-			Per DBSCAN, $\epsilon$ è stato scelto partizionando la distanza massima
-			in parti uguali.
+				Anziché richiedere sia MinPts sia $\epsilon$, HDBSCAN
+				richiede solamente MinPts. Questo perché l'algoritmo
+				reitera DBSCAN su vari valori di $\epsilon$, che determina
+				in automatico, e determina quali cluster figurano piú spesso
+				in ciascuna iterazione. Per tal motivo, la scelta di MinPts
+				per HDBSCAN é stata analoga a quella per DBSCAN, ovvero
+				nell'intervallo $[D + 1, 3D]$.
 
 		\section{Calcolo di Silhouette}
 
