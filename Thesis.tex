@@ -377,7 +377,88 @@
 			\label{tbl:theory}
 		\end{table}
 
-	\chapter{Metodi}
+	\chapter{Metodi e strumenti utilizzati}
+
+		\section{Dataset}
+
+			Per quanto riguarda l'applicare algoritmi di clustering a
+			dataset reali, come dataset ho utilizzato delle cartelle
+			cliniche elettroniche (EHR). Questi dataset, in formato
+			\texttt{.csv} (\emph{comma separated value}), sono liberamente
+			utilizzabili. Per comoditá, ho indicato tali dataset con la
+			malattia a cui si riferiscono: \texttt{Diabetes},
+			\texttt{Neuroblastoma}, \texttt{CardiacArrest},
+			\texttt{HeartFailure}, \texttt{Sepsis}. Nell'intestazione
+			dei plot é comunque possibile leggere il nome completo
+			del rispettivo dataset.
+
+			Per quanto riguarda la valutazione delle perfomance delle
+			implementazioni di Silhouette ho utilizzato due dataset da
+			me generati, indicati con \texttt{sc\_dataset\_good} e
+			\texttt{sc\_dataset\_bad}. Li ho costruiti utilizzando la
+			funzione \texttt{rnorm}, che genera dei punti casuali a
+			partire da una distribuzione normale bivariata.
+
+			\texttt{sc\_dataset\_good} è costituito da due distribuzioni
+			normali fuse insieme, entrambe con una deviazione standard
+			molto bassa, di modo che i punti siano concentrati attorno
+			alla media. \texttt{sc\_dataset\_bad} é costituito da una
+			sola distribuzione normale bivariata centrata in $(0, 0)$ e
+			con una deviazione standard molto ampia, di modo che i punti
+			siano molto dispersi. I loro scatter plot sono riportati in
+			Figura~\ref{fig:sc1} e Figura~\ref{fig:sc2} rispettivamente.
+
+			\begin{figure}[H]
+				\centering
+				\includegraphics[width = 0.75\textwidth, height = 0.45\textheight]{doc/sc_dataset_good.pdf}
+				\caption{Scatter plot di \texttt{sc\_dataset\_good}.
+				Si noti la struttura di cluster ben definita.}
+				\label{fig:sc1}
+			\end{figure}
+
+			\begin{figure}[H]
+				\centering
+				\includegraphics[width = 0.75\textwidth, height = 0.45\textheight]{doc/sc_dataset_bad.pdf}
+				\caption{Scatter plot di \texttt{sc\_dataset\_bad}.
+				Si noti l'assenza della struttura di cluster.}
+				\label{fig:sc2}
+			\end{figure}
+
+			Infine, diversi esempi si rifanno ad un dataset molto famoso
+			chiamato \texttt{iris} \cite{https://doi.org/10.1111/j.1469-1809.1936.tb02137.x}.
+			Tale dataset é costituito da $150$ elementi estratti da una
+			popolazione di fiori, ciascuno contenente cinque attributi,
+			in ordine: lunghezza del sepalo (in centimetri), larghezza
+			del sepalo, lunghezza del petalo, larghezza del petalo e
+			specie del fiore (\emph{Iris setosa}, \emph{Iris virginica}
+			oppure \emph{Iris versicolor}). Dato che l'ultimo attributo
+			non é numerico, viene in genere scartato. Nella
+			Tabella~\ref{tab:iris-sample} sono riportati alcuni
+			elementi di tale dataset.
+
+			\begin{table}[H]
+				\centering
+				\begin{tabular}{c c c c c}
+					\hline
+					\textbf{Sepal.Length} &
+					\textbf{Sepal.Width} &
+					\textbf{Petal.Length} &
+					\textbf{Petal.Width} &
+					\textbf{Species} \\
+					\hline
+					5.1 & 3.5 & 1.4 & 0.2 & setosa \\
+					4.9 & 3.0 & 1.4 & 0.2 & setosa \\
+					4.7 & 3.2 & 1.3 & 0.2 & setosa \\
+					4.6 & 3.1 & 1.5 & 0.2 & setosa \\
+					5.0 & 3.6 & 1.4 & 0.2 & setosa \\
+					5.4 & 3.9 & 1.7 & 0.4 & setosa \\
+					4.6 & 3.4 & 1.4 & 0.3 & setosa \\
+					\hline
+				\end{tabular}
+				\caption{Primi elementi del dataset \texttt{iris},
+				cosí come compare nel linguaggio \texttt{R}.}
+				\label{tab:iris-sample}
+			\end{table}
 
 		\section{Funzioni di distanza}
 
@@ -568,30 +649,31 @@
 			%\end{equation*}
 
 			\begin{table}
-				\begin{boxedminipage}{0.25\linewidth}
+				\centering
+				\begin{minipage}{0.25\linewidth}
 						\pgfplotstabletypeset[
 							col sep=comma,
 							header=true,
 							every head row/.style={before row=\toprule, after row=\midrule},
 							every last row/.style={after row=\bottomrule},
 						]{data/siOne.csv}
-				\end{boxedminipage}
-				\begin{boxedminipage}{0.25\linewidth}
+				\end{minipage}
+				\begin{minipage}{0.25\linewidth}
 						\pgfplotstabletypeset[
 							col sep=comma,
 							header=true,
 							every head row/.style={before row=\toprule, after row=\midrule},
 							every last row/.style={after row=\bottomrule},
 						]{data/siTwo.csv}
-				\end{boxedminipage}
-				\begin{boxedminipage}{0.25\linewidth}
+				\end{minipage}
+				\begin{minipage}{0.25\linewidth}
 						\pgfplotstabletypeset[
 							col sep=comma,
 							header=true,
 							every head row/.style={before row=\toprule, after row=\midrule},
 							every last row/.style={after row=\bottomrule},
 						]{data/siThree.csv}
-				\end{boxedminipage}
+				\end{minipage}
 				\caption{Valori di $s(i)$, cluster e neighboring cluster per
 				i primi 10 elementi dei tre cluster. Si noti come i valori
 				di $s(i)$ del primo cluster siano più alti ed il neighboring
@@ -741,25 +823,6 @@
 			di clustering K-Means e calcolare sul risultato di quest'ultimo
 			la Silhouette media.
 
-			Lo scatter plot dei due dataset è riportato in Figura~\ref{fig:sc}.
-			Li ho costruiti utilizzando la funzione \texttt{rnorm}, che genera
-			dei punti casuali a partire da una distribuzione normale bivariata.	
-			Il primo è stato costruito usando due distribuzioni normali fuse
-			insieme, entrambe con una deviazione standard molto bassa, di modo
-			che i punti siano concentrati attorno alla media. Il secondo è
-			costituito da una sola distribuzione normale centrata in $(0, 0)$
-			con una deviazione standard molto ampia, di modo che i punti siano
-			molto dispersi.
-
-			\begin{figure}[H]
-				\centering
-				\includegraphics[width = 0.75\textwidth, height = 0.45\textheight]{doc/sc_dataset_good.pdf}
-				\includegraphics[width = 0.75\textwidth, height = 0.45\textheight]{doc/sc_dataset_bad.pdf}
-				\caption{Plot dei dataset per il test sanity check. Il primo
-				presenta una struttura di cluster ben definita, mentre nel
-				secondo la struttura di cluster è completamente assente.}
-				\label{fig:sc}
-			\end{figure}
 
 			Il test matrice binaria inizia con una matrice di dimensione
 			$2n times n$, costituita per metà da $0$ e per metà da $1$.
