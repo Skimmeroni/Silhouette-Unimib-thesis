@@ -91,23 +91,7 @@
 		chi compie il clustering. In genere, l'analisi dei dati si occupa
 		di dati numerici (altezze, lunghezze, età, ampiezze), pertanto il
 		modo più naturale per formalizzare la somiglianza è dato da una
-		\textbf{funzione di distanza}. Matematicamente, una qualsiasi
-		funzione $d: \mathbb{R} \times \mathbb{R} \rightarrow \mathbb{R}$
-		è considerabile una funzione di distanza se possiede (almeno) le
-		seguenti proprietà:
-
-		\begin{itemize}
-			\item
-			Per ogni $x \in \mathbb{R}$, $d(x, x) = 0$;
-			\item
-			Per ogni $x, y \in \mathbb{R}$, se $x \neq y$ allora $d(x, y) > 0$;
-			\item
-			Per ogni $x, y \in \mathbb{R}$, $d(x, y) = d(y, x)$
-			(\textbf{simmetria});
-			\item
-			Per ogni $x, y, z \in \mathbb{R}$, $d(x, z) \leq d(x, y) + d(y, z)$
-			(\textbf{disuguaglianza triangolare}).
-		\end{itemize}
+		\textbf{funzione di distanza}.
 
 		Un \textbf{algoritmo di clustering} non è altro che un algoritmo
 		che abbia in input un insieme di dati e che abbia in output il
@@ -118,7 +102,10 @@
 		\begin{figure}[H]
 			\centering
 			\includesvg[width = 0.5\textwidth]{images/Cluster-2.svg}
-			\caption{Ipotetico esempio di clustering}
+			\caption{Ipotetico esempio di clustering. Gli elementi sono
+			stati ripartiti in tre gruppi, identificati dal loro colore,
+			sulla base della loro distanza reciproca: elementi vicini
+			fanno parte dello stesso cluster.}
 		\end{figure}
 
 		Gli algoritmi di clustering si dividono in due macrocategorie:
@@ -140,32 +127,48 @@
 		più difficile, perché non c'è differenza fra l'insieme di
 		dati utilizzato per costruire il modello e l'insieme di
 		dati usato per testare il modello: sono lo stesso insieme.
-		Una possibile soluzione al problema è data da delle statistiche,
-		il cui valore rappresenta l'accuratezza del modello. Alcuni
-		esempi sono: \textbf{Calinksi-Harabasz} \cite{Calinski01011974},
-		\textbf{Davies-Bouldin} \cite{4766909} e \textbf{Dunn Index}
-		\cite{Dunn01011974}.
+		É peró comunque possibile osservare l'operato di un algoritmo
+		di clustering ``a posteriori'' e studiarlo matematicamente.
 
-		La statistica di interesse per questa tesi è Silhouette
-		\cite{ROUSSEEUW198753}. Tale statistica, nelle parole
-		dell'autore, si propone di rispondere alle seguenti domande:
+		Questo approccio viene seguito da degli indici formulati
+		specificatamente per questo scopo. Cosí come la media o la
+		deviazione standard riassumono in un solo numero una proprietá
+		di un insieme di dati (il suo centro nel primo caso e la sua
+		dispersione nel secondo), indici di questo tipo riassumono in
+		un solo numero la bontá dell'operato di un algoritmo di clustering.
+		Alcuni esempi di indici di questo tipo sono: \textbf{Calinksi-Harabasz}
+		\cite{Calinski01011974}, \textbf{Davies-Bouldin} \cite{4766909} e
+		\textbf{Dunn Index} \cite{Dunn01011974}.
+
+		Fra queste, per questa tesi é stata scelta Silhouette
+		\cite{ROUSSEEUW198753}. Tale indice, nelle parole
+		dell'autore, si propone di rispondere alle seguenti
+		domande:
 
 		\begin{itemize}
 			\item
 			Il clustering è di buona qualità? In altre parole, gli elementi di
-			uno stesso cluster sono fra di loro "vicini" ed al contempo "lontani"
+			uno stesso cluster sono fra di loro ``vicini'' ed al contempo ``lontani''
 			dagli elementi di tutti gli altri cluster?
 			\item
 			Quali sono gli elementi ben classificati, ovvero quelli che probabilmente
-			si trovano nel cluster "giusto"?
+			si trovano nel cluster ``giusto''?
 			\item
 			Quali sono gli elementi che è difficile stabilire con certezza in quali
-			cluster vadano collocati, ovvero quelli che stanno "nel mezzo" fra più
+			cluster vadano collocati, ovvero quelli che stanno ``nel mezzo'' fra più
 			cluster?
 			\item
 			Il numero di cluster scelto è effettivamente rappresentativo del dataset
-			o è 'artificioso'?
+			o è ``artificioso''?
 		\end{itemize}
+
+		Per testare Silhouette su dei dataset realmente esistenti sono
+		stati usati dati provenienti da cartelle cliniche elettroniche
+		(EHR). Questo é routine nella letteratura scientifica: alcuni
+		articoli che sono andati in questa direzione sono riassunti
+		nella Tabella~\ref{tbl:ehr}. La Tabella~\ref{tbl:theory} riassume
+		invece alcuni articoli che analizzano le proprietá di Silhouette
+		e ne propongono delle varianti.
 
 		\begin{table}[h]
 			\centering
@@ -465,6 +468,23 @@
 			\end{table}
 
 		\section{Funzioni di distanza}
+
+			Matematicamente, una qualsiasi funzione $d: \mathbb{R} \times
+			\mathbb{R} \rightarrow \mathbb{R}$ è considerabile una funzione
+			di distanza se possiede (almeno) le seguenti proprietà:
+
+			\begin{itemize}
+				\item
+				Per ogni $x \in \mathbb{R}$, $d(x, x) = 0$;
+				\item
+				Per ogni $x, y \in \mathbb{R}$, se $x \neq y$ allora $d(x, y) > 0$;
+				\item
+				Per ogni $x, y \in \mathbb{R}$, $d(x, y) = d(y, x)$
+				(\textbf{simmetria});
+				\item
+				Per ogni $x, y, z \in \mathbb{R}$, $d(x, z) \leq d(x, y) + d(y, z)$
+				(\textbf{disuguaglianza triangolare}).
+			\end{itemize}
 
 			Si supponga di avere a disposizione un dataset di dimensione
 			$N \times M$, dove $N$ indica il numero degli elementi e $M$ è
