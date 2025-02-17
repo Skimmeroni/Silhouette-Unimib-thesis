@@ -1,14 +1,18 @@
 \documentclass{beamer}
+
 \usepackage{amsmath}
+\usepackage[italian]{babel}
 \usepackage{bookmark}
 \usepackage{booktabs}
-\usepackage{pgfplotstable}
+\usepackage{boxedminipage}
+\usepackage{svg}
 
+\setlength{\fboxrule}{0pt}
 \usetheme{Rochester}
 
 \title{Studio e approfondimento del coefficiente Silhouette per la
 valutazione interna di risultati di clustering non-supervisionato}
-\author{XXX YYY ZZZZZZ}
+\author{Federico Salvioni 845029}
 \date{\today}
 
 \begin{document}
@@ -17,17 +21,10 @@ valutazione interna di risultati di clustering non-supervisionato}
         \titlepage
     \end{frame}
 
-    %\begin{frame}
-    %    \frametitle{Outline}
-    %    \tableofcontents
-    %\end{frame}
-
     \section{Clustering}
 
         \begin{frame}
             \frametitle{Clustering}
-
-            Da dizionario Merriam-Webster:
 
             \vfill
 
@@ -45,29 +42,31 @@ valutazione interna di risultati di clustering non-supervisionato}
         \end{frame}
 
         \begin{frame}
-            \frametitle{Quanti sono i cluster?}
+            \frametitle{Quanti e quali sono i cluster?}
 
             \begin{itemize}
                 \item
-                Gli algoritmi di clustering non sono in grado di fornire una
-                metrica oggettiva per determinare quale sia il corretto numero
-                di cluster
+                Gli algoritmi di clustering non supervisionato non sono in
+                grado di determinare se il loro operato rispecchi la struttura
+                di cluster, perché non vi è alcuna "ground truth";
                 \item
-                Questo é particolarmente problematico negli algoritmi che hanno
-                il numero di cluster come iperparametro (e.g. K-Means)
+                Utilizzare parametri errati induce un raggruppamento non
+                rappresentativo del dataset, senza che l'algoritmo lo
+                consideri un errore;
                 \item
-                Nel clustering non supervisionato non vi è a disposizione
-                alcuna "ground truth"
-                \item
-                Un numero di cluster errato induce un raggruppamento non
-                rappresentativo del dataset, bensí un raggruppamento artificioso
+                Sono state proposte diverse metriche che sono in grado di
+                stimare la qualità dell'operato di un algoritmo di clustering
+                non supervisionato.
             \end{itemize}
         \end{frame}
 
+    \section{Silhouette}
+
         \begin{frame}
             \frametitle{Introduzione di Silhouette}
-            Silhouette si propone di rispondere alle seguenti domande:
 
+            La metrica Silhouette si propone di rispondere alle seguenti domande:
+        
             \begin{itemize}
                 \item
                 Il clustering è di buona qualità?
@@ -78,84 +77,155 @@ valutazione interna di risultati di clustering non-supervisionato}
                 \item
                 Il numero di cluster scelto è rappresentativo del dataset?
             \end{itemize}
+
+            \vfill
+            Questo è possibile a partire da una nozione di \textbf{distanza}.
         \end{frame}
 
-    \section{Silhouette}
+        \begin{frame}
+            \frametitle{Formula per la Silhouette}
+
+            \centering
+            \begin{boxedminipage}{0.49\textwidth}
+                \begin{block}{$a(i)$}
+                    \begin{equation*}
+                        a(i) = \frac{1}{|A| - 1} \sum_{j \in \{A - \{i\}\}} d(i, j)
+                    \end{equation*}
+                \end{block}
+            \end{boxedminipage}
+            \begin{boxedminipage}{0.49\textwidth}
+                \begin{block}{$b(i)$}
+                    \begin{equation*}
+                        b(i) = min_{C \neq A} \frac{1}{|C|} \sum_{j \in C} d(i, j)
+                    \end{equation*}
+                \end{block}
+            \end{boxedminipage}
+
+            \vfill
+
+            \begin{block}{$s(i)$}
+                \begin{equation*}
+                    s(i) = \frac{b(i) - a(i)}{max\{a(i), b(i)\}}
+                \end{equation*}
+            \end{block}
+        \end{frame}
 
         \begin{frame}
-            \frametitle{Situazione iniziale}
+            \frametitle{Silhouette width}
+
+            \centering
+            \includegraphics[width = 0.65\textwidth]{doc/si.pdf}
+        \end{frame}
+
+    \section{Clustering}
+
+        \begin{frame}
+            \frametitle{Algoritmi di clustering}
+
+            \centering
+            \begin{boxedminipage}{0.49\textwidth}
+                \begin{figure}
+                \includesvg[width = 0.9\textwidth]{images/K-Means-Example.svg}
+                \caption{K-Means}
+                \end{figure}
+            \end{boxedminipage}
+            \begin{boxedminipage}{0.49\textwidth}
+                \begin{figure}
+                \includesvg[width = 0.9\textwidth]{images/DBSCAN-density-data.svg}
+                \caption{DBSCAN}
+                \end{figure}
+            \end{boxedminipage}
+        \end{frame}
+
+    \section{Test}
+
+        \begin{frame}
+            \frametitle{Matrice binaria}
+
+            \centering
+            \begin{boxedminipage}{0.49\textwidth}
+                \begin{figure}
+                    \includegraphics[width = \textwidth, page = 1]{results/results_CLUSTER.pdf}
+                    \caption{Sanity check (favorevole)}
+                \end{figure}
+            \end{boxedminipage}
+            \begin{boxedminipage}{0.49\textwidth}
+                \begin{figure}
+                    \includegraphics[width = \textwidth, page = 2]{results/results_CLUSTER.pdf}
+                    \caption{Sanity check (sfavorevole)}
+                \end{figure}
+            \end{boxedminipage}
+        \end{frame}
+
+        \begin{frame}
+            \frametitle{Sanity check}
+
+            \centering
+            \begin{boxedminipage}{0.49\textwidth}
+                \begin{figure}
+                    \includegraphics[width = \textwidth, page = 3]{results/results_CLUSTER.pdf}
+                    \caption{Matrice binaria}
+                \end{figure}
+            \end{boxedminipage}
+            \begin{boxedminipage}{0.49\textwidth}
+                \begin{figure}
+                    \includegraphics[width = \textwidth, page = 1]{results/Final_comparison.pdf}
+                    \caption{Comparazione R/Python}
+                \end{figure}
+            \end{boxedminipage}
+        \end{frame}
+
+    \section{EHR}
+
+        \begin{frame}
+            \frametitle{Clustering su dataset reali}
+
+	    \centering
+            \begin{boxedminipage}{0.49\textwidth}
+                \begin{figure}
+                    \includegraphics[width = \textwidth, page = 7]{results/results_Neuroblastoma.csv.pdf}
+                    \caption{Elbow plot}
+                \end{figure}
+            \end{boxedminipage}
+            \begin{boxedminipage}{0.49\textwidth}
+                \begin{figure}
+                    \includegraphics[width = \textwidth, page = 8]{results/results_Neuroblastoma.csv.pdf}
+                    \caption{Clustering}
+                \end{figure}
+            \end{boxedminipage}
+        \end{frame}
+
+	\begin{frame}
+            \frametitle{Clustering su dataset reali}
+
+	    \centering
+            \begin{boxedminipage}{0.49\textwidth}
+                \begin{figure}
+                    \includegraphics[width = \textwidth, page = 9]{results/results_Neuroblastoma.csv.pdf}
+                    \caption{Ranking (1)}
+                \end{figure}
+            \end{boxedminipage}
+            \begin{boxedminipage}{0.49\textwidth}
+                \begin{figure}
+                    \includegraphics[width = \textwidth, page = 10]{results/results_Neuroblastoma.csv.pdf}
+                    \caption{Ranking (2)}
+                \end{figure}
+            \end{boxedminipage}
+        \end{frame}
+
+    \section{Conclusioni}
+
+        \begin{frame}
+            \frametitle{Sviluppi futuri}
+
+            Possibili estensioni:
 
             \begin{itemize}
-                \item
-                Si consideri un dataset di dimensione $N \times M$
-                ($N$ elementi, $M$ attributi)
-                \item
-                Si assuma che gli attributi siano tutti dati numerici
-                (altezze, lunghezze, ecc...) e che siano tutti noti
-                \item
-                Da questo é possibile costruire una \textbf{matrice
-                delle distanze} $N \times N$
-                \item
-                La cella $(i, j)$ contiene il valore $d(i, j)$, che
-                rappresenta il grado di "dissomiglianza" fra $i$ e $j$
+                \item Usare dataset che non siano EHR;
+                \item Sostituire i valori ignoti con valori concreti, anziché scartare gli elementi manchevoli;
+                \item Ridurre il numero di dimensioni (\textbf{principal component analysis}).
             \end{itemize}
         \end{frame}
-
-        \begin{frame}
-            \frametitle{Funzione di distanza}
-
-            Il grado di dissomiglianza fra $i$ e $j$ è calcolato mediante
-            una \textbf{funzione di distanza} applicata ai loro attributi.
-            Ad esempio:
-
-            \vfill
-
-            \begin{block}{Distanza Euclidea}
-                \begin{equation*}
-                    d(i, j) = \sqrt{\sum_{m = 1}^{M} (f_{i, m} - f_{j, m})^{2}}
-                \end{equation*}
-
-            Con $f_{i, m}$, $f_{j, m}$ valori del $m$-esimo attributo
-            \end{block}
-
-            \vfill
-
-            Altri esempi: \textbf{distanza di Manhattan},
-            \textbf{distanza di Minkowski}.
-        \end{frame}
-
-        \begin{frame}
-            \frametitle{K-Means}
-
-            \begin{table}[h]
-            \centering
-                \pgfplotstabletypeset[
-                col sep=comma,
-                header=true,
-                every head row/.style={before row=\toprule, after row=\midrule},
-                every last row/.style={after row=\bottomrule},
-                ]{data/sdist.csv}
-                \caption{Matrice delle distanze per il dataset \texttt{iris} (solo i primi 6 elementi).}
-                \label{tab:dist}
-            \end{table}
-
-            \vfill
-
-            Nota la matrice delle distanze, si applichi ad esempio K-Means
-            per suddividere il dataset in $K$ cluster
-        \end{frame}
-
-        %\begin{frame}
-            %\frametitle{}
-        %\end{frame}
-
-    %\section{Scelta dei pacchetti}
-
-    %\section{Uso di Silhouette su EHR}
-
-    %\section{Aspetti teorici di Silhouette}
-
-    %\section{Dataset reali}
 
     \section{Fine}
 
@@ -164,7 +234,7 @@ valutazione interna di risultati di clustering non-supervisionato}
             \centering
             \Huge{Domande?}
 
-            \includegraphics{Chill.png}
+            \includegraphics{images/Chill.png}
         \end{frame}
 
 \end{document}
