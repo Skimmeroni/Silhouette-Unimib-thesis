@@ -543,6 +543,207 @@
 			specificato diversamente, quando ci si riferisce ad una funzione
 			di distanza generica si intende la distanza Euclidea.
 
+		\section{Algoritmi di clustering}
+
+			Gli algoritmi di clustering sono innumerevoli, ed è
+			impossibile testarli tutti. In questa tesi ne ho scelti
+			quattro: \textbf{K-Means} \cite{1056489} e la sua variante
+			\textbf{K-Medians}, \textbf{DBSCAN} \cite{10.5555/3001460.3001507}
+			e \textbf{HDBSCAN} \cite{10.1007/978-3-642-37456-2_14}.
+
+			\subsection{Clustering partizionale: K-Means e K-Medians}
+
+				\textbf{K-Means} e \textbf{K-Medians} sono esempi di algoritmi
+				di clustering \textbf{partizionale}, ovvero che suddividono
+				l'insieme di dati in un certo numero di cluster operando diversi
+				"raffinamenti" spostando uno o più elementi da un cluster all'altro
+				fino a raggiungere la precisione desiderata. L'algoritmo può essere
+				descritto come segue:
+
+				\begin{enumerate}
+					\item
+						Sia scelga un intero $k$. Tale valore sarà il numero di cluster;
+					\item
+						Si scelgano $k$ elementi qualsiasi del dataset, detti \textbf{seed}.
+						Tali seed fungeranno da \textbf{centroidi} iniziali, ovvero da elementi
+						che rappresentano il "baricentro" o il "punto medio" di ciascun cluster;
+					\item
+						Per ciascun elemento del dataset che non è un centroide, si calcoli
+						la distanza fra tale elemento e tutti i centroidi. L'elemento viene
+						assegnato alla partizione il cui centroide ha la più piccola distanza
+						da questo;
+					\item
+						Per ogni cluster se ne ricalcolino i centroidi, operando la media
+						aritmetica dei suoi valori;
+					\item
+						Se è stato raggiunto un criterio di terminazione, l'algoritmo termina.
+						Altrimenti, si riprende dal punto 3.
+				\end{enumerate}
+
+				Si noti come l'algoritmo non specifichi un criterio di terminazione. Un criterio
+				molto semplice consiste nel fissare un $\epsilon$ e valutare di quanto
+				si discosta il nuovo valore dei centroidi (calcolato al punto 4) dal
+				valore precedente: se questo scostamento è inferiore ad $\epsilon$,
+				l'algoritmo termina. Un criterio simile prevede di fissare un $\epsilon$
+				e di terminare l'algoritmo se il numero di elementi che vengono assegnati
+				ad un cluster diverso alla fine della corrente iterazione è inferiore ad
+				$\epsilon$.
+
+				\begin{figure}[H]
+					\centering
+					\includesvg{images/K-Means-Example}
+					\caption{Applicazione dell'algoritmo K-Means ad un ipotetico dataset;
+					i tre colori indicano i tre cluster individuati dall'algoritmo (By I,
+					Weston.pace, CC BY-SA 3.0, https://commons.wikimedia.org/w/index.php?curid=2463085).}
+					\label{fig:k-means-example}
+				\end{figure}
+
+				L'algoritmo K-Medians è una variante di K-Means che usa le mediane dei
+				cluster come centroidi anziché le loro medie. Per tal motivo, mentre
+				K-Means può utilizzare sostanzialmente qualsiasi funzione di distanza,
+				K-Medians utilizza sempre la distanza di Manhattan.
+
+				Sebbene K-Means e K-Medians siano efficienti (se il numero di
+				iterazioni è piccolo, il tempo di esecuzione è quasi-lineare) e
+				anche estremamente semplici, tanto da comparire come subroutine
+				in algoritmi più complessi, presentano dei problemi. Ad esempio,
+				dato che ogni elemento ha lo stesso peso nel computo dei centroidi,
+				anche un solo elemento che abbia valori anomali può destabilizzare
+				completamente il risultato finale. Inoltre, il parametro $k$ che
+				determina il numero di cluster potrebbe non avere alcuna relazione
+				con l'effettivo numero di cluster (se esistono) nell'insieme di
+				dati, e quindi un valore scorretto di $k$ porta a risultati che
+				non rispecchiano per nulla la vera struttura di cluster. Infine,
+				il raggruppamento di più elementi sulla base di una distanza genera
+				dei cluster di forma ellittica, ma non tutti i dataset hanno una
+				struttura di cluster con questa forma.
+
+			\subsection{Clustering per densità: DBSCAN}
+
+				\textbf{DBSCAN} è un esempio di algoritmo di clustering \textbf{per
+				densità}, ovvero che costruisce i cluster a partire da come gli
+				elementi di un dataset sono aggregati. In questo senso, i cluster
+				figurano come regioni di spazio densamente popolate, di forma del
+				tutto arbitraria, separate da spazio poco popolato.
+
+				DBSCAN prevede che vengano innanzitutto scelti due valori, un intero
+				chiamato MinPts ed un numero reale positivo $\epsilon$. A partire da
+				questi, per ogni elemento $p$ del dataset è possibile definire un
+				insieme $N_{\epsilon}(p)$, chiamato $\epsilon$\textbf{-vicinato}
+				($\epsilon$\textbf{-neighbourhood}). Tale insieme contiene tutti i
+				punti $q$ che hanno distanza da $p$ inferiore a $\epsilon$:
+
+				\begin{equation*}
+					N_{\epsilon} (p) = \{q | d(p, q) \leq \epsilon\}
+				\end{equation*}
+
+				Ogni elemento $p$ del dataset viene classificato sulla base del numero
+				di elementi di $N_{\epsilon}(p)$:
+
+				\begin{itemize}
+					\item
+					Se $N_{\epsilon}(p)$ ha almeno MinPts elementi, si dice che $p$ è un
+					\textbf{core point};
+					\item
+					Se $N_{\epsilon}(p)$ ha meno di MinPts elementi ma $p$ si trova
+					nell'$\epsilon$-vicinato di un altro elemento, allora si dice che
+					$p$ è un \textbf{border point};
+					\item
+					Se un elemento non non è né un core point né un border
+					point, è detto \textbf{noise point}.
+				\end{itemize}
+
+				Si dice che un elemento $q$ è \textbf{direttamente raggiungibile}
+				da $p$ se $p$ è un core point e $q$ si trova nell'$\epsilon$-vicinato
+				di $p$. Se un elemento $r$ è direttamente raggiungibile da $q$ e $q$
+				è direttamente raggiungibile da un elemento $p$, allora si dice che
+				$r$ è \textbf{indirettamente raggiungibile} da $p$ (si noti come
+				la raggiungibilità non sia una proprietà necessariamente simmetrica).
+
+				\begin{figure}[H]
+					\centering
+					\includesvg[width = 0.5\textwidth]{images/DBSCAN-Illustration.svg}
+					\caption{Ipotetica classificazione di alcuni elementi, usando
+					MinPts = 4. Gli elementi in rosso sono dei core point, perché
+					hanno 4 o più elementi nel loro $\epsilon$-vicinato. Gli elementi
+					in giallo sono invece border point, perché hanno meno di 4 elementi
+					nel loro $\epsilon$-vicinato ma sono nell'$\epsilon$-vicinato di
+					almeno un core point. Infine, gli elementi in blu sono dei
+					noise point, perché oltre ad avere meno di 4 elementi nel loro
+					$\epsilon$-vicinato non sono nell'$epsilon$-vicinato di alcun
+					core point (By Chire - Own work, CC BY-SA 3.0,
+					https://commons.wikimedia.org/w/index.php?curid=17045963).}
+					\label{fig:dbscan-illustration}
+				\end{figure}
+
+				Quando DBSCAN viene invocato viene inizializzato un cluster
+				$C$, dopodiché viene costruito l'$\epsilon$-vicinato di ogni
+				elemento $p$ che non sia stato ancora ispezionato. Se tale
+				insieme ha meno di MinPts elementi, allora $p$ è certamente
+				un noise point: questo perché è troppo isolato per poter
+				essere un core point e, non essendo ancora stato ispezionato,
+				non può trovarsi nell'$\epsilon$-vicinato di nessun altro punto.
+
+				Se invece l'$\epsilon$-vicinato di $p$ ha almeno MinPts
+				elementi, allora tale elemento è certamente un core point.
+				Viene allora costruito un cluster $C$ nel quale $p$ viene
+				inserito, dopodiché vengono osservati tutti gli elementi
+				$q$ che si trovano nell'$\epsilon$-vicinato di $p$.
+				Se $q$ non è mai stato ispezionato, si osserva
+				l'$\epsilon$-vicinato di $q$ a sua volta: se questo
+				contiene più elementi dell'$\epsilon$-vicinato di $p$,
+				allora $N_{\epsilon}(q)$ e $N_{\epsilon}(p)$ vengono
+				uniti in un insieme unico, perché gli elementi
+				dell'$\epsilon$-vicinato di $q$ sono indirettamente
+				raggiungibili a partire da $p$. Se $q$ non appartiene
+				ad alcun cluster, allora viene aggiunto al cluster in esame.
+
+				\begin{figure}[H]
+					\centering
+					\includesvg[width = 0.5\textwidth]{images/DBSCAN-density-data.svg}
+					\caption{Risultato dell'applicazione dell'algoritmo DBSCAN su un
+					ipotetico dataset. Le aree in blu e in verde rappresentano i due
+					cluster, mentre i punti in grigio sono i noise point (By Chire -
+					Own work, CC BY-SA 3.0, https://commons.wikimedia.org/w/index.php?curid=17085332)}
+					\label{fig:dbscan-density-data}
+				\end{figure}
+
+				Si osservi come la scelta di $\epsilon$ e MinPts influisca di molto
+				sul risultato finale. Infatti, scegliendo un valore di $\epsilon$ o
+				di MinPts troppo piccolo, quasi tutti gli elementi verranno classificati
+				come noise point, e quindi quasi tutti scartati. D'altro canto, un valore
+				di $\epsilon$ o di MinPts troppo grande potrebbe indurre un clustering
+				dove quasi tutti i punti sono inclusi nello stesso cluster.
+
+				A differenza di K-Means e K-Medians, che costruiscono sempre cluster
+				di forma ellissoidale, DBSCAN costruisce cluster di qualsiasi forma.
+				Questo è sia un aspetto positivo, perché in questo modo è possibile
+				catturare strutture di cluster molto più variegate, sia negativo,
+				perché la densità di un'area non sottende necessariamente alla
+				presenza di un cluster, e non tutte le aree dense lo sono allo
+				stesso modo. Occorre però evidenziare come, nonostante sia leggermente
+				inferiore a K-Means e K-Medians in termini di tempo di esecuzione
+				($O n \log(n)$, con $n$ numero di elementi del dataset), le sue
+				prestazioni sono state empiricamente dimostrate come molto competitive.
+
+			\subsection{Clustering gerarchico: HDBSCAN}
+
+				\textbf{HDBSCAN} è un esempio di algoritmo di clustering
+				\textbf{gerarchico}, ovvero che costruisce i cluster formando
+				una struttura ad albero \footnote{In realtà, HDBSCAN è un
+				algoritmo ibrido fra il paradigma per densità ed il paradigma
+				gerarchico. Un esempio semplice di algoritmo di clustering
+				``puramente'' gerarchico é \textbf{UPGMA} \cite{Sokal1958ASM}.}
+
+			Per K-Means, è stato testato un numero di cluster compreso fra $2$ e
+			$6$, mentre per K-Medians fra $2$ e $10$.
+
+			Per DBSCAN e HDBSCAN, MinPts è stato scelto nel range dal numero delle
+			dimensioni del dataset al doppio più uno delle dimensioni del dataset.
+
+			Per DBSCAN, $\epsilon$ è stato scelto partizionando la distanza massima
+			in parti uguali.
+
 		\section{Calcolo di Silhouette}
 
 			Per poter calcolare Silhouette è prima necessario introdurre due
@@ -844,250 +1045,51 @@
 			quelli disponibili.
 
 			Ho cercato quante più implementazioni di Silhouette possibili
-			utilizzando il sito \texttt{https://rdrr.io} e scegliendone
-			quante più possibili che provenissero dal repository CRAN.
-			In particolare, sono stati scelti \texttt{cluster},
-			\texttt{drclust}, \texttt{tidyclust} e \texttt{Kira}. Pacchetti
-			noti come \texttt{fpc}, che pure implementano Silhouette, li ho
-			esclusi a priori perché non aggiornati da tempo.
+			utilizzando il sito \texttt{https://rdrr.io} e scegliendo
+			solamente quelli provenienti dal repository CRAN, di modo da
+			avere la certezza di reperire solamente pacchetti di qualitá.
+			In particolare, ho scelto \texttt{cluster}, \texttt{drclust},
+			\texttt{tidyclust} e \texttt{Kira}. Pacchetti noti come
+			\texttt{fpc}, che pure implementano Silhouette, li ho esclusi
+			a priori perché non aggiornati da tempo.
 
 			Oltre a questi, come controprova ho utilizzato l'implementazione
 			della Silhouette presente nel pacchetto \texttt{scikit-learn} per
 			\texttt{Python}. Questo è stato fatto attraverso il pacchetto
 			\texttt{reticulate}, che permette di chiamare funzioni \texttt{Python}
-			all'interno di codice \texttt{R}.
+			all'interno di codice \texttt{R}. Essendo \texttt{scikit-learn} 
+			considerata una implementazione fidata, é possibile usarla come
+			riferimento per fare dei confronti.
 
 			Per comparare le performance delle diverse implementazioni di
 			Silhouette ho eseguito due test, uno chiamato "sanity check" ed
-			uno chiamato "matrice binaria". Il codice per la generazione dei
-			test è liberamente disponibile. Ho organizzato il codice seguendo
-			le linee guida riportate in \cite{10.1371/journal.pcbi.1000424}.
-			Ho anche tenuto un lab notebook per tenere traccia dei risultati
-			mano mano che venivano generati, facendo riferimento a \cite{10.1371/journal.pcbi.1004385}
+			uno chiamato "matrice binaria".
 
-			Il test Sanity check prevede di utilizzare due dataset creati
-			artificialmente, il primo dove la struttura di cluster è
-			estremamente evidente ed il secondo dove la struttura di
-			cluster è completamente assente, applicare su questi l'algoritmo
-			di clustering K-Means e calcolare sul risultato di quest'ultimo
-			la Silhouette media.
+			Il test sanity check prevede di applicare K-Means con $K = 2$
+			sui dataset \texttt{sc\_dataset\_good} e \texttt{sc\_dataset\_bad}
+			e calcolare la Silhouette media complessiva per entrambi. L'idea
+			é che una implementazione corretta di Silhouette fornisca un
+			valore molto alto per la Silhouette media complessiva rispetto
+			al primo dataset, dove il numero di cluster scelto rispecchia
+			perfettamente la struttura del dataset, ed un valore molto basso
+			per il secondo, in cui i dati non hanno alcuna struttura.
 
-			Il test matrice binaria inizia con una matrice di dimensione
-			$2n times n$, costituita per metà da $0$ e per metà da $1$.
-			Su tale matrice viene applicato K-Means con iperparametro
-			$K = 2$ e si calcola la Silhouette media complessiva del
-			risultato. Dopodiché, una qualsiasi delle righe viene sostituita
-			con un valore scelto casualmente nell'intervallo $(0, 1)$ e si
-			ripete il procedimento. Tale test viene ripetuto esattamente
-			$2n$ volte, ogni volta con una riga diversa.
+			Il test matrice binaria prevede invece di generare una matrice
+			di dimensione $20 \times 10$, costituita per metà da $0$ e per
+			metà da $1$. Su tale matrice viene applicato K-Means con $K = 2$
+			e si calcola la Silhouette media complessiva del risultato.
+			Dopodiché, una qualsiasi delle righe viene sostituita con un
+			valore scelto casualmente nell'intervallo $(0, 1)$ e si
+			ripete il procedimento fino a quando tutte le righe hanno
+			subito esattamente una sostituzione.
 
 			I $2n$ valori della Silhouette media complessiva così trovati
 			sono poi riportati in un plot; l'idea è che tali valori debbano
 			essere alti nelle prime istanze del test quando gli $0$ e gli
-			$1$ sono ben separati e piano piano perdano si riducano così
-			come il dataset perde coesione. Ci si aspetta che i punti sul
-			grafico approssimino una distribuzione lineare.
-
-		\section{Algoritmi di clustering}
-
-			Gli algoritmi di clustering sono innumerevoli, ed è
-			impossibile testarli tutti. In questa tesi ne ho scelti
-			quattro: \textbf{K-Means} \cite{1056489} e la sua variante
-			\textbf{K-Medians}, \textbf{DBSCAN} \cite{10.5555/3001460.3001507}
-			e \textbf{HDBSCAN} \cite{10.1007/978-3-642-37456-2_14}.
-
-			\subsection{Clustering partizionale: K-Means e K-Medians}
-
-				\textbf{K-Means} e \textbf{K-Medians} sono esempi di algoritmi
-				di clustering \textbf{partizionale}, ovvero che suddividono
-				l'insieme di dati in un certo numero di cluster operando diversi
-				"raffinamenti" spostando uno o più elementi da un cluster all'altro
-				fino a raggiungere la precisione desiderata. L'algoritmo può essere
-				descritto come segue:
-
-				\begin{enumerate}
-					\item
-						Sia scelga un intero $k$. Tale valore sarà il numero di cluster;
-					\item
-						Si scelgano $k$ elementi qualsiasi del dataset, detti \textbf{seed}.
-						Tali seed fungeranno da \textbf{centroidi} iniziali, ovvero da elementi
-						che rappresentano il "baricentro" o il "punto medio" di ciascun cluster;
-					\item
-						Per ciascun elemento del dataset che non è un centroide, si calcoli
-						la distanza fra tale elemento e tutti i centroidi. L'elemento viene
-						assegnato alla partizione il cui centroide ha la più piccola distanza
-						da questo;
-					\item
-						Per ogni cluster se ne ricalcolino i centroidi, operando la media
-						aritmetica dei suoi valori;
-					\item
-						Se è stato raggiunto un criterio di terminazione, l'algoritmo termina.
-						Altrimenti, si riprende dal punto 3.
-				\end{enumerate}
-
-				Si noti come l'algoritmo non specifichi un criterio di terminazione. Un criterio
-				molto semplice consiste nel fissare un $\epsilon$ e valutare di quanto
-				si discosta il nuovo valore dei centroidi (calcolato al punto 4) dal
-				valore precedente: se questo scostamento è inferiore ad $\epsilon$,
-				l'algoritmo termina. Un criterio simile prevede di fissare un $\epsilon$
-				e di terminare l'algoritmo se il numero di elementi che vengono assegnati
-				ad un cluster diverso alla fine della corrente iterazione è inferiore ad
-				$\epsilon$.
-
-				\begin{figure}[H]
-					\centering
-					\includesvg{images/K-Means-Example}
-					\caption{Applicazione dell'algoritmo K-Means ad un ipotetico dataset;
-					i tre colori indicano i tre cluster individuati dall'algoritmo (By I,
-					Weston.pace, CC BY-SA 3.0, https://commons.wikimedia.org/w/index.php?curid=2463085).}
-					\label{fig:k-means-example}
-				\end{figure}
-
-				L'algoritmo K-Medians è una variante di K-Means che usa le mediane dei
-				cluster come centroidi anziché le loro medie. Per tal motivo, mentre
-				K-Means può utilizzare sostanzialmente qualsiasi funzione di distanza,
-				K-Medians utilizza sempre la distanza di Manhattan.
-
-				Sebbene K-Means e K-Medians siano efficienti (se il numero di
-				iterazioni è piccolo, il tempo di esecuzione è quasi-lineare) e
-				anche estremamente semplici, tanto da comparire come subroutine
-				in algoritmi più complessi, presentano dei problemi. Ad esempio,
-				dato che ogni elemento ha lo stesso peso nel computo dei centroidi,
-				anche un solo elemento che abbia valori anomali può destabilizzare
-				completamente il risultato finale. Inoltre, il parametro $k$ che
-				determina il numero di cluster potrebbe non avere alcuna relazione
-				con l'effettivo numero di cluster (se esistono) nell'insieme di
-				dati, e quindi un valore scorretto di $k$ porta a risultati che
-				non rispecchiano per nulla la vera struttura di cluster. Infine,
-				il raggruppamento di più elementi sulla base di una distanza genera
-				dei cluster di forma ellittica, ma non tutti i dataset hanno una
-				struttura di cluster con questa forma.
-
-			\subsection{Clustering per densità: DBSCAN}
-
-				\textbf{DBSCAN} è un esempio di algoritmo di clustering \textbf{per
-				densità}, ovvero che costruisce i cluster a partire da come gli
-				elementi di un dataset sono aggregati. In questo senso, i cluster
-				figurano come regioni di spazio densamente popolate, di forma del
-				tutto arbitraria, separate da spazio poco popolato.
-
-				DBSCAN prevede che vengano innanzitutto scelti due valori, un intero
-				chiamato MinPts ed un numero reale positivo $\epsilon$. A partire da
-				questi, per ogni elemento $p$ del dataset è possibile definire un
-				insieme $N_{\epsilon}(p)$, chiamato $\epsilon$\textbf{-vicinato}
-				($\epsilon$\textbf{-neighbourhood}). Tale insieme contiene tutti i
-				punti $q$ che hanno distanza da $p$ inferiore a $\epsilon$:
-
-				\begin{equation*}
-					N_{\epsilon} (p) = \{q | d(p, q) \leq \epsilon\}
-				\end{equation*}
-
-				Ogni elemento $p$ del dataset viene classificato sulla base del numero
-				di elementi di $N_{\epsilon}(p)$:
-
-				\begin{itemize}
-					\item
-					Se $N_{\epsilon}(p)$ ha almeno MinPts elementi, si dice che $p$ è un
-					\textbf{core point};
-					\item
-					Se $N_{\epsilon}(p)$ ha meno di MinPts elementi ma $p$ si trova
-					nell'$\epsilon$-vicinato di un altro elemento, allora si dice che
-					$p$ è un \textbf{border point};
-					\item
-					Se un elemento non non è né un core point né un border
-					point, è detto \textbf{noise point}.
-				\end{itemize}
-
-				Si dice che un elemento $q$ è \textbf{direttamente raggiungibile}
-				da $p$ se $p$ è un core point e $q$ si trova nell'$\epsilon$-vicinato
-				di $p$. Se un elemento $r$ è direttamente raggiungibile da $q$ e $q$
-				è direttamente raggiungibile da un elemento $p$, allora si dice che
-				$r$ è \textbf{indirettamente raggiungibile} da $p$ (si noti come
-				la raggiungibilità non sia una proprietà necessariamente simmetrica).
-
-				\begin{figure}[H]
-					\centering
-					\includesvg[width = 0.5\textwidth]{images/DBSCAN-Illustration.svg}
-					\caption{Ipotetica classificazione di alcuni elementi, usando
-					MinPts = 4. Gli elementi in rosso sono dei core point, perché
-					hanno 4 o più elementi nel loro $\epsilon$-vicinato. Gli elementi
-					in giallo sono invece border point, perché hanno meno di 4 elementi
-					nel loro $\epsilon$-vicinato ma sono nell'$\epsilon$-vicinato di
-					almeno un core point. Infine, gli elementi in blu sono dei
-					noise point, perché oltre ad avere meno di 4 elementi nel loro
-					$\epsilon$-vicinato non sono nell'$epsilon$-vicinato di alcun
-					core point (By Chire - Own work, CC BY-SA 3.0,
-					https://commons.wikimedia.org/w/index.php?curid=17045963).}
-					\label{fig:dbscan-illustration}
-				\end{figure}
-
-				Quando DBSCAN viene invocato viene inizializzato un cluster
-				$C$, dopodiché viene costruito l'$\epsilon$-vicinato di ogni
-				elemento $p$ che non sia stato ancora ispezionato. Se tale
-				insieme ha meno di MinPts elementi, allora $p$ è certamente
-				un noise point: questo perché è troppo isolato per poter
-				essere un core point e, non essendo ancora stato ispezionato,
-				non può trovarsi nell'$\epsilon$-vicinato di nessun altro punto.
-
-				Se invece l'$\epsilon$-vicinato di $p$ ha almeno MinPts
-				elementi, allora tale elemento è certamente un core point.
-				Viene allora costruito un cluster $C$ nel quale $p$ viene
-				inserito, dopodiché vengono osservati tutti gli elementi
-				$q$ che si trovano nell'$\epsilon$-vicinato di $p$.
-				Se $q$ non è mai stato ispezionato, si osserva
-				l'$\epsilon$-vicinato di $q$ a sua volta: se questo
-				contiene più elementi dell'$\epsilon$-vicinato di $p$,
-				allora $N_{\epsilon}(q)$ e $N_{\epsilon}(p)$ vengono
-				uniti in un insieme unico, perché gli elementi
-				dell'$\epsilon$-vicinato di $q$ sono indirettamente
-				raggiungibili a partire da $p$. Se $q$ non appartiene
-				ad alcun cluster, allora viene aggiunto al cluster in esame.
-
-				\begin{figure}[H]
-					\centering
-					\includesvg[width = 0.5\textwidth]{images/DBSCAN-density-data.svg}
-					\caption{Risultato dell'applicazione dell'algoritmo DBSCAN su un
-					ipotetico dataset. Le aree in blu e in verde rappresentano i due
-					cluster, mentre i punti in grigio sono i noise point (By Chire -
-					Own work, CC BY-SA 3.0, https://commons.wikimedia.org/w/index.php?curid=17085332)}
-					\label{fig:dbscan-density-data}
-				\end{figure}
-
-				Si osservi come la scelta di $\epsilon$ e MinPts influisca di molto
-				sul risultato finale. Infatti, scegliendo un valore di $\epsilon$ o
-				di MinPts troppo piccolo, quasi tutti gli elementi verranno classificati
-				come noise point, e quindi quasi tutti scartati. D'altro canto, un valore
-				di $\epsilon$ o di MinPts troppo grande potrebbe indurre un clustering
-				dove quasi tutti i punti sono inclusi nello stesso cluster.
-
-				A differenza di K-Means e K-Medians, che costruiscono sempre cluster
-				di forma ellissoidale, DBSCAN costruisce cluster di qualsiasi forma.
-				Questo è sia un aspetto positivo, perché in questo modo è possibile
-				catturare strutture di cluster molto più variegate, sia negativo,
-				perché la densità di un'area non sottende necessariamente alla
-				presenza di un cluster, e non tutte le aree dense lo sono allo
-				stesso modo. Occorre però evidenziare come, nonostante sia leggermente
-				inferiore a K-Means e K-Medians in termini di tempo di esecuzione
-				($O n \log(n)$, con $n$ numero di elementi del dataset), le sue
-				prestazioni sono state empiricamente dimostrate come molto competitive.
-
-			\subsection{Clustering gerarchico: HDBSCAN}
-
-				\textbf{HDBSCAN} è un esempio di algoritmo di clustering
-				\textbf{gerarchico}, ovvero che costruisce i cluster formando
-				una struttura ad albero \footnote{In realtà, HDBSCAN è un
-				algoritmo ibrido fra il paradigma per densità ed il paradigma
-				gerarchico. Un esempio semplice di algoritmo di clustering
-				``puramente'' gerarchico é \textbf{UPGMA} \cite{Sokal1958ASM}.}
-
-			Per K-Means, è stato testato un numero di cluster compreso fra $2$ e
-			$6$, mentre per K-Medians fra $2$ e $10$.
-
-			Per DBSCAN e HDBSCAN, MinPts è stato scelto nel range dal numero delle
-			dimensioni del dataset al doppio più uno delle dimensioni del dataset.
-
-			Per DBSCAN, $\epsilon$ è stato scelto partizionando la distanza massima
-			in parti uguali.
+			$1$ sono ben separati e, mano a mano che nel dataset vengono
+			introdotti valori casuali, si abbassino sempre piú. Pur
+			ammettendo delle flutturazioni, ci si aspetta che tali
+			valori si distribuiscano linearmente.
 
 	\chapter{Risultati ottenuti}
 
@@ -1777,6 +1779,18 @@
 		dimensioni fino a due o a tre, di poter visualizzare il risultato
 		del clustering in uno scatter plot, a prescindere dal numero originale
 		delle dimensioni.
+
+	\chapter*{Disponibilitá del codice}
+
+		Il codice per la generazione dei test e per l'applicazione degli
+		algoritmi di clustering ai dataset EHR è liberamente disponibile.
+		Il codice in questione puó essere reperito al seguente link:
+		\texttt{https://github.com/Skimmeroni/Silhouette-Unimib-thesis}.
+
+		Ho organizzato il codice seguendo le linee guida riportate in
+		\cite{10.1371/journal.pcbi.1000424}. Ho anche tenuto un lab
+		notebook per tenere traccia dei risultati mano mano che venivano
+		generati, facendo riferimento a \cite{10.1371/journal.pcbi.1004385}.
 
 	\printbibliography
 
