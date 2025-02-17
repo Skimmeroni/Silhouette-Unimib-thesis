@@ -1499,61 +1499,36 @@
 
 	\chapter{Discussione}
 
-		\section{Silhouette}
+		\section{Classificazione dei pacchetti R}
 
-			A partire dall'idea di base di Silhouette, è possibile costruirne
-			infinite varianti. Gli autori citano:
-
-			\begin{itemize}
-				\item
-				Per determinare il miglior numero di cluster non è strettamente
-				necessario utilizzare la Silhouette media complessiva. Sarebbe
-				infatti possibile anche combinare gli $s(i)$ in modo diverso;
-				\item
-				La Silhouette media complessiva può essere essa stessa usata
-				come funzione obiettivo da massimizzare direttamente all'interno
-				di un algoritmo di clustering, anziché effettuare una valutazione
-				a posteriori;
-				\item
-				Se l'algoritmo di clustering si basa sulla costruzione di centroidi
-				o sulla elezione di rappresentanti, si potrebbe usare la distanza
-				da tali centroidi o rappresentanti come grado di dissomiglianza
-				anziché calcolare $a(i)$ o $D(i, C)$ per ogni $i$-esimo elemento,
-				semplificando il procedimento. Naturalmente, questo approccio
-				renderebbe Silhouette dipendente dal tipo di algoritmo usato. 
-			\end{itemize}
-
-			Tutte e tre le varianti sono toccate da articoli citati.
-
-		\section{Pacchetti}
+			Sulla base dei test sanity check e matrice binaria é possibile
+			trarre delle conclusioni in merito a quale pacchetto R che
+			implementa Silhouette é da preferire.
 
 			Il test sanity check non è stato particolarmente conclusivo,
 			perché tutti e cinque i pacchetti hanno fornito valori molto
-			simili (circa $0.9$ per il primo dataset e circa $0.4$ per il
-			secondo). Questo è un risultato atteso, perché il test era
-			appositamente costruito per escludere pacchetti problematici.
+			simili (circa $0.9$ per \texttt{sc\_dataset\_good} e circa
+			$0.4$ per \texttt{sc\_dataset\_bad}) e del tutto concordi con
+			i risultati attesi. Questo non deve sorprendere, perché l'idea
+			del test era di creare una situazione cosí estrema da evidenziare
+			immediatamente la presenza di pacchetti problematici.
 
-			Il test è stato più informativo del precedente,
-			perché i valori restituiti avevano delle differenze
-			evidenziabili. In particolare, \texttt{Kira} è stato il
-			pacchetto con le performance peggiori, perché i valori
-			della Silhouette media complessiva sono rimasti pressoché
-			identici. I pacchetti \texttt{cluster}, \texttt{drclust}
-			e \texttt{tidyclust} hanno invece avuto risultati molto
-			simili. In particolare, \texttt{cluster} e \texttt{tidyclust}
-			hanno avuto risultati perfettamente identici, segno che
-			probabilmente l'uno usa l'altro come subroutine.
+			Il test matrice binaria è stato invece più informativo, perché
+			i valori restituiti avevano delle differenze evidenziabili. In
+			particolare, \texttt{Kira} è stato il pacchetto con le performance
+			peggiori, perché i valori della Silhouette media complessiva sono
+			rimasti pressoché identici lungo tutte le iterazioni. I pacchetti
+			\texttt{cluster}, \texttt{drclust} e \texttt{tidyclust} hanno
+			invece avuto risultati molto simili. In particolare,
+			\texttt{cluster} e \texttt{tidyclust} hanno avuto risultati
+			perfettamente identici.
 
-			Alla luce dei due test considerati, il pacchetto \texttt{Kira}
-			è stato immediatamente escluso, perché i risultati forniti dal
-			test della matrice binaria non sono affatto incoraggianti.
-			Dato che i pacchetti \texttt{cluster} e \texttt{tidyclust}
-			hanno fornito un risultato identico, fra i due è stato preferito
-			\texttt{cluster}, perché fra i due era quello con il tempo di
-			esecuzione più basso. Il pacchetto \texttt{scikit-learn}
-			attraverso \texttt{reticulate} non è stato preso in
-			considerazione, perché era stato incluso semplicemente
-			come metro di paragone.
+			Alla luce dei due test considerati, ho escluso immediatamente
+			il pacchetto \texttt{Kira}, perché i risultati forniti dal test
+			matrice binaria non sono affatto incoraggianti. Dato che i
+			pacchetti \texttt{cluster} e \texttt{tidyclust} hanno fornito
+			un risultato identico, fra i due ho preferito \texttt{cluster},
+			perché ha un tempo di esecuzione più basso.
 
 			Fra \texttt{cluster} e \texttt{drclust} ho preferito scegliere
 			\texttt{cluster}. Questo sia perché il tempo di esecuzione è
@@ -1563,22 +1538,46 @@
 			non dipende dall'algoritmo usato. Infatti, \texttt{cluster}
 			ha in input il risultato di un qualsiasi algoritmo di clustering
 			ed una matrice delle distanze, mentre gli altri pacchetti
-			richiedono in input espressamente il risultato dell'applicazione
-			di una loro implementazione di un algoritmo.
+			richiedono in input espressamente il risultato di un algoritmo
+			proveniente dal pacchetto da cui provengono, riducendone la
+			portabilitá.
 
-			In Figura~\ref{fig:cmp} è presentata la differenza fra
-			\texttt{cluster} e \texttt{scikit-learn} sul test matrice
-			binaria. Come è possibile notare, la differenza fra i due
-			è contenuta.
+			Questo mi ha portato a scegliere \texttt{cluster} come
+			pacchetto che implementasse Silhouette. Naturalmente, il
+			pacchetto \texttt{scikit-learn} (attraverso \texttt{reticulate})
+			non era preventivato che potesse essere scelto, dato che era
+			stato incluso semplicemente come metro di paragone.
+
+			A tal proposito, i plot successivi riportano il test matrice
+			binaria applicato contemporaneamente sia a \texttt{cluster}
+			che a \texttt{scikit-learn}, usando tre dimensioni diverse per
+			la matrice, allo scopo di verificare di quanto i valori trovati
+			si discostano. Come è possibile notare, la differenza fra i due
+			è contenuta, e descresce con l'aumentare dell'aumentare delle
+			dimensioni della matrice.
 
 			\begin{figure}[H]
 				\centering
-				\includegraphics[width = 0.5\textwidth, height = 0.3\textheight, page = 1]{results/Final_comparison.pdf}
-				\includegraphics[width = 0.5\textwidth, height = 0.3\textheight, page = 2]{results/Final_comparison.pdf}
-				\includegraphics[width = 0.5\textwidth, height = 0.3\textheight, page = 3]{results/Final_comparison.pdf}
-				\caption{Differenze fra il test matrice binaria tra \texttt{cluster} (pacchetto R)
-				e \texttt{scikit-learn} (pacchetto Python).}
-				\label{fig:cmp}
+				\includegraphics[width = 0.75\textwidth, page = 1]{results/Final_comparison.pdf}
+				\caption{Test matrice binaria sia su \texttt{cluster} (pacchetto R) che su
+				\texttt{scikit-learn} (pacchetto Python), usando una matrice $20 \times 10$.}
+				\label{fig:cmp1}
+			\end{figure}
+
+			\begin{figure}[H]
+				\centering
+				\includegraphics[width = 0.75\textwidth, page = 2]{results/Final_comparison.pdf}
+				\caption{Test matrice binaria sia su \texttt{cluster} (pacchetto R) che su
+				\texttt{scikit-learn} (pacchetto Python), usando una matrice $100 \times 50$.}
+				\label{fig:cmp2}
+			\end{figure}
+
+			\begin{figure}[H]
+				\centering
+				\includegraphics[width = 0.75\textwidth, page = 3]{results/Final_comparison.pdf}
+				\caption{Test matrice binaria sia su \texttt{cluster} (pacchetto R) che su
+				\texttt{scikit-learn} (pacchetto Python), usando una matrice $1000 \times 500$.}
+				\label{fig:cmp3}
 			\end{figure}
 
 		\section{EHR}
@@ -1742,6 +1741,32 @@
 				\label{fig:dbscan-extra5}
 			\end{figure}
 
+		\section{Oltre Silhouette?}
+
+			A partire dall'idea di base di Silhouette, è possibile costruirne
+			infinite varianti. Gli autori citano:
+
+			\begin{itemize}
+				\item
+				Per determinare il miglior numero di cluster non è strettamente
+				necessario utilizzare la Silhouette media complessiva. Sarebbe
+				infatti possibile anche combinare gli $s(i)$ in modo diverso;
+				\item
+				La Silhouette media complessiva può essere essa stessa usata
+				come funzione obiettivo da massimizzare direttamente all'interno
+				di un algoritmo di clustering, anziché effettuare una valutazione
+				a posteriori;
+				\item
+				Se l'algoritmo di clustering si basa sulla costruzione di centroidi
+				o sulla elezione di rappresentanti, si potrebbe usare la distanza
+				da tali centroidi o rappresentanti come grado di dissomiglianza
+				anziché calcolare $a(i)$ o $D(i, C)$ per ogni $i$-esimo elemento,
+				semplificando il procedimento. Naturalmente, questo approccio
+				renderebbe Silhouette dipendente dal tipo di algoritmo usato. 
+			\end{itemize}
+
+			Tutte e tre le varianti sono toccate da articoli citati.
+
 	\chapter{Conclusioni}
 
 		Data la natura di questa tesi, é evidente come questo non possa
@@ -1785,6 +1810,7 @@
 		Il codice per la generazione dei test e per l'applicazione degli
 		algoritmi di clustering ai dataset EHR è liberamente disponibile.
 		Il codice in questione puó essere reperito al seguente link:
+
 		\texttt{https://github.com/Skimmeroni/Silhouette-Unimib-thesis}.
 
 		Ho organizzato il codice seguendo le linee guida riportate in
