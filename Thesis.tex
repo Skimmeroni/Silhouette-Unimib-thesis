@@ -980,7 +980,7 @@
 					\includegraphics[width = \textwidth, page = 1]{results/results_TIDYCLUST.pdf}
 				\end{boxedminipage}
 				\begin{boxedminipage}{0.5\textwidth}
-					%\includegraphics[width = \textwidth, page = 1]{results/results_KIRA.pdf}
+					\includegraphics[width = \textwidth, page = 1]{results/results_KIRA.pdf}
 				\end{boxedminipage}
 				\caption{Plot dei test sanity check usando il dataset con struttura di cluster
 				ben visibile.}
@@ -998,7 +998,7 @@
 					\includegraphics[width = \textwidth, page = 2]{results/results_TIDYCLUST.pdf}
 				\end{boxedminipage}
 				\begin{boxedminipage}{0.5\textwidth}
-					%\includegraphics[width = \textwidth, page = 2]{results/results_KIRA.pdf}
+					\includegraphics[width = \textwidth, page = 2]{results/results_KIRA.pdf}
 				\end{boxedminipage}
 				\caption{Plot dei test sanity check usando il dataset con struttura di cluster
 				assente.}
@@ -1037,7 +1037,7 @@
 					\includegraphics[width = \textwidth, page = 3]{results/results_TIDYCLUST.pdf}
 				\end{boxedminipage}
 				\begin{boxedminipage}{0.5\textwidth}
-					%\includegraphics[width = \textwidth, page = 3]{results/results_KIRA.pdf}
+					\includegraphics[width = \textwidth, page = 3]{results/results_KIRA.pdf}
 				\end{boxedminipage}
 				\caption{Plot dei test matrice binaria.}
 				\label{fig:bm}
@@ -1390,6 +1390,13 @@
 
 		\section{EHR}
 
+			Come é possibile notare nei plot mostrati in precedenza,
+			l'algoritmo scelto influenza notevolmente il numero di
+			cluster che vengono individuati, pure se in ogni caso si
+			tratta di iperparametri massimizzati usando Silhouette.
+			Questo é in accordo con gli articoli citati. Di seguito
+			sono riportate le performance degli algoritmi di clustering.
+
 			\begin{figure}[h]
 				\centering
 				\includegraphics[width = 0.75\textwidth, height = 0.45\textheight, page = 9]{
@@ -1455,7 +1462,14 @@
 				\label{fig:comp5}
 			\end{figure}
 
-			Il valore di $\epsilon$ puó essere stimato costruendo un \textbf{KNN
+			DBSCAN figura spesso come algoritmo dalle alte performance.
+			Per tale motivo mi sono chiesto se fosse possibile testare
+			le prestazioni di Silhouette su DBSCAN comparandolo con un
+			metodo di ottimizzazione degli iperparametri alternativo, e
+			vedere se i due risultati sono simili.
+
+			Fissato MinPts come il doppio piú uno delle dimensioni del dataset,
+			il valore di $\epsilon$ puó essere stimato costruendo un \textbf{KNN
 			plot}: fissato $k = \textrm{MinPts} - 1$, lungo l'asse delle ascisse
 			si riportano gli elementi ordinati in ordine crescente per distanza
 			dal loro $k$-esimo vicino, mentre sull'asse delle ordinate la distanza
@@ -1466,7 +1480,9 @@
 
 			Come è possibile apprezzare nelle figure successive, i valori
 			di $\epsilon$ così restituiti inducono un clustering che è molto
-			simile a quello fornito utilizzando Silhouette.
+			simile a quello fornito utilizzando Silhouette. Questo indica che
+			Silhouette é effettivamente in grado di restituire una combinazione
+			ottimale di iperparametri.
 
 			\begin{figure}[h]
 				\centering
