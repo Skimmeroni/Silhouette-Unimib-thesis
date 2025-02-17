@@ -379,24 +379,19 @@
 
 	\chapter{Metodi}
 
-		\section{Silhouette}
+		\section{Funzioni di distanza}
 
 			Si supponga di avere a disposizione un dataset di dimensione
 			$N \times M$, dove $N$ indica il numero degli elementi e $M$ è
-			il numero di attributi. Per comodità, si assuma che gli attributi
-			siano tutti dati numerici (altezze, lunghezze, capacità, ecc...).
-			Per ogni elemento, tutti i valori di ciascun attributo sono noti.
+			il numero di attributi. Si assuma, per semplicitá, che tutti
+			gli attributi siano tutti dati numerici (altezze, lunghezze,
+			capacità, ecc...) e che ogni valore di ogni attributo sia noto.
 
-			A partire da tale dataset è possibile costruire quella che viene
-			chiamata \textbf{matrice delle distanze}. Tale matrice ha dimensione
-			$N \times N$ e, in ciascuna cella $(i, j)$, è presente un valore
-			indicato con $d(i, j)$ che rappresenta il grado di "dissomiglianza"
-			fra l'elemento $i$ e l'elemento $j$ del dataset.
-
-			Tale grado di dissomiglianza è calcolato mediante una
-			\textbf{funzione di distanza}, usando come input i valori
-			degli attributi di $i$ e di $j$. Un esempio di funzione di
-			distanza è la \textbf{distanza Euclidea}, definita come segue:
+			Per ciascuna coppia di elementi $i$ e $j$ del dataset é possibile
+			calcolare la loro distanza mediante una funzione di distanza. La
+			funzione di distanza piú intuitiva è la \textbf{distanza Euclidea},
+			che equivale alla distanza fra due punti nel piano cartesiano
+			$n$-dimensionale, definita come segue:
 
 			\begin{equation}
 				d(i, j) =
@@ -409,22 +404,64 @@
 			attributo per, rispettivamente, l'$i$-esimo ed il $j$-esimo
 			elemento del dataset.
 
-			Altri esempi di distanze sono la \textbf{distanza di Manhattan}
-			e la \textbf{distanza di Minkowski} (dal punto di vista di
-			Silhouette, quale funzione di distanza venga usata è irrilevante).
+			Un'altro esempio di distanza é la \textbf{distanza di Manhattan},
+			calcolata come la somma fra le differenze in modulo di ciascuna
+			coppia di attributi:
+
+			\begin{equation}
+				d(i, j) =
+				\sum_{m = 1}^{M} |f_{i, m} - f_{j, m}| =
+				|f_{i, 1} - f_{j, 1}| + \dots +
+				|f_{i, M} - f_{j, M}|
+			\end{equation}
+
+			Ultimo esempio di distanza é la \textbf{distanza di Jaccard},
+			calcolata a partire dal numero di elementi che due insiemi $A$
+			e $B$ hanno in comune ed al numero di elementi che non hanno
+			in comune:
+
+			\begin{equation}
+				d(A, B) = 1 - \frac{|A \cap B|}{|A \cup B|}
+			\end{equation}
+
+			A partire da un dataset di $N$ elementi e da una funzione
+			di distanza è possibile costruire quella che viene chiamata
+			\textbf{matrice delle distanze}. Tale matrice ha dimensione
+			$N \times N$ e, in ciascuna cella $(i, j)$, è presente la
+			distanza $d(i, j)$ fra i due elementi. La Tabella~\ref{tab:dist}
+			contiene un esempio di matrice delle distanze.
 
 			\begin{table}[h]
-				\centering
-				\pgfplotstabletypeset[
-					col sep=comma,
-					header=true,
-					every head row/.style={before row=\toprule, after row=\midrule},
-					every last row/.style={after row=\bottomrule},
-					]{data/sdist.csv}
-				\caption{Matrice delle distanze per il dataset \texttt{iris}. Per questioni
-				di spazio sono presenti solamente i primi 6 elementi.}
+				\begin{equation*}
+					\begin{bmatrix}
+						0.5385165 & & & & & & \\
+						0.5099020 & 0.3000000 & & & & & \\
+						0.6480741 & 0.3316625 & 0.2449490 & & & & \\
+						0.1414214 & 0.6082763 & 0.5099020 & 0.6480741 & & & \\
+						0.6164414 & 1.0908712 & 1.0862780 & 1.1661904 & 0.6164414 & & \\ 
+						0.5196152 & 0.5099020 & 0.2645751 & 0.3316625 & 0.4582576 & 0.9949874 & \\ 
+						0.1732051 & 0.4242641 & 0.4123106 & 0.5000000 & 0.2236068 & 0.7000000 & 0.4242641 \\
+					\end{bmatrix}
+				\end{equation*}
+
+				\caption{Matrice delle distanze per il dataset \texttt{iris},
+				scartando l'ultimo attributo in quanto non numerico, usando
+				come funzione di distanza la distanza Euclidea. Per questioni
+				di spazio sono presenti solamente i primi 7 elementi. Si noti
+				come la matrice sia riportata solo per metá, perché per
+				definizione una matrice delle distanze é sempre simmetrica.}
 				\label{tab:dist}
 			\end{table}
+
+			La distanza Euclidea é la funzione di distanza che viene
+			utilizzata di default nella maggior parte delle implementazioni
+			di default degli algoritmi di clustering. Inoltre, nella maggior
+			parte dei casi, un algoritmo di clustering non necessita di
+			utilizzare una funzione di distanza specifica. Pertanto, se non
+			specificato diversamente, quando ci si riferisce ad una funzione
+			di distanza generica si intende la distanza Euclidea.
+
+		\section{Silhouette}
 
 			Una volta nota la matrice delle distanze, si supponga di applicare
 			un algoritmo di clustering (K-Means, ad esempio) per suddividere il
@@ -704,7 +741,7 @@
 			di clustering K-Means e calcolare sul risultato di quest'ultimo
 			la Silhouette media.
 
-			Lo scatter plot dei due dataset è riportato in Figure~\ref{fig:sc}.
+			Lo scatter plot dei due dataset è riportato in Figura~\ref{fig:sc}.
 			Li ho costruiti utilizzando la funzione \texttt{rnorm}, che genera
 			dei punti casuali a partire da una distribuzione normale bivariata.	
 			Il primo è stato costruito usando due distribuzioni normali fuse
@@ -1347,7 +1384,7 @@
 			richiedono in input espressamente il risultato dell'applicazione
 			di una loro implementazione di un algoritmo.
 
-			In Figure~\ref{fig:cmp} è presentata la differenza fra
+			In Figura~\ref{fig:cmp} è presentata la differenza fra
 			\texttt{cluster} e \texttt{scikit-learn} sul test matrice
 			binaria. Come è possibile notare, la differenza fra i due
 			è contenuta.
